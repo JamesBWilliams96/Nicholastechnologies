@@ -27,7 +27,7 @@ type NativeProps = Common & { href?: undefined } & Omit<
 export type ButtonProps = AnchorProps | NativeProps;
 
 const base =
-  "group relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium tracking-[-0.01em] transition-[transform,background-color,color,box-shadow,border-color,opacity] duration-200 ease-out-quart focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent-500 active:scale-[0.985] disabled:pointer-events-none disabled:opacity-60";
+  "group relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium tracking-[-0.01em] transition-[transform,translate,background-color,color,box-shadow,border-color,opacity] duration-200 ease-out-quart focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent-500 active:scale-[0.985] disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<ButtonVariant, string> = {
   /* Tone-aware: dark on light sections, light on dark sections. */
@@ -40,7 +40,7 @@ const variants: Record<ButtonVariant, string> = {
   inverse:
     "bg-white text-ink-950 shadow-[0_8px_24px_-10px_rgb(0_0_0/0.5)] hover:-translate-y-px hover:bg-paper",
   ghost:
-    "rounded-md px-0 text-fg underline-offset-4 hover:text-accent-600 hover:underline",
+    "rounded-md px-0 text-fg underline-offset-4 hover:text-brand hover:underline",
 };
 
 const sizes: Record<ButtonSize, string> = {

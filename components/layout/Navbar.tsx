@@ -10,6 +10,7 @@ import { CloseIcon, MenuIcon } from "@/components/ui/icons";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [overDark, setOverDark] = useState(false);
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
@@ -20,6 +21,36 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* Flip the bar to the dark tone while it overlaps a dark section. */
+  useEffect(() => {
+    const targets = Array.from(document.querySelectorAll<HTMLElement>("main .tone-dark, footer.tone-dark"));
+    if (targets.length === 0) return;
+    const active = new Set<Element>();
+    let io: IntersectionObserver | null = null;
+    const observe = () => {
+      io?.disconnect();
+      active.clear();
+      const band = 40; // px below the top edge that decides the tone
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) active.add(entry.target);
+            else active.delete(entry.target);
+          }
+          setOverDark(active.size > 0);
+        },
+        { rootMargin: `0px 0px -${Math.max(0, window.innerHeight - band)}px 0px`, threshold: 0 },
+      );
+      targets.forEach((t) => io?.observe(t));
+    };
+    observe();
+    window.addEventListener("resize", observe);
+    return () => {
+      io?.disconnect();
+      window.removeEventListener("resize", observe);
+    };
   }, []);
 
   const close = useCallback(() => setOpen(false), []);
@@ -47,7 +78,7 @@ export function Navbar() {
   }, [open, close]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className={cn("fixed inset-x-0 top-0 z-50", overDark && "tone-dark")}>
       <a
         href="#main"
         className="sr-only left-4 top-4 z-[60] rounded-full bg-fg px-4 py-2 text-sm font-medium text-bg focus:not-sr-only focus:absolute"
@@ -59,7 +90,7 @@ export function Navbar() {
         className={cn(
           "transition-[background-color,box-shadow,backdrop-filter,border-color] duration-300 ease-out-quart",
           scrolled || open
-            ? "border-b border-line bg-paper/80 shadow-[0_1px_0_0_rgb(255_255_255/0.4)_inset] backdrop-blur-xl"
+            ? "border-b border-line bg-bg/80 backdrop-blur-xl"
             : "border-b border-transparent bg-transparent",
         )}
       >
@@ -71,7 +102,7 @@ export function Navbar() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-muted transition-colors duration-200 hover:bg-ink-950/5 hover:text-fg"
+                  className="rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-muted transition-colors duration-200 hover:bg-fg/5 hover:text-fg"
                 >
                   {item.label}
                 </Link>
@@ -86,7 +117,7 @@ export function Navbar() {
             <button
               ref={toggleRef}
               type="button"
-              className="inline-flex size-10 items-center justify-center rounded-full text-fg transition-colors hover:bg-ink-950/5 md:hidden"
+              className="inline-flex size-10 items-center justify-center rounded-full text-fg transition-colors hover:bg-fg/5 md:hidden"
               aria-expanded={open}
               aria-controls={menuId}
               aria-label={open ? "Close menu" : "Open menu"}
@@ -102,7 +133,7 @@ export function Navbar() {
       <div
         id={menuId}
         className={cn(
-          "fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col bg-paper transition-[opacity,transform] duration-300 ease-out-quart md:hidden",
+          "fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col bg-bg transition-[opacity,transform] duration-300 ease-out-quart md:hidden",
           open ? "opacity-100" : "pointer-events-none -translate-y-2 opacity-0",
         )}
         aria-hidden={!open}

@@ -210,11 +210,11 @@ export function HeroVisual() {
   return (
     <ParallaxStage className="relative mx-auto w-full max-w-[600px] lg:max-w-none">
       <div
-        className="relative aspect-[1.05/1] xs:aspect-[1.15/1] sm:aspect-[1.2/1] lg:aspect-[1.06/1]"
+        className="relative aspect-[1/1.18] xs:aspect-[1/1.08] sm:aspect-[1.2/1] lg:aspect-[1.06/1]"
         aria-hidden="true"
       >
         {/* Main website */}
-        <Reveal variant="scale" delay={120} className="absolute left-0 top-[6%] w-full sm:w-[80%]">
+        <Reveal variant="scale" delay={120} className="absolute left-0 top-0 w-full sm:top-[6%] sm:w-[80%]">
           <ParallaxLayer depth={6}>
             <div className="animate-float-slow motion-safe-only">
               <BrowserFrame url="yourbusiness.com">
@@ -236,7 +236,7 @@ export function HeroVisual() {
         </Reveal>
 
         {/* Booking panel */}
-        <Reveal delay={560} className="absolute -left-[2%] bottom-[-3%] w-[58%] xs:w-[52%] sm:w-[42%] lg:-left-[5%]">
+        <Reveal delay={560} className="absolute -left-[2%] bottom-0 w-[58%] xs:w-[52%] sm:bottom-[-3%] sm:w-[42%] lg:-left-[5%]">
           <ParallaxLayer depth={18}>
             <div className="animate-float motion-safe-only">
               <Panel>
@@ -247,7 +247,7 @@ export function HeroVisual() {
         </Reveal>
 
         {/* Analytics panel */}
-        <Reveal delay={700} className="absolute -right-[2%] bottom-[-2%] w-[46%] xs:w-[42%] sm:right-[4%] sm:w-[34%]">
+        <Reveal delay={700} className="absolute -right-[2%] bottom-[5%] w-[46%] xs:w-[42%] sm:right-[4%] sm:bottom-[-2%] sm:w-[34%]">
           <ParallaxLayer depth={12}>
             <div className="animate-float-slow motion-safe-only [animation-delay:-4s]">
               <Panel>
@@ -258,7 +258,7 @@ export function HeroVisual() {
         </Reveal>
 
         {/* Deploy toast */}
-        <Reveal delay={900} variant="none" className="absolute right-[2%] top-0 sm:right-[18%] sm:top-[-1%]">
+        <Reveal delay={900} variant="none" className="absolute right-[2%] -top-5 sm:right-[18%] sm:top-[-1%]">
           <ParallaxLayer depth={22}>
             <div className="animate-float-delayed motion-safe-only [animation-delay:-2s]">
               <DeployToast />

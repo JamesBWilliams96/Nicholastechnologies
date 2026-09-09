@@ -47,6 +47,7 @@ person who built it. Never make "one person" sound limited.
 | `accent-500` `#2f5bff` (+ `accent-50…800`) | **the** accent (cobalt). Buttons, highlights, active states, small dots. Use sparingly: one or two accent moments per section. |
 | `glow-violet` | only inside the accent glow gradient. Never for UI. |
 | `ok` / `ok-soft`, `warn` / `warn-soft` | status colours inside mock interfaces only |
+| `danger-300/400/500`, `danger-soft` | form validation errors only |
 
 **Tone-aware tokens** (flip automatically inside `.tone-dark`): `bg-bg`, `text-fg`,
 `text-muted`, `text-subtle`, `bg-surface`, `bg-surface-2`, `bg-surface-3`, `border-line`,
@@ -77,7 +78,7 @@ Eyebrows: mono, uppercase, tracked (`Eyebrow` component).
 - Section padding comes from `<Section>` (`py-20 sm:py-24 lg:py-32`). Don't add your own.
 - Between heading and content: `mt-12 sm:mt-16`. Card padding: `p-6 sm:p-8`. Grid gaps: `gap-4 sm:gap-6`.
 - Radii: cards `rounded-2xl` (24px) or `rounded-3xl` for hero-scale cards; inner UI `rounded-xl`/`rounded-lg`; pills `rounded-full`.
-- Borders: `ring-1 ring-line` (or `border border-line`). Fine, never heavy.
+- Borders: `ring-1 ring-line` (or `border border-line`). Fine, never heavy. Rings and shadows compose (`ring-1 ring-line shadow-card`).
 - Shadows: `shadow-card` (resting card), `shadow-float` (floating UI/mockups), `shadow-lift` (hover), `shadow-glow` (rare accent).
 - Easings: `ease-out-quart` (default UI), `ease-out-expo` (entrances), `ease-spring` (small playful nudges).
 - Durations: 200ms hover, 500–900ms entrances.
@@ -102,6 +103,7 @@ import { Logo, LogoMark } from "@/components/ui/Logo";
 import { ParallaxStage, ParallaxLayer } from "@/components/ui/ParallaxStage"; // pointer parallax (desktop only)
 import * as Icons from "@/components/ui/icons";               // ArrowRightIcon, CheckIcon, GlobeIcon, BagIcon, AppWindowIcon, LifeBuoyIcon, CalendarIcon, ChartIcon, UsersIcon, ShieldIcon, ServerIcon, ZapIcon, CodeIcon, MailIcon, ClockIcon, WrenchIcon, LockIcon, RefreshIcon, MessageIcon, FileTextIcon, SendIcon, HammerIcon, SparkIcon
 import { useInView, usePrefersReducedMotion } from "@/lib/use-in-view";
+import { InViewGroup } from "@/components/ui/InViewGroup";     // sets data-inview on scroll; children animate via [.js_[data-inview]_&]: variants
 import { cn } from "@/lib/utils";
 import { site } from "@/content/site";                        // name, url, tagline, currency, nav, cta, email
 import { projects, type Project } from "@/content/projects";
@@ -131,7 +133,7 @@ mockups in `aria-hidden="true"`; if a mock carries meaning, give the frame a `la
   `"use client"` child component.
 - One `h2` per section; card titles are `h3`. Never skip heading levels.
 - Reveal cards with staggered delays (60–100ms apart). Don't animate paragraphs individually.
-- Hover on cards: `transition-[transform,box-shadow] duration-300 ease-out-quart hover:-translate-y-0.5 hover:shadow-lift`, and let the mockup inside respond (`group` / `group-hover:`).
+- Hover on cards: `transition-[transform,translate,box-shadow] duration-300 ease-out-quart hover:-translate-y-0.5 hover:shadow-lift` (Tailwind v4's `-translate-y-*` sets the `translate` property, so it must be in the transition list), and let the mockup inside respond (`group` / `group-hover:`).
 - Keep each section visually distinct in *composition*, identical in *system*.
 
 ## 6. Copy voice
