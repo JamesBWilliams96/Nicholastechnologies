@@ -56,7 +56,7 @@ function SiteMock() {
         </div>
         <ImageBlock variant="warm" className="aspect-[4/5] rounded-[2.4cqw]">
           <div className="absolute inset-x-[7%] bottom-[7%] rounded-[1.6cqw] bg-white/92 p-[2.2cqw] shadow-card backdrop-blur">
-            <p className="font-mono text-[1.7cqw] uppercase tracking-[0.12em] text-ink-400">Next available</p>
+            <p className="font-mono text-[1.7cqw] uppercase tracking-[0.12em] text-ink-500">Next available</p>
             <p className="mt-[0.8cqw] text-[2.5cqw] font-semibold">Today, 14:30</p>
           </div>
         </ImageBlock>
@@ -136,12 +136,12 @@ function BookingMock() {
     <div className="p-3 sm:p-3.5">
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold">Bookings</span>
-        <span className="font-mono text-2xs text-ink-400">This week</span>
+        <span className="font-mono text-2xs text-ink-500">This week</span>
       </div>
       <div className="mt-2.5 grid grid-cols-7 gap-1 text-center">
         {days.map((d, i) => (
           <div key={i}>
-            <span className="font-mono text-[0.6rem] text-ink-400">{d}</span>
+            <span className="font-mono text-[0.6rem] text-ink-500">{d}</span>
             <span
               className={cn(
                 "mt-0.5 block rounded-md py-1 text-[0.7rem] font-medium tabular-nums",
@@ -163,7 +163,7 @@ function BookingMock() {
             )}
             style={{ animationDelay: "1.6s" }}
           >
-            <span className="font-mono text-ink-400 tabular-nums">{s.time}</span>
+            <span className="font-mono text-ink-500 tabular-nums">{s.time}</span>
             <span className="font-medium text-ink-800">{s.label}</span>
             <MockChip tone={s.tone} className="ml-auto text-[0.58rem]">
               {s.status}
@@ -185,7 +185,7 @@ function AnalyticsMock() {
         </MockChip>
       </div>
       <p className="mt-1 text-2xl font-semibold tracking-tight tabular-nums">
-        38 <span className="text-xs font-normal text-ink-400">this month</span>
+        38 <span className="text-xs font-normal text-ink-500">this month</span>
       </p>
       <Bars
         values={[0.35, 0.5, 0.42, 0.6, 0.55, 0.7, 0.62, 0.8, 0.72, 0.9, 0.84, 1]}
@@ -201,7 +201,7 @@ function DeployToast() {
     <div className="glass-strong flex items-center gap-2 rounded-full py-1.5 pl-2.5 pr-3 text-xs text-ink-950 shadow-card">
       <span className="size-2 rounded-full bg-ok animate-pulse-dot motion-safe-only" />
       <span className="font-medium">Deployed to production</span>
-      <span className="font-mono text-2xs text-ink-400">42s</span>
+      <span className="font-mono text-2xs text-ink-500">42s</span>
     </div>
   );
 }

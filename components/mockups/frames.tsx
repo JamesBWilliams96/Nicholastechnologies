@@ -51,7 +51,7 @@ export function BrowserFrame({
         <div
           className={cn(
             "mx-auto flex h-5 w-[52%] max-w-56 items-center justify-center gap-1 rounded-md font-mono text-[0.625rem] sm:h-6",
-            dark ? "bg-white/6 text-ink-300" : "bg-white text-ink-400 ring-1 ring-ink-950/6",
+            dark ? "bg-white/6 text-ink-300" : "bg-white text-ink-500 ring-1 ring-ink-950/6",
           )}
         >
           <svg viewBox="0 0 24 24" className="size-2.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>

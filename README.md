@@ -1,0 +1,60 @@
+# Nicholas Technologies — website
+
+The marketing site for Nicholas Technologies, a one-person software studio building websites,
+Shopify stores and small custom web apps for local businesses and early-stage startups.
+
+Built with Next.js (App Router), React, TypeScript and Tailwind CSS v4. No animation libraries,
+no component kits: the design system lives in `app/globals.css` and `components/ui`.
+
+## Getting started
+
+```bash
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build
+npm run start      # serve the production build
+npm run lint       # eslint
+npm run typecheck  # tsc --noEmit
+```
+
+Copy `.env.example` to `.env.local` and fill in what you need:
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Public URL of the deployed site. Drives canonical URLs, Open Graph, the sitemap and robots.txt. |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Optional. Shown in the footer and offered as a fallback if the enquiry form can't send. |
+| `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Enquiry form delivery through [Resend](https://resend.com). Until these are set, submissions are logged on the server and the visitor is told the form isn't connected yet. |
+
+## Where things live
+
+```
+app/                  routes, metadata, sitemap, robots, OG image, API route for enquiries
+components/ui/        design-system primitives (Button, Section, SectionHeading, Reveal, Chip, Logo, icons)
+components/mockups/   browser / phone / app frames and mock UI building blocks
+components/layout/    Navbar, Footer
+components/sections/  one folder or file per homepage section
+content/site.ts       name, navigation, CTA, tagline, currency symbol used in mockups
+content/projects.ts   portfolio entries (placeholders until real projects are added)
+docs/design-system.md the design brief: tokens, type scale, voice, rules
+```
+
+## Replacing the portfolio placeholders
+
+The "Selected work" section renders `content/projects.ts`. Every entry ships as a clearly
+labelled placeholder — nothing on the site is invented. To add a real project:
+
+1. Set `placeholder: false` and fill in `name`, `summary`, `category`, `stack` and optionally `href`.
+2. Add a screenshot under `public/work/` and set `image` (`src`, `alt`, `width`, `height`).
+3. Optionally add a `caseStudy` (`challenge`, `solution`, `result`). It gets its own page at
+   `/work/<slug>` and is added to the sitemap automatically.
+
+## Founder photo
+
+`components/sections/About.tsx` has a `founderPhoto` constant. Leave it `null` for the designed
+placeholder slot, or point it at a real photo under `public/` to render it.
+
+## Deploying
+
+The site is a standard Next.js app and deploys unchanged to Vercel or any Node host. Set the
+environment variables above in the hosting dashboard. Security headers are configured in
+`next.config.ts`.
