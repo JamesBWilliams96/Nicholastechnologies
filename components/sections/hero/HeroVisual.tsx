@@ -214,7 +214,7 @@ export function HeroVisual() {
         aria-hidden="true"
       >
         {/* Main website */}
-        <Reveal variant="scale" delay={120} className="absolute left-0 top-0 w-full sm:top-[6%] sm:w-[80%]">
+        <Reveal eager variant="scale" delay={120} className="absolute left-0 top-0 w-full sm:top-[6%] sm:w-[80%]">
           <ParallaxLayer depth={6}>
             <div className="animate-float-slow motion-safe-only">
               <BrowserFrame url="yourbusiness.com">
@@ -225,7 +225,7 @@ export function HeroVisual() {
         </Reveal>
 
         {/* Phone: store */}
-        <Reveal delay={420} className="absolute right-0 top-[14%] hidden w-[26%] sm:block">
+        <Reveal eager delay={420} className="absolute right-0 top-[14%] hidden w-[26%] sm:block">
           <ParallaxLayer depth={14}>
             <div className="animate-float-delayed motion-safe-only">
               <PhoneFrame>
@@ -236,7 +236,7 @@ export function HeroVisual() {
         </Reveal>
 
         {/* Booking panel */}
-        <Reveal delay={560} className="absolute -left-[2%] bottom-0 w-[58%] xs:w-[52%] sm:bottom-[-3%] sm:w-[42%] lg:-left-[5%]">
+        <Reveal eager delay={560} className="absolute -left-[2%] bottom-0 w-[58%] xs:w-[52%] sm:bottom-[-3%] sm:w-[42%] lg:-left-[5%]">
           <ParallaxLayer depth={18}>
             <div className="animate-float motion-safe-only">
               <Panel>
@@ -247,7 +247,7 @@ export function HeroVisual() {
         </Reveal>
 
         {/* Analytics panel */}
-        <Reveal delay={700} className="absolute -right-[2%] bottom-[5%] w-[46%] xs:w-[42%] sm:right-[4%] sm:bottom-[-2%] sm:w-[34%]">
+        <Reveal eager delay={700} className="absolute -right-[2%] bottom-[5%] w-[46%] xs:w-[42%] sm:right-[4%] sm:bottom-[-2%] sm:w-[34%]">
           <ParallaxLayer depth={12}>
             <div className="animate-float-slow motion-safe-only [animation-delay:-4s]">
               <Panel>
@@ -258,7 +258,7 @@ export function HeroVisual() {
         </Reveal>
 
         {/* Deploy toast */}
-        <Reveal delay={900} variant="none" className="absolute right-[2%] -top-5 sm:right-[18%] sm:top-[-1%]">
+        <Reveal eager delay={900} variant="none" className="absolute right-[2%] -top-5 sm:right-[18%] sm:top-[-1%]">
           <ParallaxLayer depth={22}>
             <div className="animate-float-delayed motion-safe-only [animation-delay:-2s]">
               <DeployToast />

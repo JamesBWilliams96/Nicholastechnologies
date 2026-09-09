@@ -19,16 +19,16 @@ export function Hero() {
 
       <div className="container-site grid items-center gap-14 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:gap-8 xl:gap-12">
         <div className="max-w-2xl">
-          <Reveal>
+          <Reveal eager>
             <Eyebrow>Independent software studio</Eyebrow>
           </Reveal>
-          <Reveal delay={70}>
+          <Reveal eager delay={70}>
             <h1 className="mt-6 text-display-xl">
               Websites, stores and software,{" "}
               <span className="text-ink-500">built around your business.</span>
             </h1>
           </Reveal>
-          <Reveal delay={140}>
+          <Reveal eager delay={140}>
             <p className="mt-6 max-w-[46ch] text-lead text-muted">
               {site.name} is a one-person studio building high-quality websites, Shopify stores
               and small custom web apps for local businesses and early-stage startups. You work
@@ -36,7 +36,7 @@ export function Hero() {
               launch.
             </p>
           </Reveal>
-          <Reveal delay={210}>
+          <Reveal eager delay={210}>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button href="/#contact" size="lg" arrow>
                 Start a project
@@ -46,7 +46,7 @@ export function Hero() {
               </Button>
             </div>
           </Reveal>
-          <Reveal delay={280}>
+          <Reveal eager delay={280}>
             <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-muted">
               {proofPoints.map((p) => (
                 <li key={p} className="inline-flex items-center gap-1.5">

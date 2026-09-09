@@ -30,6 +30,12 @@ export type RevealProps = HTMLAttributes<HTMLElement> & {
   variant?: "up" | "scale" | "left" | "none";
   /** Animate every time the element enters the viewport. */
   repeat?: boolean;
+  /**
+   * Play the entrance immediately with CSS keyframes instead of waiting for
+   * hydration + IntersectionObserver. Use for above-the-fold content so the
+   * largest contentful paint isn't delayed by JavaScript.
+   */
+  eager?: boolean;
   children?: ReactNode;
 };
 
@@ -43,6 +49,7 @@ export function Reveal({
   delay = 0,
   variant = "up",
   repeat = false,
+  eager = false,
   style,
   children,
   ...rest
@@ -52,7 +59,7 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (typeof IntersectionObserver === "undefined") {
+    if (eager || typeof IntersectionObserver === "undefined") {
       el.classList.add("is-visible");
       return;
     }
@@ -71,13 +78,14 @@ export function Reveal({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [repeat]);
+  }, [repeat, eager]);
 
   const Tag = as as ElementType;
   return (
     <Tag
       ref={ref}
       data-reveal={variant}
+      data-eager={eager ? "" : undefined}
       style={{ "--reveal-delay": `${delay}ms`, ...style } as CSSProperties}
       {...rest}
     >

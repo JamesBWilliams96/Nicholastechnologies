@@ -353,11 +353,34 @@
   transform: none;
 }
 
+/* Eager reveals (above the fold) animate with keyframes straight away,
+   so the first paint doesn't wait for hydration. */
+.js [data-reveal][data-eager],
+[data-reveal][data-eager] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  animation: reveal-up 0.9s var(--ease-out-quart) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal="scale"][data-eager],
+[data-reveal="scale"][data-eager] {
+  animation-name: reveal-scale;
+}
+
+.js [data-reveal="none"][data-eager],
+[data-reveal="none"][data-eager] {
+  animation-name: reveal-fade;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .js [data-reveal] {
+  .js [data-reveal],
+  [data-reveal][data-eager] {
     opacity: 1;
     transform: none;
     transition: none;
+    animation: none;
   }
 
   .motion-safe-only {
@@ -404,6 +427,37 @@
   }
   to {
     transform: scaleY(1);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
