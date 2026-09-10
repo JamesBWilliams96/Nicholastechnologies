@@ -17,9 +17,9 @@ export function Wordmark({ active = false, dim = false, className, children, ...
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-[0.55em] whitespace-nowrap rounded-full bg-surface px-[0.95em] py-[0.55em] font-mono font-semibold leading-none tracking-[-0.01em] text-fg ring-1 ring-inset ring-line-strong transition-[color,opacity,box-shadow,transform] duration-500 ease-out-quart",
-        active && "ring-accent-500 shadow-[0_0_0_4px_var(--brand-soft)]",
-        dim && "text-muted opacity-55",
+        "inline-flex items-center gap-[0.55em] whitespace-nowrap rounded-full bg-surface px-[0.95em] py-[0.55em] font-mono font-semibold tracking-[-0.01em] ring-1 ring-inset transition-[color,opacity,box-shadow,scale] duration-500 ease-out-quart",
+        active ? "ring-accent-500 shadow-[0_0_0_4px_var(--brand-soft)]" : "ring-line-strong",
+        dim ? "text-muted opacity-55" : "text-fg",
         className,
       )}
       {...rest}

@@ -3,6 +3,7 @@ import type { Dictionary } from "@/content/i18n/types";
 import { cn } from "@/lib/utils";
 import { Panel } from "@/components/mockups/frames";
 import { CheckIcon } from "@/components/ui/icons";
+import { playWhenInView } from "@/components/ui/in-view";
 import { LogoMark } from "@/components/ui/Logo";
 
 /* ------------------------------------------------------------------
@@ -33,10 +34,7 @@ function Signature() {
     >
       <path
         d="M4 21c6-14 12-16 14-9s-1 15-4 14 3-16 12-13 4 12 10 8 7-13 14-8-2 13 4 11 10-14 16-9-3 12 4 9 10-6 26-7"
-        className={cn(
-          "animate-dash motion-safe-only [animation-delay:300ms]",
-          "[.js_&]:[animation-play-state:paused] [.js_[data-inview]_&]:[animation-play-state:running]",
-        )}
+        className={cn("animate-dash [animation-delay:300ms]", playWhenInView)}
         style={
           {
             strokeDasharray: SIGNATURE_LENGTH,
@@ -71,7 +69,7 @@ function ApprovedStamp({ label }: { label: string }) {
 export function ProposalMock({ t }: { t: ProposalCopy }) {
   return (
     <div className="@container">
-      <Panel variant="solid" className="relative shadow-float">
+      <Panel variant="solid" shadow="float" className="relative">
         <ApprovedStamp label={t.approved} />
 
         <div className="p-[6cqw]">

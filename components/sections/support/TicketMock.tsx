@@ -1,16 +1,14 @@
 import type { Dictionary } from "@/content/i18n/types";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon, CheckIcon } from "@/components/ui/icons";
-import { DarkChip } from "./DarkChip";
+import { playWhenInView } from "@/components/ui/in-view";
+import { DarkChip } from "@/components/mockups/primitives";
 
 /* ------------------------------------------------------------------
    A support request that has just been resolved, with a one-line
    reply from the person who built the site. Sits in a glass Panel
    over the status window. Sized in rem: it is a small card.
    ------------------------------------------------------------------ */
-
-const playWhenInView =
-  "motion-safe-only [.js_&]:[animation-play-state:paused] [.js_[data-inview]_&]:[animation-play-state:running]";
 
 export function TicketMock({ t }: { t: Dictionary["support"]["ticket"] }) {
   return (
@@ -31,7 +29,7 @@ export function TicketMock({ t }: { t: Dictionary["support"]["ticket"] }) {
         <DarkChip
           tone="neutral"
           className={cn(
-            "transition-opacity duration-500 ease-out-quart",
+            "leading-none transition-opacity duration-500 ease-out-quart",
             "[.js_[data-inview]_&]:opacity-50 [.js_[data-inview]_&]:delay-[1100ms]",
           )}
         >
@@ -42,7 +40,7 @@ export function TicketMock({ t }: { t: Dictionary["support"]["ticket"] }) {
           className={cn("inline-flex animate-fade-up", playWhenInView)}
           style={{ animationDelay: "1100ms" }}
         >
-          <DarkChip tone="ok">
+          <DarkChip tone="ok" className="leading-none">
             <CheckIcon className="-ml-0.5 size-[1.1em]" />
             {t.resolved}
           </DarkChip>

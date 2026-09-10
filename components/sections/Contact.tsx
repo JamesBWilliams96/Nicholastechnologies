@@ -4,12 +4,12 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/SectionHeading";
-import { FileTextIcon, MessageIcon, SparkIcon } from "@/components/ui/icons";
+import { FileTextIcon, MailIcon, SparkIcon } from "@/components/ui/icons";
 import { site } from "@/content/site";
 import { CardReveal } from "./contact/CardReveal";
 import { ContactForm } from "./contact/ContactForm";
 
-const icons = [MessageIcon, FileTextIcon, SparkIcon];
+const icons = [MailIcon, FileTextIcon, SparkIcon];
 
 type ContactProps = { locale: Locale; t: Dictionary["contact"]; form: Dictionary["form"] };
 
@@ -17,9 +17,12 @@ type ContactProps = { locale: Locale; t: Dictionary["contact"]; form: Dictionary
  * Final call to action and enquiry form. Dark tone, the one section that
  * gets an accent glow — it's the finale before the (dark) footer.
  *
- * Layout: on lg the invitation sits in a sticky left column beside the form.
- * Below lg the left column dissolves (`contents`) so the form can sit
- * directly under the headline and the reassurance list follows it.
+ * Layout: three direct grid children in reading order — headline, form,
+ * reassurance list — so DOM order matches what is seen at every width.
+ * Below lg they simply stack. On lg the form card spans both rows of the
+ * right column; the headline takes row 1 on the left and the list sits
+ * beneath it in the tall second row, where it can stick while the long
+ * form scrolls past.
  */
 export function Contact({ locale, t, form }: ContactProps) {
   const mailto = site.email
@@ -37,64 +40,24 @@ export function Contact({ locale, t, form }: ContactProps) {
       </div>
 
       <Container>
-        <div className="grid gap-y-12 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:gap-x-16 xl:gap-x-24">
-          {/* Left: the invitation */}
-          <div className="contents lg:sticky lg:top-28 lg:block lg:self-start">
-            <div className="max-w-xl">
-              <Reveal>
-                <Eyebrow>{t.eyebrow}</Eyebrow>
-              </Reveal>
-              <Reveal delay={60}>
-                <h2 id="contact-heading" className="mt-5 max-w-[16ch] text-display-lg">
-                  {t.titleA} <span className="text-muted">{t.titleB}</span>
-                </h2>
-              </Reveal>
-              <Reveal delay={120}>
-                <p className="mt-5 max-w-[46ch] text-lead text-muted">{t.lead}</p>
-              </Reveal>
-            </div>
-
-            <div className="order-2 max-w-xl lg:mt-12">
-              <Reveal>
-                <p className="font-mono text-2xs font-medium uppercase tracking-[0.14em] text-muted">
-                  {t.expectLabel}
-                </p>
-              </Reveal>
-              <ul className="mt-5 divide-y divide-line border-y border-line">
-                {t.expectations.map((item, i) => {
-                  const Icon = icons[i];
-                  return (
-                    <Reveal as="li" key={item.title} delay={80 + i * 70} className="flex gap-4 py-4.5 sm:gap-5">
-                      <span className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-surface text-fg ring-1 ring-line">
-                        <Icon className="size-[1.05rem]" />
-                      </span>
-                      <div className="min-w-0">
-                        <h3 className="text-[0.9375rem] font-semibold leading-snug">{item.title}</h3>
-                        <p className="mt-1 text-sm leading-relaxed text-muted">{item.text}</p>
-                      </div>
-                    </Reveal>
-                  );
-                })}
-              </ul>
-
-              {mailto ? (
-                <Reveal delay={320} className="mt-8">
-                  <p className="text-sm text-muted">
-                    {t.preferEmail}{" "}
-                    <a
-                      href={mailto}
-                      className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-fg"
-                    >
-                      {site.email}
-                    </a>
-                  </p>
-                </Reveal>
-              ) : null}
-            </div>
+        <div className="grid gap-y-12 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:grid-rows-[auto_1fr] lg:gap-x-16 xl:gap-x-24">
+          {/* The invitation */}
+          <div className="max-w-xl lg:col-start-1 lg:row-start-1">
+            <Reveal>
+              <Eyebrow>{t.eyebrow}</Eyebrow>
+            </Reveal>
+            <Reveal delay={60}>
+              <h2 id="contact-heading" className="mt-5 max-w-[16ch] text-display-lg">
+                {t.titleA} <span className="text-muted">{t.titleB}</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={120}>
+              <p className="mt-5 max-w-[46ch] text-lead text-muted">{t.lead}</p>
+            </Reveal>
           </div>
 
-          {/* Right: the form, in a card over the glow */}
-          <CardReveal delay={160} className="order-1 min-w-0">
+          {/* The form, in a card over the glow */}
+          <CardReveal delay={160} className="min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2">
             <div className="relative rounded-3xl bg-surface p-5 ring-1 ring-line shadow-[0_32px_80px_-32px_rgb(0_0_0/0.7)] xs:p-6 sm:p-8 lg:p-9 xl:p-10">
               {/* Top-edge highlight and a faint inner sheen */}
               <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
@@ -106,6 +69,45 @@ export function Contact({ locale, t, form }: ContactProps) {
               </div>
             </div>
           </CardReveal>
+
+          {/* What to expect: reassurance beneath the headline */}
+          <div className="max-w-xl lg:sticky lg:top-28 lg:col-start-1 lg:row-start-2 lg:self-start">
+            <Reveal>
+              <p className="font-mono text-2xs font-medium uppercase tracking-[0.14em] text-muted">
+                {t.expectLabel}
+              </p>
+            </Reveal>
+            <ul className="mt-5 divide-y divide-line border-y border-line">
+              {t.expectations.map((item, i) => {
+                const Icon = icons[i];
+                return (
+                  <Reveal as="li" key={item.title} delay={80 + i * 70} className="flex gap-4 py-4.5 sm:gap-5">
+                    <span className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-surface text-fg ring-1 ring-line">
+                      <Icon className="size-[1.05rem]" />
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-md font-semibold leading-snug">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-muted">{item.text}</p>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </ul>
+
+            {mailto ? (
+              <Reveal delay={320} className="mt-8">
+                <p className="text-sm text-muted">
+                  {t.preferEmail}{" "}
+                  <a
+                    href={mailto}
+                    className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-fg"
+                  >
+                    {site.email}
+                  </a>
+                </p>
+              </Reveal>
+            ) : null}
+          </div>
         </div>
       </Container>
     </Section>

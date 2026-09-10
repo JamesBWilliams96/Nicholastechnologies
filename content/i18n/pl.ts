@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 /** Polish. */
 export const pl: Dictionary = {
   meta: {
-    title: "Nicholas Technologies — Strony www, sklepy Shopify i aplikacje",
+    title: "Nicholas Technologies — Tworzenie stron www, Shopify i aplikacje",
     description:
       "Jednoosobowe studio tworzące strony www, sklepy Shopify i aplikacje webowe dla małych firm i startupów. Projekty w stałej cenie, wsparcie po starcie.",
     ogDescription:
@@ -25,7 +25,7 @@ export const pl: Dictionary = {
   nav: { work: "Realizacje", services: "Usługi", process: "Proces", about: "O mnie", contact: "Kontakt" },
   footer: {
     tagline: "Strony internetowe, aplikacje webowe i wsparcie techniczne.",
-    rights: "© {year} {site}. Wszelkie prawa zastrzeżone.",
+    rights: "© {site}. Wszelkie prawa zastrzeżone.",
     builtBy: "Zaprojektowane i zbudowane przez {site}.",
   },
   hero: {
@@ -41,10 +41,10 @@ export const pl: Dictionary = {
     titleA: "Na tyle małe, żeby mi zależało.",
     titleB: "Na tyle techniczne, żeby zbudować to porządnie.",
     points: [
-      { title: "Bezpośrednio", text: "Rozmawiasz z osobą, która to buduje. Bez account managerów." },
+      { title: "Bezpośrednio", text: "Rozmawiasz ze mną na każdym etapie, a pracę wykonuję ja. Nikogo pomiędzy." },
       { title: "Stała cena", text: "Zakres, rezultaty i koszt ustalone, zanim zacznę pracę." },
       { title: "Porządnie zbudowane", text: "React, Next.js, Shopify albo Webflow – dobrane do zadania." },
-      { title: "Wciąż tu jestem", text: "Hosting, utrzymanie i wsparcie po starcie." },
+      { title: "Wciąż tu jestem", text: "Hostuję stronę, dbam o aktualizacje i jestem pod ręką, gdy już działa." },
     ],
   },
   services: {
@@ -52,16 +52,18 @@ export const pl: Dictionary = {
     titleA: "Co buduję",
     titleB: "i jak dbam, żeby działało.",
     description:
-      "Strony internetowe, sklepy online, niewielkie aplikacje i wsparcie, kiedy już są uruchomione. Zakres i cena projektu są ustalane, zanim ruszy praca.",
+      "Projektowanie i tworzenie stron www dla małych firm i startupów: strony internetowe, sklepy online, niewielkie aplikacje i wsparcie, kiedy już są uruchomione. Zakres i cena projektu są ustalane, zanim ruszy praca.",
     items: [
       {
         title: "Strony internetowe",
-        description: "Strony i landing page’e zaprojektowane wokół Twojej firmy.",
+        description:
+          "Projektowanie i tworzenie stron internetowych na zamówienie, od pojedynczego landing page’a po pełną stronę, wokół Twojej firmy.",
         tags: ["React + Next.js", "Webflow", "Landing page’e", "Redesign"],
       },
       {
         title: "Shopify",
-        description: "Profesjonalne sklepy internetowe i indywidualne rozszerzenia Shopify.",
+        description:
+          "Tworzenie sklepów Shopify, które sprzedają na telefonie: profesjonalny e-commerce, indywidualne motywy i usprawnienia tego, co już masz.",
         tags: ["Konfiguracja sklepu", "Dostosowanie motywu", "Integracje", "Usprawnienia"],
       },
       {
@@ -72,7 +74,7 @@ export const pl: Dictionary = {
       {
         title: "Stałe wsparcie",
         description:
-          "Hosting, utrzymanie i wsparcie techniczne po starcie – od osoby, która to zbudowała.",
+          "Hosting, utrzymanie strony i wsparcie techniczne po starcie.",
         tags: ["Hosting", "Aktualizacje", "Utrzymanie", "Wsparcie techniczne"],
       },
     ],
@@ -82,7 +84,8 @@ export const pl: Dictionary = {
   },
   work: {
     eyebrow: "Wybrane realizacje",
-    title: "Rzeczy, które zbudowałem.",
+    titleSamples: "Rzeczy, które zbudowałem.",
+    titleReal: "Rzeczy, które zbudowałem.",
     descriptionSamples:
       "Kilka przykładów projektów, jakich się podejmuję: strona, która przynosi rezerwacje, sklep, który sprzedaje na telefonie, narzędzie, które zastępuje arkusz kalkulacyjny.",
     descriptionReal: "Kilka ostatnich projektów. Każdy zaprojektowany, zbudowany i uruchomiony przeze mnie.",
@@ -180,7 +183,7 @@ export const pl: Dictionary = {
       { title: "Zakres", text: "Ustalamy, czego naprawdę potrzebujesz, i uzgadniamy zakres oraz cenę." },
       { title: "Budowa", text: "Projektuję i programuję stronę lub aplikację." },
       { title: "Start", text: "Wszystko zostaje przetestowane, wdrożone i przekazane." },
-      { title: "Wsparcie", text: "Opcjonalny hosting, utrzymanie i wsparcie techniczne po starcie." },
+      { title: "Wsparcie", text: "Opcjonalnie. Jeśli chcesz, zostaję i dbam o stronę dalej." },
     ],
     closingText: "Pierwszy krok to rozmowa. Powiedz mi, nad czym pracujesz, a resztą zajmiemy się razem.",
     closingCta: "Zacznij projekt",
@@ -231,7 +234,7 @@ export const pl: Dictionary = {
     eyebrow: "O mnie",
     titleA: "Jednoosobowe studio,",
     titleB: "z wyboru.",
-    lead: "{site} to z wyboru jedna osoba. Przez cały projekt masz tego samego projektanta, programistę i jeden kontakt, a potem tę samą osobę, która się nim opiekuje.",
+    lead: "{site} to jedna osoba, bo tak pracuję najlepiej: blisko klienta, blisko kodu i z odpowiedzialnością za całość. Wszystko, co buduję, sprowadza się do tych samych pięciu rzeczy.",
     focusLabel: "Na czym się skupiam",
     focus: [
       { title: "Dobry design", text: "Przemyślany, czysty i łatwy w obsłudze, na każdym ekranie." },
@@ -267,7 +270,7 @@ export const pl: Dictionary = {
     lead: "Nowa strona, sklep internetowy, narzędzie na miarę albo pomoc z czymś, co już istnieje – powiedz mi, co masz w planach.",
     expectLabel: "Czego się spodziewać",
     expectations: [
-      { title: "Odpowiedź od osoby, która to zbuduje", text: "Odpisuje osoba, która wykona pracę, a nie skrzynka odbiorcza." },
+      { title: "Odpowiedź od osoby, która to zbuduje", text: "Krótka odpowiedź z kilkoma pytaniami, żebym zrozumiał, czego potrzebujesz, zanim cokolwiek zaproponuję." },
       { title: "Jasny zakres i stała cena", text: "Zanim zacznę pracę, wiesz, co powstaje i ile kosztuje." },
       { title: "Szczera rada", text: "Nawet jeśli odpowiedź brzmi: „jeszcze tego nie potrzebujesz”." },
     ],

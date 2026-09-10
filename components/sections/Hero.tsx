@@ -51,7 +51,7 @@ export function Hero({ locale, t }: { locale: Locale; t: Dictionary["hero"] }) {
           </Reveal>
         </div>
 
-        <div className="relative lg:-mr-6 xl:-mr-10">
+        <div className="relative xl:-mr-10">
           <HeroVisual />
         </div>
       </div>

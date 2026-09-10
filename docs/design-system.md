@@ -47,6 +47,8 @@ person who built it. Never make "one person" sound limited.
 | `accent-500` `#2f5bff` (+ `accent-50…800`) | **the** accent (cobalt). Buttons, highlights, active states, small dots. Use sparingly: one or two accent moments per section. |
 | `glow-violet` | only inside the accent glow gradient. Never for UI. |
 | `ok` / `ok-soft`, `warn` / `warn-soft` | status colours inside mock interfaces only |
+| `ok-ink` / `ok-ring`, `warn-ink` / `warn-ring` | status text and ring on `*-soft` fills (`Chip`, `MockChip`) |
+| `ok-bright` / `warn-bright` | status text inside dark app windows (`DarkChip`) |
 | `danger-300/400/500`, `danger-soft` | form validation errors only |
 
 **Tone-aware tokens** (flip automatically inside `.tone-dark`): `bg-bg`, `text-fg`,
@@ -67,7 +69,7 @@ numbers, metadata, code-like details). Scale (all responsive `clamp`s):
 | `text-display-md` | big statements, sub-sections, card titles on feature cards |
 | `text-display-sm` | card titles |
 | `text-lead` | section intro paragraphs (`text-muted`) |
-| `text-base` / `text-sm` | body / dense body |
+| `text-base` / `text-md` / `text-sm` | body / body-medium (15px: nav links, card copy, field text) / dense body |
 | `text-xs` / `text-2xs` (mono) | labels, chips, metadata |
 
 Headline conventions: sentence case, short, confident, full stop at the end. A two-tone
@@ -99,20 +101,26 @@ import { SectionHeading, Eyebrow } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";              // variant primary|accent|secondary|ghost|inverse, size sm|md|lg, arrow, href
 import { Reveal } from "@/components/ui/Reveal";              // <Reveal delay={ms} variant="up|scale|left|none" as="div|li|...">  scroll-in animation
 import { Chip } from "@/components/ui/Chip";                  // tone neutral|accent|ok|warn, mono (default true)
+import { Wordmark } from "@/components/ui/Wordmark";          // tool-name badge (mono, ring, dot), props active|dim; sized in em so text-* scales it
 import { Logo, LogoMark } from "@/components/ui/Logo";
 import { ParallaxStage, ParallaxLayer } from "@/components/ui/ParallaxStage"; // pointer parallax (desktop only)
 import * as Icons from "@/components/ui/icons";               // ArrowRightIcon, CheckIcon, GlobeIcon, BagIcon, AppWindowIcon, LifeBuoyIcon, CalendarIcon, ChartIcon, UsersIcon, ShieldIcon, ServerIcon, ZapIcon, CodeIcon, MailIcon, ClockIcon, WrenchIcon, LockIcon, RefreshIcon, MessageIcon, FileTextIcon, SendIcon, HammerIcon, SparkIcon
 import { useInView, usePrefersReducedMotion } from "@/lib/use-in-view";
 import { InViewGroup } from "@/components/ui/InViewGroup";     // sets data-inview on scroll; children animate via [.js_[data-inview]_&]: variants
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";                            // clsx only: a later class never overrides an earlier one (see below)
 import { site } from "@/content/site";                        // name, url, tagline, currency, nav, cta, email
 import { projects, type Project } from "@/content/projects";
 ```
 
+`cn` is plain `clsx`, not tailwind-merge: `className` is appended, never merged, so don't pass a class
+that fights a primitive's base (`hidden` on a `Button`, `h-*` on a `Skeleton`). Use the prop the primitive
+exposes instead (`Skeleton height`, `MockAvatar size`, `Panel tone/shadow`, `MockButton style`), wrap the
+element for responsive visibility, and write conditional classes as either/or ternaries.
+
 Mockup building blocks (`@/components/mockups/frames`, `@/components/mockups/primitives`):
 `BrowserFrame` (url, chrome light|dark), `PhoneFrame`, `Panel` (variant glass|solid), `AppFrame`,
-`Skeleton` (width, tone), `ImageBlock` (variant warm|cool|mono|accent), `MockButton`, `MockChip`,
-`MockAvatar`, `Bars` (animated bar chart), `Sparkline`, `MockDivider`.
+`Skeleton` (width, tone), `ImageBlock` (variant warm|cool|mono|accent), `MockButton` (tone dark|light|accent|ghost|ghost-dark),
+`MockChip` (light UIs), `DarkChip` (tone neutral|ok|warn|accent, dot; status pills on dark app windows), `MockAvatar`, `Bars` (animated bar chart), `Sparkline`, `MockDivider`.
 
 Frames set `@container`, so inside a frame size things with **container query units**
 (`text-[3cqw]`, `p-[4cqw]`, `size-[5cqw]`) and the mock scales with its frame. Wrap decorative
@@ -142,6 +150,9 @@ Short sentences. Plain English. Confident, specific, human. No buzzwords, no "in
 solutions", no "leverage". Prefer *"You tell me what needs building. I work out the simplest way
 to build it."* Use the brief's microcopy: "What I build", "How it works", "Start a project",
 "Send enquiry →", "Still need help after launch?". Avoid exclamation marks.
+Use typographic quotes in copy: ’ for apostrophes, “ ” for quotations, never ' or ". A quick
+regression check: `grep -rnE "[A-Za-z]'[A-Za-z]" --include=*.tsx --include=*.ts app components content lib | grep -v '^\S*:\s*[/*]'`
+should return only comments.
 
 ## 7. Page order
 

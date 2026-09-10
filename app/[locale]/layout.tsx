@@ -3,10 +3,13 @@ import { notFound } from "next/navigation";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { site } from "@/content/site";
+import { Boot } from "@/components/layout/Boot";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { isLocale, localeMeta, locales, type Locale } from "@/lib/i18n/config";
+import { baseOpenGraph } from "@/lib/i18n/metadata";
+import { themeBootScript } from "@/lib/theme";
 import "../globals.css";
 
 type Params = { locale: string };
@@ -37,15 +40,11 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
       "Next.js developer",
       "Webflow",
     ],
-    openGraph: {
-      type: "website",
-      siteName: site.name,
-      locale: localeMeta[locale].og,
-      alternateLocale: locales.filter((l) => l !== locale).map((l) => localeMeta[l].og),
-      title: t.meta.title,
-      description: t.meta.ogDescription,
-    },
-    twitter: { card: "summary_large_image", title: t.meta.title, description: t.meta.description },
+    /* No title/description here: Next fills the og: and twitter: equivalents from
+       each route's own title and description, so child pages never unfurl with
+       homepage copy. */
+    openGraph: baseOpenGraph(locale),
+    twitter: { card: "summary_large_image" },
     robots: {
       index: true,
       follow: true,
@@ -106,10 +105,6 @@ function structuredData(locale: Locale, description: string) {
   };
 }
 
-/* Runs before paint: flags JS for the scroll reveals and applies the saved
-   theme (or the system preference) so there is no flash of the wrong mode. */
-const bootScript = `document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.dataset.theme='dark'}}catch(e){}`;
-
 export default async function LocaleLayout({ children, params }: LayoutProps<"/[locale]">) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
@@ -123,14 +118,19 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
+        {/* Runs before paint: flags JS for the scroll reveals and applies the
+            saved theme (or the system preference) so there is no flash of the
+            wrong mode. <Boot /> below repeats it for renders where React
+            skips inline scripts. */}
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData(locale, t.meta.ogDescription)) }}
         />
       </head>
       <body className="min-h-dvh flex flex-col">
-        <Navbar locale={locale} nav={t.nav} common={t.common} />
+        <Boot />
+        <Navbar locale={locale} nav={t.nav} common={t.common} tagline={t.footer.tagline} />
         <main id="main" className="flex-1">
           {children}
         </main>

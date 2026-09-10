@@ -29,7 +29,7 @@ export function Studio({ locale, t }: { locale: Locale; t: Dictionary["studio"] 
             </Reveal>
             <Reveal delay={60}>
               <h2 className="mt-5 max-w-[19ch] text-display-lg">
-                <span className="text-muted">{t.titleMuted}</span> {t.titleBright}
+                <span className="text-muted">{t.titleMuted}</span> <span className="block">{t.titleBright}</span>
               </h2>
             </Reveal>
           </div>

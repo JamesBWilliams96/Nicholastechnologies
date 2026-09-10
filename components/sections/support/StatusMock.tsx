@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { cn } from "@/lib/utils";
-import { AppFrame } from "@/components/mockups/frames";
+import { BrowserFrame } from "@/components/mockups/frames";
 import {
   ClockIcon,
   CodeIcon,
@@ -10,14 +10,16 @@ import {
   ServerIcon,
   WrenchIcon,
 } from "@/components/ui/icons";
-import { DarkChip } from "./DarkChip";
+import { playWhenInView } from "@/components/ui/in-view";
+import { DarkChip } from "@/components/mockups/primitives";
 
 /* ------------------------------------------------------------------
    A dark status dashboard for "yourbusiness.com": everything is fine,
    and someone is clearly looking after it. Illustrative only.
 
-   Sized with container-query units so the mock scales with its frame;
-   `max()` floors keep the type legible when the frame is narrow.
+   Sits in a dark BrowserFrame (the same chrome as the Work app preview).
+   The page is sized with container-query units so it scales with its
+   frame; `max()` floors keep the type legible when the frame is narrow.
    Animations are paused until the parent InViewGroup sets data-inview.
    ------------------------------------------------------------------ */
 
@@ -47,36 +49,19 @@ const t = {
   label: "text-[max(1.7cqw,0.625rem)]",
 };
 
-const playWhenInView =
-  "motion-safe-only [.js_&]:[animation-play-state:paused] [.js_[data-inview]_&]:[animation-play-state:running]";
-
 export function StatusMock() {
   return (
-    <AppFrame chrome="dark" className="ring-white/12">
-      {/* Title bar */}
-      <div className="flex items-center justify-between gap-[3cqw] border-b border-white/8 bg-ink-800 px-[3.6cqw] py-[2.3cqw]">
-        <div className="flex min-w-0 items-center gap-[2.4cqw]">
-          <div className="flex gap-[1.1cqw]">
-            <span className="size-[1.7cqw] min-h-1.5 min-w-1.5 rounded-full bg-white/20" />
-            <span className="size-[1.7cqw] min-h-1.5 min-w-1.5 rounded-full bg-white/20" />
-            <span className="size-[1.7cqw] min-h-1.5 min-w-1.5 rounded-full bg-white/20" />
-          </div>
-          <span
-            className={cn(
-              "inline-flex min-w-0 items-center gap-[1.3cqw] rounded-[1cqw] bg-white/6 px-[1.9cqw] py-[1cqw] font-mono text-ink-200",
-              t.mono,
-            )}
-          >
-            <span className="size-[1.3cqw] min-h-1.5 min-w-1.5 shrink-0 rounded-full bg-ok" />
-            <span className="truncate">status · yourbusiness.com</span>
-          </span>
-        </div>
-        {/* Signed in: the studio mark, so the window reads as looked after */}
-        <span className="inline-flex size-[max(3.6cqw,1.25rem)] shrink-0 items-center justify-center rounded-[max(0.9cqw,0.3rem)] bg-paper text-[max(1.9cqw,0.625rem)] font-semibold leading-none text-ink-950">
+    <BrowserFrame
+      chrome="dark"
+      url="status.yourbusiness.com"
+      className="ring-white/12"
+      /* Signed in: the studio mark, so the window reads as looked after */
+      trailing={
+        <span className="inline-flex size-5 items-center justify-center rounded-[0.3rem] bg-paper text-[0.625rem] font-semibold leading-none text-ink-950">
           N
         </span>
-      </div>
-
+      }
+    >
       <div className="px-[4.4cqw] pb-[max(4.4cqw,1.5rem)] pt-[4cqw]">
         {/* Overall status */}
         <div className="flex items-start justify-between gap-[3cqw]">
@@ -85,7 +70,7 @@ export function StatusMock() {
               <span className="absolute inset-0 rounded-full bg-ok/25" />
               <span className="size-[62%] rounded-full bg-ok animate-pulse-dot motion-safe-only" />
             </span>
-            <span className={cn("font-semibold leading-none tracking-[-0.02em] text-paper", t.title)}>
+            <span className={cn("font-semibold tracking-[-0.02em] text-paper", t.title)}>
               All systems operational
             </span>
           </div>
@@ -158,6 +143,6 @@ export function StatusMock() {
           ))}
         </ul>
       </div>
-    </AppFrame>
+    </BrowserFrame>
   );
 }

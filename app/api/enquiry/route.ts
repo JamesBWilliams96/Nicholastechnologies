@@ -7,7 +7,7 @@ import { formatEnquiryText, validateEnquiry, type Enquiry } from "@/lib/enquiry"
  * Validates with lib/enquiry.ts, drops honeypot submissions silently, applies a
  * light per-IP rate limit, then emails the enquiry through Resend when
  * RESEND_API_KEY and CONTACT_TO_EMAIL are set. Without them the enquiry is
- * logged on the server and the client is told the form isn't connected yet.
+ * logged on the server and the visitor still sees the normal confirmation.
  */
 
 export const runtime = "nodejs";
@@ -18,12 +18,16 @@ const RATE_MAX = 5;
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const DEFAULT_FROM = `${site.name} <onboarding@resend.dev>`;
 
-const GENERIC_ERROR = "Something went wrong and your enquiry wasn't sent. Please try again.";
+const GENERIC_ERROR = "Something went wrong and your enquiry wasn’t sent. Please try again.";
 
 /* --------------------------------------------------------------
    Best-effort in-memory rate limiting. Resets whenever the server
    restarts and isn't shared between instances — that's fine for a
    contact form; the goal is to blunt accidental floods, not attacks.
+
+   A hit is recorded per attempt, not per successful delivery: if the
+   upstream is failing, counting only successes would let a client
+   hammer it without ever tripping the limit.
    -------------------------------------------------------------- */
 const hits = new Map<string, number[]>();
 
@@ -58,6 +62,40 @@ type Payload = { ok: boolean; message?: string; errors?: Record<string, string>
 
 function json(body: Payload, status = 200): Response {
   return Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
+}
+
+/**
+ * Reads the request body while counting bytes, so a chunked or missing
+ * Content-Length can't sidestep the size cap — `req.json()` would buffer
+ * the whole thing before we ever saw how big it was. Returns null once the
+ * running total passes `limit` (the stream is cancelled at that point).
+ */
+async function readBody(req: Request, limit: number): Promise<Uint8Array | null> {
+  if (!req.body) return new Uint8Array(0);
+  const reader = req.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > limit) {
+        await reader.cancel();
+        return null;
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const out = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    out.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return out;
 }
 
 async function sendViaResend(data: Enquiry, apiKey: string, to: string): Promise<boolean> {
@@ -95,16 +133,21 @@ async function sendViaResend(data: Enquiry, apiKey: string, to: string): Promise
 
 export async function POST(req: Request) {
   try {
-    const length = Number(req.headers.get("content-length") ?? 0);
-    if (length > MAX_BODY_BYTES) {
-      return json({ ok: false, message: "That message is too long to send. Please shorten it." }, 413);
-    }
+    const tooLong = () =>
+      json({ ok: false, message: "That message is too long to send. Please shorten it." }, 413);
+
+    // Cheap pre-check on the declared length; the streamed read below is what
+    // actually enforces the cap, whether or not the header is present.
+    const declared = Number(req.headers.get("content-length") ?? 0);
+    if (declared > MAX_BODY_BYTES) return tooLong();
 
     let body: unknown;
     try {
-      body = await req.json();
+      const raw = await readBody(req, MAX_BODY_BYTES);
+      if (raw === null) return tooLong();
+      body = JSON.parse(new TextDecoder().decode(raw));
     } catch {
-      return json({ ok: false, message: "The enquiry couldn't be read. Please try again." }, 400);
+      return json({ ok: false, message: "The enquiry couldn’t be read. Please try again." }, 400);
     }
 
     const result = validateEnquiry(body);
@@ -114,6 +157,15 @@ export async function POST(req: Request) {
 
     // Honeypot filled: almost certainly a bot. Pretend it worked and move on.
     if (result.spam) return json({ ok: true });
+
+    // Rate-limit before deciding how to deliver, so an unconfigured deployment
+    // (which logs the enquiry in full) is capped just like a configured one.
+    if (isRateLimited(clientKey(req))) {
+      return json(
+        { ok: false, message: "That’s a few enquiries in a short time. Please wait a while and try again." },
+        429,
+      );
+    }
 
     const apiKey = process.env.RESEND_API_KEY?.trim();
     const to = process.env.CONTACT_TO_EMAIL?.trim();
@@ -127,16 +179,9 @@ export async function POST(req: Request) {
       return json({ ok: true, delivered: false });
     }
 
-    if (isRateLimited(clientKey(req))) {
-      return json(
-        { ok: false, message: "That's a few enquiries in a short time. Please wait a while and try again." },
-        429,
-      );
-    }
-
     const sent = await sendViaResend(result.data, apiKey, to);
     if (!sent) {
-      return json({ ok: false, message: "Your enquiry couldn't be sent right now. Please try again in a moment." }, 502);
+      return json({ ok: false, message: "Your enquiry couldn’t be sent right now. Please try again in a moment." }, 502);
     }
 
     return json({ ok: true });

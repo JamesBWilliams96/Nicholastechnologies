@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 /** Slovak. */
 export const sk: Dictionary = {
   meta: {
-    title: "Nicholas Technologies — Weby, Shopify e-shopy a webové aplikácie",
+    title: "Nicholas Technologies — Tvorba webov, Shopify a aplikácie",
     description:
       "Jednočlenné štúdio, ktoré stavia weby, Shopify e-shopy a webové aplikácie na mieru pre malé firmy a startupy. Pevná cena, podpora aj po spustení.",
     ogDescription:
@@ -25,7 +25,7 @@ export const sk: Dictionary = {
   nav: { work: "Práce", services: "Služby", process: "Postup", about: "O mne", contact: "Kontakt" },
   footer: {
     tagline: "Weby, webové aplikácie a technická podpora.",
-    rights: "© {year} {site}. Všetky práva vyhradené.",
+    rights: "© {site}. Všetky práva vyhradené.",
     builtBy: "Návrh a realizácia: {site}.",
   },
   hero: {
@@ -41,10 +41,10 @@ export const sk: Dictionary = {
     titleA: "Dosť malé, aby mi na tom záležalo.",
     titleB: "Dosť technické, aby to bolo poriadne postavené.",
     points: [
-      { title: "Priamo", text: "Hovoríte s človekom, ktorý to stavia. Žiadni account manažéri." },
+      { title: "Priamo", text: "Hovoríte so mnou v každej fáze a prácu robím ja. Nikto medzi nami." },
       { title: "Pevná cena", text: "Rozsah, výstupy a cena dohodnuté ešte pred začiatkom." },
       { title: "Poriadne postavené", text: "React, Next.js, Shopify alebo Webflow, podľa toho, čo projekt potrebuje." },
-      { title: "Stále tu", text: "Hosting, údržba a podpora aj po spustení." },
+      { title: "Stále tu", text: "Web hostujem, udržiavam aktuálny a som poruke, aj keď už beží." },
     ],
   },
   services: {
@@ -52,16 +52,18 @@ export const sk: Dictionary = {
     titleA: "Čo staviam",
     titleB: "a ako to udržiavam v chode.",
     description:
-      "Weby, e-shopy, menšie aplikácie na mieru a podpora, ktorá sa o ne postará po spustení. Rozsah a cena projektu sú jasné ešte pred začiatkom.",
+      "Tvorba webov a vývoj na mieru pre malé firmy a startupy: weby, e-shopy, menšie aplikácie a podpora, ktorá sa o ne postará po spustení. Rozsah a cena projektu sú jasné ešte pred začiatkom.",
     items: [
       {
         title: "Weby",
-        description: "Weby a landing pages na mieru, navrhnuté okolo vášho podnikania.",
+        description:
+          "Návrh a tvorba webových stránok na mieru, od jednej landing page po celý web, navrhnuté okolo vášho podnikania.",
         tags: ["React + Next.js", "Webflow", "Landing pages", "Redizajny"],
       },
       {
         title: "Shopify",
-        description: "Profesionálne e-shopy a úpravy Shopify na mieru.",
+        description:
+          "Vývoj na Shopify pre e-shopy, ktoré predávajú na mobile: profesionálny e-commerce, témy na mieru a vylepšenia toho, čo už máte.",
         tags: ["Nastavenie obchodu", "Úpravy témy", "Integrácie", "Vylepšenia"],
       },
       {
@@ -72,7 +74,7 @@ export const sk: Dictionary = {
       {
         title: "Priebežná podpora",
         description:
-          "Hosting, údržba a technická podpora po spustení, od človeka, ktorý to postavil.",
+          "Hosting, údržba webu a technická podpora po spustení.",
         tags: ["Hosting", "Aktualizácie", "Údržba", "Technická podpora"],
       },
     ],
@@ -82,7 +84,8 @@ export const sk: Dictionary = {
   },
   work: {
     eyebrow: "Vybrané práce",
-    title: "Čo som postavil.",
+    titleSamples: "Čo som postavil.",
+    titleReal: "Čo som postavil.",
     descriptionSamples:
       "Niekoľko typov projektov, ktoré robím: web, ktorý prináša rezervácie, e-shop, ktorý predáva na mobile, nástroj, ktorý nahradí tabuľku.",
     descriptionReal: "Niekoľko nedávnych projektov. Každý z nich som navrhol, postavil a spustil sám.",
@@ -180,7 +183,7 @@ export const sk: Dictionary = {
       { title: "Rozsah", text: "Ujasníme si, čo naozaj potrebujete, a dohodneme rozsah a cenu." },
       { title: "Vývoj", text: "Navrhnem a vyviniem web alebo aplikáciu." },
       { title: "Spustenie", text: "Všetko otestujem, nasadím a odovzdám." },
-      { title: "Podpora", text: "Voliteľný hosting, údržba a technická podpora po spustení." },
+      { title: "Podpora", text: "Voliteľne. Ak chcete, ostanem a budem sa o web starať." },
     ],
     closingText: "Prvý krok je rozhovor. Povedzte mi, na čom pracujete, a pôjdeme ďalej.",
     closingCta: "Začať projekt",
@@ -231,7 +234,7 @@ export const sk: Dictionary = {
     eyebrow: "O mne",
     titleA: "Jednočlenné štúdio,",
     titleB: "zámerne.",
-    lead: "{site} som zámerne nechal ako štúdio jedného človeka. Počas celého projektu máte toho istého dizajnéra, vývojára a kontaktnú osobu, a ten istý človek sa o web stará aj potom.",
+    lead: "{site} som nechal ako štúdio jedného človeka, pretože tak odvádzam najlepšiu prácu: blízko ku klientovi, blízko ku kódu a so zodpovednosťou za všetko. Všetko, čo staviam, sa vracia k tým istým piatim veciam.",
     focusLabel: "Na čo sa sústredím",
     focus: [
       { title: "Dobrý dizajn", text: "Premyslený, čistý a jednoduchý na používanie, na každej obrazovke." },
@@ -267,7 +270,7 @@ export const sk: Dictionary = {
     lead: "Či potrebujete nový web, e-shop, nástroj na mieru alebo pomoc s niečím, čo už existuje, napíšte mi, čo máte na mysli.",
     expectLabel: "Čo môžete čakať",
     expectations: [
-      { title: "Odpoveď od človeka, ktorý to postaví", text: "Ozve sa vám ten, kto bude na projekte pracovať, nie anonymná schránka." },
+      { title: "Odpoveď od človeka, ktorý to postaví", text: "Krátka odpoveď s pár otázkami, aby som pochopil, čo potrebujete, skôr než čokoľvek navrhnem." },
       { title: "Jasný rozsah a pevná cena", text: "Skôr než sa začne pracovať, budete vedieť, čo sa stavia a koľko to stojí." },
       { title: "Úprimná rada", text: "Aj keby odpoveď znela „toto zatiaľ nepotrebujete“." },
     ],

@@ -56,6 +56,7 @@ export function ContactForm({ locale, t, mailto }: ContactFormProps) {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const [liveMessage, setLiveMessage] = useState("");
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
   const reducedMotion = usePrefersReducedMotion();
 
   const submitting = status.kind === "submitting";
@@ -90,6 +91,20 @@ export function ContactForm({ locale, t, mailto }: ContactFormProps) {
     },
     [focusField, t],
   );
+
+  /**
+   * After a failed delivery, give keyboard and screen-reader users a place to
+   * be: focus the message and bring it into view (submitting with Enter from
+   * a field further up would otherwise leave it off screen).
+   */
+  function focusError() {
+    requestAnimationFrame(() => {
+      const box = errorRef.current;
+      if (!box) return;
+      box.focus({ preventScroll: true });
+      box.scrollIntoView({ block: "nearest", behavior: reducedMotion ? "auto" : "smooth" });
+    });
+  }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -134,8 +149,10 @@ export function ContactForm({ locale, t, mailto }: ContactFormProps) {
       }
 
       setStatus({ kind: "error", message: t.errorGeneric });
+      focusError();
     } catch {
       setStatus({ kind: "error", message: t.errorGeneric });
+      focusError();
     }
   }
 
@@ -332,7 +349,11 @@ export function ContactForm({ locale, t, mailto }: ContactFormProps) {
       {/* Status: validation summary and delivery errors. Always present so announcements work. */}
       <div aria-live="polite" className={cn(isError && "mt-7")}>
         {isError ? (
-          <div className="rounded-xl bg-danger-400/[0.08] px-4 py-3.5 text-sm leading-relaxed ring-1 ring-inset ring-danger-400/30">
+          <div
+            ref={errorRef}
+            tabIndex={-1}
+            className="rounded-xl bg-danger-400/[0.08] px-4 py-3.5 text-sm leading-relaxed ring-1 ring-inset ring-danger-400/30 focus:outline-none"
+          >
             <p className="font-medium text-fg">{status.message}</p>
             <p className="mt-1 text-muted">
               {t.errorKept}{" "}

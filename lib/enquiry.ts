@@ -121,7 +121,7 @@ function clean(value: string): string {
 }
 
 /** Coerces anything (a parsed JSON body, form state) into the raw input shape. */
-export function toEnquiryInput(value: unknown): EnquiryInput {
+function toEnquiryInput(value: unknown): EnquiryInput {
   const v = (value && typeof value === "object" ? value : {}) as Record<string, unknown>;
   return {
     name: str(v.name),
@@ -187,7 +187,7 @@ export function validateEnquiry(
   };
 }
 
-export function timeframeLabel(value: Timeframe | undefined): string | undefined {
+function timeframeLabel(value: Timeframe | undefined): string | undefined {
   return TIMEFRAMES.find((t) => t.value === value)?.label;
 }
 
@@ -208,7 +208,7 @@ export function formatEnquiryText(data: Enquiry): string {
     `Budget:     ${data.budget ?? dash}`,
     `Timeframe:  ${timeframeLabel(data.timeframe) ?? dash}`,
     "",
-    "What they're looking to build:",
+    "What they’re looking to build:",
     data.project,
     "",
     "Anything else:",

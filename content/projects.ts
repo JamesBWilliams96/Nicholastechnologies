@@ -34,10 +34,17 @@ export type Project = {
   placeholder: boolean;
   /** Visual style of the placeholder preview. Ignored when `image` is set. */
   preview?: "website" | "store" | "app";
+  /**
+   * Optional page at /work/<slug>. `challenge` and `solution` are required.
+   * `result` is optional: describe what the client can now do (take bookings
+   * online, orders without phone calls), never a percentage, revenue or traffic
+   * figure — the brief's hard rules (docs/design-system.md §2) forbid case-study
+   * results.
+   */
   caseStudy?: {
     challenge: string;
     solution: string;
-    result: string;
+    result?: string;
   };
 };
 

@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 /** Czech. */
 export const cs: Dictionary = {
   meta: {
-    title: "Nicholas Technologies — Weby, e-shopy na Shopify a webové aplikace",
+    title: "Nicholas Technologies — Tvorba webů, Shopify a webové aplikace",
     description:
       "Studio jednoho člověka. Stavím weby, e-shopy na Shopify a webové aplikace na míru pro malé firmy a startupy. Pevná cena, podpora i po spuštění.",
     ogDescription:
@@ -25,7 +25,7 @@ export const cs: Dictionary = {
   nav: { work: "Portfolio", services: "Služby", process: "Postup", about: "O mně", contact: "Kontakt" },
   footer: {
     tagline: "Weby, webové aplikace a technická podpora.",
-    rights: "© {year} {site}. Všechna práva vyhrazena.",
+    rights: "© {site}. Všechna práva vyhrazena.",
     builtBy: "Design a vývoj: {site}.",
   },
   hero: {
@@ -41,10 +41,10 @@ export const cs: Dictionary = {
     titleA: "Dost malé na to, aby mu na vás záleželo.",
     titleB: "Dost technické na to, aby to postavilo pořádně.",
     points: [
-      { title: "Přímo", text: "Mluvíte s tím, kdo to staví. Žádní account manažeři." },
+      { title: "Přímo", text: "Mluvíte se mnou v každé fázi a práci dělám já. Nikdo mezi námi." },
       { title: "Pevná cena", text: "Rozsah, výstupy i cena domluvené před začátkem práce." },
       { title: "Postaveno pořádně", text: "React, Next.js, Shopify nebo Webflow, podle toho, co projekt potřebuje." },
-      { title: "Stále tady", text: "Hosting, údržba a podpora i po spuštění." },
+      { title: "Stále tady", text: "Web hostuji, udržuji aktuální a jsem po ruce, i když už běží." },
     ],
   },
   services: {
@@ -52,16 +52,18 @@ export const cs: Dictionary = {
     titleA: "Co stavím,",
     titleB: "a jak to udržuji v chodu.",
     description:
-      "Weby, e-shopy, menší aplikace na míru a podpora, která se o ně postará, jakmile jsou spuštěné. Rozsah i cena jsou domluvené, než se začne.",
+      "Tvorba webových stránek a vývoj na míru pro malé firmy a startupy: weby, e-shopy, menší aplikace a podpora, která se o ně postará, jakmile jsou spuštěné. Rozsah i cena jsou domluvené, než se začne.",
     items: [
       {
         title: "Weby",
-        description: "Weby a landing pages na míru, navržené kolem vašeho podnikání.",
+        description:
+          "Návrh a tvorba webových stránek na míru, od jedné landing page po celý web, navržené kolem vašeho podnikání.",
         tags: ["React + Next.js", "Webflow", "Landing pages", "Redesigny"],
       },
       {
         title: "Shopify",
-        description: "Profesionální e-shopy a úpravy Shopify na míru.",
+        description:
+          "Vývoj na Shopify pro e-shopy, které prodávají na mobilu: profesionální e-commerce, šablony na míru a vylepšení toho, co už máte.",
         tags: ["Založení e-shopu", "Úpravy šablony", "Integrace", "Vylepšení"],
       },
       {
@@ -72,7 +74,7 @@ export const cs: Dictionary = {
       {
         title: "Dlouhodobá podpora",
         description:
-          "Hosting, údržba a technická podpora po spuštění, od toho, kdo to postavil.",
+          "Hosting, údržba webu a technická podpora po spuštění.",
         tags: ["Hosting", "Aktualizace", "Údržba", "Technická podpora"],
       },
     ],
@@ -82,7 +84,8 @@ export const cs: Dictionary = {
   },
   work: {
     eyebrow: "Vybrané práce",
-    title: "Co jsem postavil.",
+    titleSamples: "Co jsem postavil.",
+    titleReal: "Co jsem postavil.",
     descriptionSamples:
       "Pár ukázek toho, jaké projekty dělám: web, který přináší rezervace, e-shop, který prodává na mobilu, nástroj, který nahradí tabulku.",
     descriptionReal: "Pár nedávných projektů. Každý z nich jsem navrhl, postavil a spustil já.",
@@ -180,7 +183,7 @@ export const cs: Dictionary = {
       { title: "Rozsah", text: "Ujasníme si, co skutečně potřebujete, a domluvíme rozsah a cenu." },
       { title: "Vývoj", text: "Navrhnu a vyvinu web nebo aplikaci." },
       { title: "Spuštění", text: "Všechno otestuji, nasadím a předám." },
-      { title: "Podpora", text: "Volitelný hosting, údržba a technická podpora po spuštění." },
+      { title: "Podpora", text: "Volitelně. Pokud chcete, zůstanu a budu se o web starat." },
     ],
     closingText: "První krok je rozhovor. Napište mi, na čem pracujete, a vezmeme to odtud.",
     closingCta: "Začít projekt",
@@ -231,7 +234,7 @@ export const cs: Dictionary = {
     eyebrow: "O mně",
     titleA: "Studio jednoho člověka,",
     titleB: "záměrně.",
-    lead: "{site} jsem záměrně nechal jako studio jednoho člověka. Po celý projekt máte stejného designéra, vývojáře i kontaktní osobu, a stejný člověk se o web stará i potom.",
+    lead: "{site} jsem nechal jako studio jednoho člověka, protože tak odvádím nejlepší práci: blízko klientovi, blízko kódu a s odpovědností za všechno. Všechno, co stavím, se vrací ke stejným pěti věcem.",
     focusLabel: "Na co se soustředím",
     focus: [
       { title: "Dobrý design", text: "Promyšlený, čistý a snadno použitelný, na každé obrazovce." },
@@ -267,7 +270,7 @@ export const cs: Dictionary = {
     lead: "Ať potřebujete nový web, e-shop, nástroj na míru nebo pomoc s něčím, co už existuje, napište mi, co máte na mysli.",
     expectLabel: "Co můžete čekat",
     expectations: [
-      { title: "Odpověď od toho, kdo to bude stavět", text: "Ozve se vám člověk, který bude práci dělat, ne anonymní schránka." },
+      { title: "Odpověď od toho, kdo to bude stavět", text: "Krátká odpověď s několika otázkami, abych pochopil, co potřebujete, než cokoli navrhnu." },
       { title: "Jasný rozsah a pevná cena", text: "Před začátkem práce víte, co se staví a kolik to stojí." },
       { title: "Upřímná rada", text: "I kdyby zněla „tohle zatím nepotřebujete“." },
     ],

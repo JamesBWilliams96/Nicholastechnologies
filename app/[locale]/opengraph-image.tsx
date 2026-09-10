@@ -5,9 +5,19 @@ import { site } from "@/content/site";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { defaultLocale, isLocale } from "@/lib/i18n/config";
 
-export const alt = `${site.name} — websites, Shopify stores and custom web apps`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+/**
+ * One share image per locale. Going through generateImageMetadata (rather
+ * than a static `alt` export) lets the alt text come from the same dictionary
+ * as the page title, so the two can't drift apart or fall out of language.
+ */
+export async function generateImageMetadata({ params }: { params: { locale: string } }) {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+  const t = await getDictionary(locale);
+  return [{ id: "share", alt: t.meta.ogAlt, size, contentType }];
+}
 
 async function loadFont(file: string) {
   return readFile(join(process.cwd(), "node_modules/geist/dist/fonts/geist-sans", file));

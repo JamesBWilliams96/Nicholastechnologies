@@ -12,7 +12,6 @@ type FooterProps = {
 };
 
 export function Footer({ locale, nav, footer, common }: FooterProps) {
-  const year = new Date().getFullYear();
   const links = [
     { label: nav.work, href: localePath(locale, "#work") },
     { label: nav.services, href: localePath(locale, "#services") },
@@ -55,7 +54,7 @@ export function Footer({ locale, nav, footer, common }: FooterProps) {
         </div>
 
         <div className="flex flex-col gap-3 border-t border-line py-6 font-mono text-xs text-subtle sm:flex-row sm:items-center sm:justify-between">
-          <p>{fmt(footer.rights, { year, site: site.name })}</p>
+          <p>{fmt(footer.rights, { site: site.name })}</p>
           <p>{fmt(footer.builtBy, { site: site.name })}</p>
         </div>
       </div>

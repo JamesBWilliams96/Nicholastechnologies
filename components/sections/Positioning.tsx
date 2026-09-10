@@ -24,7 +24,7 @@ export function Positioning({ t }: { t: Dictionary["positioning"] }) {
                     <Icon className="size-[1.1rem]" />
                   </span>
                   <div>
-                    <h3 className="text-[0.9375rem] font-semibold">{p.title}</h3>
+                    <h3 className="text-md font-semibold">{p.title}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-muted">{p.text}</p>
                   </div>
                 </Reveal>

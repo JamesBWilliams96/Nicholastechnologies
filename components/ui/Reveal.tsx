@@ -28,8 +28,6 @@ export type RevealProps = HTMLAttributes<HTMLElement> & {
   delay?: number;
   /** Direction/style of the reveal. */
   variant?: "up" | "scale" | "left" | "none";
-  /** Animate every time the element enters the viewport. */
-  repeat?: boolean;
   /**
    * Play the entrance immediately with CSS keyframes instead of waiting for
    * hydration + IntersectionObserver. Use for above-the-fold content so the
@@ -48,7 +46,6 @@ export function Reveal({
   as = "div",
   delay = 0,
   variant = "up",
-  repeat = false,
   eager = false,
   style,
   children,
@@ -68,9 +65,7 @@ export function Reveal({
         for (const entry of entries) {
           if (entry.isIntersecting) {
             el.classList.add("is-visible");
-            if (!repeat) io.disconnect();
-          } else if (repeat) {
-            el.classList.remove("is-visible");
+            io.disconnect();
           }
         }
       },
@@ -78,7 +73,7 @@ export function Reveal({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [repeat, eager]);
+  }, [eager]);
 
   const Tag = as as ElementType;
   return (

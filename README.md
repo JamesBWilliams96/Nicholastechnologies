@@ -70,13 +70,21 @@ labelled placeholder — nothing on the site is invented. To add a real project:
 
 1. Set `placeholder: false` and fill in `name`, `summary`, `category`, `stack` and optionally `href`.
 2. Add a screenshot under `public/work/` and set `image` (`src`, `alt`, `width`, `height`).
-3. Optionally add a `caseStudy` (`challenge`, `solution`, `result`). It gets its own page at
-   `/work/<slug>` and is added to the sitemap automatically.
+3. Optionally add a `caseStudy` (`challenge`, `solution`, and an optional `result`). It gets its
+   own page at `/work/<slug>` and is added to the sitemap automatically. `result` describes what
+   the client can now do (take bookings online, orders without phone calls) — never a percentage,
+   revenue or traffic figure; the brief's hard rules forbid case-study results.
 
 ## Founder photo
 
 `components/sections/About.tsx` has a `founderPhoto` constant. Leave it `null` for the designed
 placeholder slot, or point it at a real photo under `public/` to render it.
+
+## Local tooling
+
+`scripts/` is reserved for untracked local scripts and screenshots (for example, one-off
+Playwright checks). Anything you keep there is excluded from lint and typecheck
+(`eslint.config.mjs`, `tsconfig.json`), and `scripts/screenshots` is gitignored.
 
 ## Deploying
 

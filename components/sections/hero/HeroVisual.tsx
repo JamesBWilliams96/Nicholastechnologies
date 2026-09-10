@@ -28,12 +28,12 @@ function SiteMock() {
         </div>
         <div className="flex gap-[3cqw]">
           {[5, 4, 6, 4].map((w, i) => (
-            <Skeleton key={i} width={`${w}cqw`} className="h-[1.2cqw]" />
+            <Skeleton key={i} width={`${w}cqw`} height="1.2cqw" />
           ))}
         </div>
-        <span className="rounded-full bg-ink-950 px-[2.6cqw] py-[1.3cqw] text-[2.1cqw] font-medium leading-none text-white">
+        <MockButton tone="dark" className="text-[2.1cqw]" style={{ height: "4.7cqw", paddingInline: "2.6cqw" }}>
           Book now
-        </span>
+        </MockButton>
       </div>
 
       {/* hero */}
@@ -46,8 +46,8 @@ function SiteMock() {
             Bookings without the back‑and‑forth.
           </p>
           <div className="mt-[3cqw] space-y-[1.6cqw]">
-            <Skeleton width="92%" className="h-[1.3cqw]" />
-            <Skeleton width="70%" className="h-[1.3cqw]" />
+            <Skeleton width="92%" height="1.3cqw" />
+            <Skeleton width="70%" height="1.3cqw" />
           </div>
           <div className="mt-[3.6cqw] flex gap-[1.6cqw] text-[2.1cqw]">
             <MockButton tone="dark">Book a slot</MockButton>
@@ -72,8 +72,8 @@ function SiteMock() {
                 i === 1 ? "bg-accent-500" : "bg-ink-200",
               )}
             />
-            <Skeleton width="80%" className="mt-[2.4cqw] h-[1.3cqw] bg-ink-200" />
-            <Skeleton width="55%" className="mt-[1.4cqw] h-[1.3cqw]" />
+            <Skeleton width="80%" height="1.3cqw" tone="none" className="mt-[2.4cqw] bg-ink-200" />
+            <Skeleton width="55%" height="1.3cqw" className="mt-[1.4cqw]" />
           </div>
         ))}
       </div>
@@ -126,14 +126,14 @@ function StoreMock() {
 
 const days = ["M", "T", "W", "T", "F", "S", "S"];
 const slots = [
-  { time: "09:30", label: "Consultation", status: "Confirmed", tone: "ok" as const },
+  { time: "09:30", label: "Check‑up", status: "Confirmed", tone: "ok" as const },
   { time: "11:00", label: "Follow‑up", status: "Pending", tone: "warn" as const },
-  { time: "14:30", label: "New booking", status: "Just now", tone: "accent" as const },
+  { time: "14:30", label: "Booking", status: "New", tone: "accent" as const },
 ];
 
 function BookingMock() {
   return (
-    <div className="p-3 sm:p-3.5">
+    <div className="overflow-hidden p-3 sm:p-3.5">
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold">Bookings</span>
         <span className="font-mono text-2xs text-ink-500">This week</span>
@@ -158,14 +158,14 @@ function BookingMock() {
           <li
             key={s.time}
             className={cn(
-              "flex items-center gap-2 rounded-md bg-ink-50/80 px-2 py-1.5 text-[0.7rem]",
+              "flex items-center gap-2 rounded-md bg-ink-50/80 px-2 py-1.5 text-[0.65rem] sm:text-[0.7rem]",
               i === 2 && "animate-fade-up motion-safe-only ring-1 ring-accent-200",
             )}
             style={{ animationDelay: "1.6s" }}
           >
-            <span className="font-mono text-ink-500 tabular-nums">{s.time}</span>
-            <span className="font-medium text-ink-800">{s.label}</span>
-            <MockChip tone={s.tone} className="ml-auto text-[0.58rem]">
+            <span className="hidden shrink-0 font-mono text-ink-500 tabular-nums xs:inline">{s.time}</span>
+            <span className="min-w-0 truncate font-medium text-ink-800">{s.label}</span>
+            <MockChip tone={s.tone} className="ml-auto shrink-0 whitespace-nowrap text-[0.55rem]">
               {s.status}
             </MockChip>
           </li>
@@ -190,7 +190,7 @@ function AnalyticsMock() {
       <Bars
         values={[0.35, 0.5, 0.42, 0.6, 0.55, 0.7, 0.62, 0.8, 0.72, 0.9, 0.84, 1]}
         accentIndex={11}
-        className="mt-2 h-12"
+        className="mt-2 h-12 gap-1"
       />
     </div>
   );
@@ -236,7 +236,7 @@ export function HeroVisual() {
         </Reveal>
 
         {/* Booking panel */}
-        <Reveal eager delay={560} className="absolute -left-[2%] bottom-0 w-[58%] xs:w-[52%] sm:bottom-[-3%] sm:w-[42%] lg:-left-[5%]">
+        <Reveal eager delay={560} className="absolute -left-[2%] bottom-0 w-[58%] xs:w-[52%] sm:bottom-[-3%] sm:w-[42%] lg:-left-[5%] lg:w-[50%] xl:w-[42%]">
           <ParallaxLayer depth={18}>
             <div className="animate-float motion-safe-only">
               <Panel>
@@ -258,7 +258,7 @@ export function HeroVisual() {
         </Reveal>
 
         {/* Deploy toast */}
-        <Reveal eager delay={900} variant="none" className="absolute right-[2%] -top-5 sm:right-[18%] sm:top-[-1%]">
+        <Reveal eager delay={900} variant="none" className="absolute right-[2%] -top-9 sm:right-[18%] sm:top-[-1%]">
           <ParallaxLayer depth={22}>
             <div className="animate-float-delayed motion-safe-only [animation-delay:-2s]">
               <DeployToast />

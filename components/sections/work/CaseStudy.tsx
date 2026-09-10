@@ -14,7 +14,7 @@ import { StackTags } from "./StackTags";
 export type CaseStudyProject = Project & { caseStudy: NonNullable<Project["caseStudy"]> };
 
 /**
- * Case-study page body: header with the big preview, three editorial
+ * Case-study page body: header with the big preview, two or three editorial
  * blocks on a paper band, and a dark closing CTA. Pure presentation —
  * the route decides which project to render (and 404s otherwise).
  */
@@ -30,7 +30,10 @@ export function CaseStudy({ project, locale, t, work }: CaseStudyProps) {
   const story = [
     { n: "01", title: t.challenge, body: project.caseStudy.challenge },
     { n: "02", title: t.solution, body: project.caseStudy.solution },
-    { n: "03", title: t.result, body: project.caseStudy.result },
+    // "What changed" is optional — and never a figure (see `Project["caseStudy"]`).
+    ...(project.caseStudy.result
+      ? [{ n: "03", title: t.result, body: project.caseStudy.result }]
+      : []),
   ];
 
   return (

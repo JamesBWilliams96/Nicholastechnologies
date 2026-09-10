@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 /** Hungarian. */
 export const hu: Dictionary = {
   meta: {
-    title: "Nicholas Technologies — Weboldal, Shopify áruház, webalkalmazás",
+    title: "Nicholas Technologies — Weboldalkészítés, Shopify, alkalmazás",
     description:
       "Egyszemélyes stúdió: weboldalakat, Shopify áruházakat és webalkalmazásokat építek kisvállalkozásoknak és startupoknak. Fix ár, támogatás indulás után.",
     ogDescription:
@@ -25,7 +25,7 @@ export const hu: Dictionary = {
   nav: { work: "Munkák", services: "Szolgáltatások", process: "Folyamat", about: "Rólam", contact: "Kapcsolat" },
   footer: {
     tagline: "Weboldalak, webalkalmazások és technikai támogatás.",
-    rights: "© {year} {site}. Minden jog fenntartva.",
+    rights: "© {site}. Minden jog fenntartva.",
     builtBy: "Tervezte és építette: {site}.",
   },
   hero: {
@@ -41,10 +41,10 @@ export const hu: Dictionary = {
     titleA: "Elég kicsi ahhoz, hogy odafigyeljek.",
     titleB: "Elég hozzáértő ahhoz, hogy rendesen megépítsem.",
     points: [
-      { title: "Közvetlen", text: "Azzal beszél, aki építi. Ügyfélmenedzser nélkül." },
+      { title: "Közvetlen", text: "Minden szakaszban velem beszél, és a munkát is én végzem. Senki sincs közöttünk." },
       { title: "Fix áras", text: "Terjedelem, eredmények és ár rögzítve, még a munka kezdete előtt." },
       { title: "Rendesen megépítve", text: "React, Next.js, Shopify vagy Webflow – mindig a feladathoz illő." },
-      { title: "Itt maradok", text: "Tárhely, karbantartás és támogatás az indulás után." },
+      { title: "Itt maradok", text: "Én adok neki tárhelyet, naprakészen tartom, és kéznél vagyok, amikor már él." },
     ],
   },
   services: {
@@ -52,16 +52,18 @@ export const hu: Dictionary = {
     titleA: "Amit építek,",
     titleB: "és ahogy működésben tartom.",
     description:
-      "Weboldalak, webáruházak, kisebb egyedi alkalmazások, és a támogatás, amely élesben is gondjukat viseli. A projektek terjedelme és ára a kezdés előtt rögzül.",
+      "Weboldal készítés és webfejlesztés kisvállalkozásoknak és startupoknak: weboldalak, webáruházak, kisebb egyedi alkalmazások, és a támogatás, amely élesben is gondjukat viseli. A projektek terjedelme és ára a kezdés előtt rögzül.",
     items: [
       {
         title: "Weboldalak",
-        description: "Egyedi weboldalak és landing page-ek, az Ön vállalkozására tervezve.",
+        description:
+          "Egyedi weboldal tervezés és készítés, egyetlen landing page-től a teljes weboldalig, az Ön vállalkozására tervezve.",
         tags: ["React + Next.js", "Webflow", "Landing page-ek", "Újratervezés"],
       },
       {
         title: "Shopify",
-        description: "Professzionális webáruházak és egyedi Shopify-fejlesztések.",
+        description:
+          "Shopify fejlesztés mobilon is jól értékesítő áruházaknak: professzionális webáruház, egyedi témák és a meglévő bolt továbbfejlesztése.",
         tags: ["Áruház beállítása", "Téma testreszabása", "Integrációk", "Fejlesztések"],
       },
       {
@@ -72,7 +74,7 @@ export const hu: Dictionary = {
       {
         title: "Folyamatos támogatás",
         description:
-          "Tárhely, karbantartás és technikai támogatás az indulás után – attól, aki építette.",
+          "Tárhely, weboldal karbantartás és technikai támogatás az indulás után.",
         tags: ["Tárhely", "Frissítések", "Karbantartás", "Technikai támogatás"],
       },
     ],
@@ -82,7 +84,8 @@ export const hu: Dictionary = {
   },
   work: {
     eyebrow: "Válogatott munkák",
-    title: "Amiket építettem.",
+    titleSamples: "Amiket építettem.",
+    titleReal: "Amiket építettem.",
     descriptionSamples:
       "Néhány példa arra, milyen projekteket vállalok: egy weboldal, amely foglalásokat hoz, egy áruház, amely mobilon is elad, egy eszköz, amely kivált egy táblázatot.",
     descriptionReal: "Néhány friss projekt. Mindegyiket én terveztem, építettem és indítottam el.",
@@ -180,7 +183,7 @@ export const hu: Dictionary = {
       { title: "Felmérés", text: "Kitaláljuk, mire van valóban szüksége, és megegyezünk a terjedelemben és az árban." },
       { title: "Építés", text: "Megtervezem és lefejlesztem a weboldalt vagy az alkalmazást." },
       { title: "Indulás", text: "Minden tesztelve, élesítve és átadva." },
-      { title: "Támogatás", text: "Opcionális tárhely, karbantartás és technikai támogatás az indulás után." },
+      { title: "Támogatás", text: "Opcionális. Ha szeretné, maradok, és gondját viselem." },
     ],
     closingText: "Az első lépés egy beszélgetés. Mondja el, min dolgozik, és onnan együtt folytatjuk.",
     closingCta: "Projekt indítása",
@@ -231,7 +234,7 @@ export const hu: Dictionary = {
     eyebrow: "Rólam",
     titleA: "Egyszemélyes stúdió,",
     titleB: "szándékosan.",
-    lead: "A {site} szándékosan egyszemélyes. A teljes projekt alatt ugyanaz a tervező, fejlesztő és kapcsolattartó áll Ön mellett, és utána is ugyanő gondoskodik az oldalról.",
+    lead: "A {site} azért maradt egyszemélyes, mert így dolgozom a legjobban: közel az ügyfélhez, közel a kódhoz, és mindenért magam felelek. Minden, amit építek, ugyanarra az öt dologra vezethető vissza.",
     focusLabel: "Amire figyelek",
     focus: [
       { title: "Jó dizájn", text: "Átgondolt, letisztult és könnyen használható, minden képernyőn." },
@@ -267,7 +270,7 @@ export const hu: Dictionary = {
     lead: "Akár új weboldalra, webáruházra vagy egyedi eszközre van szüksége, akár egy meglévő rendszerhez kell segítség, mondja el, mire gondol.",
     expectLabel: "Mire számíthat",
     expectations: [
-      { title: "Válasz attól, aki építeni fogja", text: "Attól kap választ, aki a munkát végzi majd, nem egy postafióktól." },
+      { title: "Válasz attól, aki építeni fogja", text: "Rövid válasz néhány kérdéssel, hogy megértsem, mire van szüksége, mielőtt bármit javasolnék." },
       { title: "Világos terjedelem és fix ár", text: "Még a munka kezdete előtt tudni fogja, mi készül és mennyibe kerül." },
       { title: "Őszinte tanács", text: "Akkor is, ha a válasz az, hogy „erre még nincs szüksége”." },
     ],

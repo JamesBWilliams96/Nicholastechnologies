@@ -50,10 +50,10 @@ export function FocusList({ items, label, baseDelay = 200, className }: FocusLis
             <span aria-hidden className="font-mono text-xs leading-6 text-muted tabular-nums">
               {item.index}
             </span>
-            <h3 className="text-[0.9375rem] font-semibold leading-6 tracking-[-0.01em] text-fg">
+            <h3 className="text-md font-semibold leading-6 tracking-[-0.01em] text-fg">
               {item.title}
             </h3>
-            <p className="col-start-2 mt-1 text-[0.9375rem] leading-6 text-muted sm:col-start-3 sm:mt-0">
+            <p className="col-start-2 mt-1 text-md leading-6 text-muted sm:col-start-3 sm:mt-0">
               {item.text}
             </p>
           </Reveal>

@@ -24,12 +24,12 @@ export function WebsiteMock() {
               </div>
               <div className="flex gap-[3cqw]">
                 {[6, 4, 5, 4].map((w, i) => (
-                  <Skeleton key={i} width={`${w}cqw`} className="h-[1.2cqw]" />
+                  <Skeleton key={i} width={`${w}cqw`} height="1.2cqw" />
                 ))}
               </div>
-              <span className="rounded-full bg-ink-950 px-[2.6cqw] py-[1.3cqw] text-[2.1cqw] font-medium leading-none text-white">
+              <MockButton tone="dark" className="text-[2.1cqw]" style={{ height: "4.7cqw", paddingInline: "2.6cqw" }}>
                 Get a quote
-              </span>
+              </MockButton>
             </div>
 
             <div className="mt-[8cqw] grid grid-cols-[1.05fr_0.95fr] items-center gap-[6cqw]">
@@ -41,8 +41,8 @@ export function WebsiteMock() {
                   Built by hand. Made to last.
                 </p>
                 <div className="mt-[3cqw] space-y-[1.6cqw]">
-                  <Skeleton width="88%" className="h-[1.3cqw]" />
-                  <Skeleton width="64%" className="h-[1.3cqw]" />
+                  <Skeleton width="88%" height="1.3cqw" />
+                  <Skeleton width="64%" height="1.3cqw" />
                 </div>
                 <div className="mt-[3.6cqw] flex gap-[1.6cqw] text-[2.1cqw]">
                   <MockButton tone="dark">Book a site visit</MockButton>
@@ -68,8 +68,8 @@ export function WebsiteMock() {
               {gallery.map((v, i) => (
                 <div key={v}>
                   <ImageBlock variant={v} className="aspect-[4/3] rounded-[2cqw]" />
-                  <Skeleton width={`${70 - i * 10}%`} className="mt-[2cqw] h-[1.3cqw] bg-ink-200" />
-                  <Skeleton width="40%" className="mt-[1.2cqw] h-[1.1cqw] bg-ink-200/70" />
+                  <Skeleton width={`${70 - i * 10}%`} height="1.3cqw" tone="none" className="mt-[2cqw] bg-ink-200" />
+                  <Skeleton width="40%" height="1.1cqw" tone="none" className="mt-[1.2cqw] bg-ink-200/70" />
                 </div>
               ))}
             </div>
@@ -77,8 +77,8 @@ export function WebsiteMock() {
               {[0, 1, 2].map((i) => (
                 <div key={i} className="rounded-[2cqw] bg-white p-[2.6cqw] ring-1 ring-ink-950/6">
                   <span className={cn("block size-[4cqw] rounded-[1.1cqw]", i === 0 ? "bg-ink-950" : "bg-ink-200")} />
-                  <Skeleton width="78%" className="mt-[2.4cqw] h-[1.3cqw] bg-ink-200" />
-                  <Skeleton width="52%" className="mt-[1.3cqw] h-[1.3cqw]" />
+                  <Skeleton width="78%" height="1.3cqw" tone="none" className="mt-[2.4cqw] bg-ink-200" />
+                  <Skeleton width="52%" height="1.3cqw" className="mt-[1.3cqw]" />
                 </div>
               ))}
             </div>

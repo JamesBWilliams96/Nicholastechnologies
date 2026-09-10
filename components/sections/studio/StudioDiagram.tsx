@@ -150,7 +150,7 @@ export function StudioDiagram({ t }: { t: Dictionary["studio"]["diagram"] }) {
                 {milestones.map((m) => (
                   <li
                     key={m.label}
-                    className="flex -translate-x-1 items-center gap-2.5 lg:flex-col lg:gap-2 lg:-translate-y-1 lg:translate-x-0"
+                    className="flex -translate-x-1 items-center gap-1.5 xs:gap-2.5 lg:flex-col lg:gap-2 lg:-translate-y-1 lg:translate-x-0"
                     style={{ "--d": drawn ? `${m.delay}ms` : "0ms" } as CSSProperties}
                   >
                     <span
@@ -164,7 +164,7 @@ export function StudioDiagram({ t }: { t: Dictionary["studio"]["diagram"] }) {
                     />
                     <span
                       className={cn(
-                        "font-mono text-2xs font-medium uppercase tracking-[0.12em] transition-colors duration-500 [transition-delay:var(--d)]",
+                        "font-mono text-2xs font-medium uppercase tracking-[0.06em] xs:tracking-[0.12em] transition-colors duration-500 [transition-delay:var(--d)]",
                         drawn ? "text-fg" : "text-muted",
                       )}
                     >

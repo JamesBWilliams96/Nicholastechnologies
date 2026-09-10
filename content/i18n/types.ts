@@ -65,7 +65,10 @@ export type Dictionary = {
   };
   work: {
     eyebrow: string;
-    title: string;
+    /** Heading while only sample projects are shown — must not claim built work. */
+    titleSamples: string;
+    /** Heading once at least one real project is published. */
+    titleReal: string;
     descriptionSamples: string;
     descriptionReal: string;
     liveSite: string;

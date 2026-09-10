@@ -36,7 +36,7 @@ export function SupportVisual({ ticket }: { ticket: Dictionary["support"]["ticke
           >
             <ParallaxLayer depth={16}>
               <div className="animate-float motion-safe-only">
-                <Panel className="text-paper">
+                <Panel tone="dark">
                   <TicketMock t={ticket} />
                 </Panel>
               </div>

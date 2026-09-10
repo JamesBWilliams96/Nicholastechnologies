@@ -1,7 +1,18 @@
+import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { locales, type Locale } from "@/lib/i18n/config";
+import { defaultLocale, isLocale, locales, type Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/content/i18n/types";
 import { NotFoundContent } from "@/components/layout/NotFoundContent";
+
+/* Next passes the [locale] segment to the not-found module's metadata, so the
+   title can be localised here. `noindex` lives here as well; pages that lead
+   here throw notFound() from their own generateMetadata so this is what both
+   the server HTML and the hydrated client render. */
+export async function generateMetadata({ params }: { params: Promise<{ locale?: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getDictionary(isLocale(locale) ? locale : defaultLocale);
+  return { title: t.notFound.metaTitle, robots: { index: false } };
+}
 
 /**
  * Localised 404. Not-found pages get no route params and reading request

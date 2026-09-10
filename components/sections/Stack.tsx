@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StackBuilder } from "./stack/StackBuilder";
-import { Wordmark } from "./stack/Wordmark";
+import { Wordmark } from "@/components/ui/Wordmark";
 
 /* Tool names are product names and stay as they are in every language. */
 const toolNames: readonly (readonly string[])[] = [["Webflow"], ["React", "Next.js"], ["Shopify"]];

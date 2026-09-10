@@ -13,8 +13,9 @@ import type { Dictionary } from "@/content/i18n/types";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/Button";
 import { AppWindowIcon, ArrowRightIcon, BagIcon, CodeIcon, GlobeIcon } from "@/components/ui/icons";
+import { useInView, usePrefersReducedMotion } from "@/lib/use-in-view";
 import { cn } from "@/lib/utils";
-import { Wordmark } from "./Wordmark";
+import { Wordmark } from "@/components/ui/Wordmark";
 
 /* ------------------------------------------------------------------
    "Build your stack": pick a project type, see which tool(s) I'd reach
@@ -68,13 +69,25 @@ const HOVER_INTENT_MS = 120;
 
 /* ---------------------------------- diagram ---------------------------------- */
 
+/** The orbit loops forever, and a transform on an SVG group lays the
+    document out on every frame. Only run it while the diagram can be seen
+    (the observer toggles, so scrolling past pauses it again). Under reduced
+    motion the loop is off anyway, so the attribute is set straight away. */
+const playWhenInView =
+  "[.js_&]:[animation-play-state:paused] [.js_[data-inview]_&]:[animation-play-state:running]";
+
 function Diagram({ selected, yourProject }: { selected: ProjectId; yourProject: string }) {
   const project = projects.find((p) => p.id === selected) ?? projects[1];
   const active = new Set<ToolId>(project.tools);
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: false, threshold: 0.2 });
+  const reduced = usePrefersReducedMotion();
 
   return (
     <div
+      ref={ref}
       aria-hidden="true"
+      data-inview={inView || reduced ? "" : undefined}
       className="@container relative aspect-[5/4] select-none overflow-hidden bg-surface-2/60 sm:aspect-[4/3] lg:aspect-[3/2] lg:flex-auto"
     >
       {/* backdrop */}
@@ -90,7 +103,12 @@ function Diagram({ selected, yourProject }: { selected: ProjectId; yourProject: 
       >
         {/* orbit: a dashed circle, squashed into an ellipse, turning slowly */}
         <g transform={`translate(${CX} ${CY}) scale(1 ${ORBIT_SQUASH})`}>
-          <g className="animate-orbit motion-safe-only origin-center [animation-duration:72s] [transform-box:fill-box]">
+          <g
+            className={cn(
+              "animate-orbit motion-safe-only origin-center [animation-duration:72s] [transform-box:fill-box]",
+              playWhenInView,
+            )}
+          >
             <circle
               r={ORBIT_R}
               className="stroke-line-strong"
@@ -282,7 +300,7 @@ export function StackBuilder({
                 >
                   <p.icon className="size-[1.1rem]" />
                 </span>
-                <span className="flex-1 text-[0.9375rem] font-medium leading-snug">{t.options[i].label}</span>
+                <span className="flex-1 text-md font-medium leading-snug">{t.options[i].label}</span>
                 <ArrowRightIcon
                   aria-hidden
                   className={cn(

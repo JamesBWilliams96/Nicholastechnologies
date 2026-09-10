@@ -16,12 +16,16 @@ type WorkProps = { locale: Locale; t: Dictionary["work"]; common: Dictionary["co
  */
 export function Work({ locale, t, common }: WorkProps) {
   const [featured, ...rest] = projects;
-  const description = realProjects.length > 0 ? t.descriptionReal : t.descriptionSamples;
+  // Title and description must agree: sample projects are never "things I've built".
+  const hasRealWork = realProjects.length > 0;
+  const heading = hasRealWork
+    ? { title: t.titleReal, description: t.descriptionReal }
+    : { title: t.titleSamples, description: t.descriptionSamples };
 
   return (
     <Section id="work" tone="paper">
       <Container>
-        <SectionHeading eyebrow={t.eyebrow} title={t.title} description={description} />
+        <SectionHeading eyebrow={t.eyebrow} title={heading.title} description={heading.description} />
 
         <ul className="mt-12 grid gap-4 sm:mt-16 sm:gap-6 md:grid-cols-2">
           {featured ? (

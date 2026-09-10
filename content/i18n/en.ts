@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 /** English — the reference copy. Other languages mirror this shape exactly. */
 export const en: Dictionary = {
   meta: {
-    title: "Nicholas Technologies — Websites, Shopify stores & custom web apps",
+    title: "Nicholas Technologies — Web design, Shopify & custom web apps",
     description:
       "A one-person studio building websites, Shopify stores and custom web apps for small businesses and startups. Fixed-price projects, support after launch.",
     ogDescription:
@@ -25,7 +25,7 @@ export const en: Dictionary = {
   nav: { work: "Work", services: "Services", process: "Process", about: "About", contact: "Contact" },
   footer: {
     tagline: "Websites, web apps and technical support.",
-    rights: "© {year} {site}. All rights reserved.",
+    rights: "© {site}. All rights reserved.",
     builtBy: "Designed and built by {site}.",
   },
   hero: {
@@ -41,10 +41,10 @@ export const en: Dictionary = {
     titleA: "Small enough to care.",
     titleB: "Technical enough to build it properly.",
     points: [
-      { title: "Direct", text: "You talk to the person building it. No account managers." },
+      { title: "Direct", text: "You talk to me at every stage, and I do the work. No one in between." },
       { title: "Fixed-price", text: "Scope, deliverables and cost agreed before work starts." },
       { title: "Built properly", text: "React, Next.js, Shopify or Webflow, chosen to fit the job." },
-      { title: "Still here", text: "Hosting, maintenance and support after launch." },
+      { title: "Still here", text: "I host it, keep it updated and stay on hand once it’s live." },
     ],
   },
   services: {
@@ -52,16 +52,18 @@ export const en: Dictionary = {
     titleA: "What I build,",
     titleB: "and how I keep it running.",
     description:
-      "Websites, online stores, small custom apps and the support to look after them once they’re live. Projects are scoped and priced before they start.",
+      "Web design and web development for small businesses and startups: websites, online stores, small custom apps and the support to look after them once they’re live. Projects are scoped and priced before they start.",
     items: [
       {
         title: "Websites",
-        description: "Custom websites and landing pages designed around your business.",
+        description:
+          "Custom website development, from a single landing page to a full site, designed to do a job for your business.",
         tags: ["React + Next.js", "Webflow", "Landing pages", "Redesigns"],
       },
       {
         title: "Shopify",
-        description: "Professional ecommerce stores and custom Shopify improvements.",
+        description:
+          "Shopify development for stores that sell on mobile: professional ecommerce, custom themes and improvements to what you already have.",
         tags: ["Store setup", "Theme customisation", "Integrations", "Improvements"],
       },
       {
@@ -72,7 +74,7 @@ export const en: Dictionary = {
       {
         title: "Ongoing support",
         description:
-          "Hosting, maintenance and technical support after launch, from the person who built it.",
+          "Hosting, website maintenance and technical support after launch.",
         tags: ["Hosting", "Updates", "Maintenance", "Technical support"],
       },
     ],
@@ -82,7 +84,8 @@ export const en: Dictionary = {
   },
   work: {
     eyebrow: "Selected work",
-    title: "Things I’ve built.",
+    titleSamples: "Things I’ve built.",
+    titleReal: "Things I’ve built.",
     descriptionSamples:
       "A few of the kinds of projects I take on: a website that brings in bookings, a store that sells on mobile, a tool that replaces a spreadsheet.",
     descriptionReal: "A few recent projects. Every one of them designed, built and launched by me.",
@@ -176,13 +179,13 @@ export const en: Dictionary = {
     description: "Five steps. No mystery. You see where things are at every stage.",
     ariaLabel: "The five steps of a project",
     steps: [
-      { title: "Talk", text: "Tell me what you’re trying to build, improve or fix." },
+      { title: "Talk", text: "Tell me what you’re trying to build, improve or\u00A0fix." },
       { title: "Scope", text: "We work out what you actually need and agree on the scope and price." },
-      { title: "Build", text: "I design and develop the website or application." },
+      { title: "Build", text: "I design and develop the website or\u00A0application." },
       { title: "Launch", text: "Everything gets tested, deployed and handed over." },
-      { title: "Support", text: "Optional hosting, maintenance and technical support after launch." },
+      { title: "Support", text: "Optional. If you’d like, I stay on to look after it." },
     ],
-    closingText: "Step one is a conversation. Tell me what you’re working on and we’ll take it from there.",
+    closingText: "Step one is a conversation. Start it whenever you’re ready and we’ll take it from there.",
     closingCta: "Start a project",
   },
   stack: {
@@ -229,13 +232,13 @@ export const en: Dictionary = {
   },
   about: {
     eyebrow: "About",
-    titleA: "A one-person studio,",
+    titleA: "A one‑person studio,",
     titleB: "on purpose.",
-    lead: "I kept {site} to one person on purpose. You get the same designer, developer and point of contact for the whole project, and the same person looking after it afterwards.",
+    lead: "I kept {site} to one person because that’s how I do my best work: close to the client, close to the code, and responsible for all of it. Everything I build comes back to the same five things.",
     focusLabel: "What I focus on",
     focus: [
       { title: "Good design", text: "Considered, clean and easy to use, on every screen." },
-      { title: "Good technology", text: "The right tools for the job, built properly so they keep working." },
+      { title: "Good technology", text: "Well-chosen technology, carefully built, so it stays reliable." },
       { title: "Clear communication", text: "Straight answers, no jargon, no surprises." },
       { title: "Practical solutions", text: "The simplest thing that properly solves the problem." },
       { title: "Long-term relationships", text: "I’d rather look after your site for years than build it and disappear." },
@@ -264,10 +267,10 @@ export const en: Dictionary = {
     eyebrow: "Start a project",
     titleA: "Got something in mind?",
     titleB: "Let’s build it.",
-    lead: "Whether you need a new website, an online store, a custom tool or help with something that already exists, tell me what you have in mind.",
+    lead: "Whether you need a new website, an online store, a custom tool or help with something that already exists, tell me what you’re working on.",
     expectLabel: "What to expect",
     expectations: [
-      { title: "A reply from the person who’ll build it", text: "You hear back from the person who will do the work, not an inbox." },
+      { title: "A reply from the person who’ll build it", text: "A short reply with a few questions, so I understand what you need before suggesting anything." },
       { title: "A clear scope and a fixed price", text: "You’ll know what’s being built and what it costs before work starts." },
       { title: "Honest advice", text: "Even if the answer is “you don’t need this yet”." },
     ],

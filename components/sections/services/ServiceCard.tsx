@@ -10,8 +10,8 @@ type ServiceCardProps = {
   tags: readonly string[];
   /** Decorative interface mock rendered in the stage. Must be aria-hidden. */
   mock: ReactNode;
-  /** Extra classes for the mock wrapper (position inside the stage). */
-  mockClassName?: string;
+  /** Position of the mock inside the stage (`inset-x-*`, `top-*`). */
+  mockClassName: string;
   className?: string;
 };
 
@@ -41,7 +41,7 @@ export function ServiceCard({
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-grid mask-fade-radial opacity-70 [background-size:32px_32px]"
         />
-        <div aria-hidden="true" className={cn("absolute inset-x-[8%] top-[10%]", mockClassName)}>
+        <div aria-hidden="true" className={cn("absolute", mockClassName)}>
           {mock}
         </div>
       </div>
@@ -54,17 +54,24 @@ export function ServiceCard({
             {index}
           </span>
         </div>
-        <p className="mb-6 mt-2 max-w-[44ch] text-[0.9375rem] leading-relaxed text-muted">{description}</p>
-        <ul className="mt-auto flex flex-wrap items-center gap-x-2.5 gap-y-1.5 border-t border-line pt-4 font-mono text-xs text-muted">
-          {tags.map((tag, i) => (
-            <li key={tag} className="inline-flex items-center gap-2.5">
-              <span>{tag}</span>
-              {i < tags.length - 1 ? (
-                <span aria-hidden className="size-[3px] rounded-full bg-line-strong" />
-              ) : null}
-            </li>
-          ))}
-        </ul>
+        <p className="mb-6 mt-2 max-w-[44ch] text-md leading-relaxed text-muted">{description}</p>
+        {/*
+          Dotted tag list. Each item carries its own leading separator, and the
+          list is shifted left by exactly one separator (10px + 3px + 10px) inside a
+          clipping wrapper, so wrapped lines never start or end with a dangling dot.
+        */}
+        <div className="mt-auto overflow-hidden border-t border-line pt-4">
+          <ul className="-ml-[23px] flex flex-wrap gap-y-1.5 font-mono text-xs text-muted">
+            {tags.map((tag) => (
+              <li
+                key={tag}
+                className="inline-flex items-center before:mx-2.5 before:inline-block before:size-[3px] before:rounded-full before:bg-line-strong before:content-['']"
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </article>
   );

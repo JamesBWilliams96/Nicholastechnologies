@@ -50,7 +50,7 @@ export function ProjectCard({ project, index, featured = false, locale, t, commo
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card",
+        "group relative flex h-full flex-col overflow-hidden rounded-2xl bg-surface ring-1 ring-line shadow-card",
         "transition-[transform,translate,box-shadow] duration-300 ease-out-quart hover:-translate-y-0.5 hover:shadow-lift",
         "has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-3 has-[a:focus-visible]:outline-accent-500",
         featured && "lg:grid lg:grid-cols-[minmax(0,1.38fr)_minmax(0,1fr)]",
@@ -101,7 +101,7 @@ export function ProjectCard({ project, index, featured = false, locale, t, commo
             <Chip>{t.categories[project.category]}</Chip>
             {statusChip}
           </div>
-          <span aria-hidden className="font-mono text-xs text-muted tabular-nums">
+          <span aria-hidden className="font-mono text-2xs font-medium tracking-[0.12em] text-muted tabular-nums">
             {String(index + 1).padStart(2, "0")}
           </span>
         </div>

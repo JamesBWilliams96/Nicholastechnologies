@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
+import { SectionFooter } from "@/components/ui/SectionFooter";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "./services/ServiceCard";
 import { WebsiteMock } from "./services/WebsiteMock";
@@ -13,7 +14,7 @@ import { StatusMock } from "./services/StatusMock";
 
 /* The four mocks, in the same order as the dictionary's service items. */
 const visuals = [
-  { id: "websites", mock: <WebsiteMock /> },
+  { id: "websites", mock: <WebsiteMock />, mockClassName: "inset-x-[8%] top-[10%]" },
   { id: "shopify", mock: <StoreMock />, mockClassName: "inset-x-[7%] top-[9%]" },
   { id: "custom-software", mock: <DashboardMock />, mockClassName: "inset-x-[7%] top-[10%]" },
   {
@@ -53,19 +54,16 @@ export function Services({ locale, t }: { locale: Locale; t: Dictionary["service
           ))}
         </ul>
 
-        <Reveal delay={120} className="mt-10 sm:mt-12">
-          <div className="flex flex-col gap-5 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-[50ch] text-muted">{t.closingText}</p>
-            <Button
-              href={localePath(locale, "#contact")}
-              variant="ghost"
-              arrow
-              className="shrink-0 self-start text-[0.9375rem] sm:self-auto"
-            >
-              {t.closingLink}
-            </Button>
-          </div>
-        </Reveal>
+        <SectionFooter text={t.closingText} delay={120}>
+          <Button
+            href={localePath(locale, "#contact")}
+            variant="ghost"
+            arrow
+            className="shrink-0 self-start text-md sm:self-auto"
+          >
+            {t.closingLink}
+          </Button>
+        </SectionFooter>
       </Container>
     </Section>
   );

@@ -38,15 +38,14 @@ function EmptySlot({ className, label }: { className?: string; label: string }) 
   return (
     <div aria-hidden="true" className={cn(frame, "tone-light", className)}>
       {/* Warm gradient (the site's image treatment) with an engineering grid on top */}
-      <ImageBlock
-        variant="warm"
-        className="absolute inset-0 rounded-none transition-transform duration-700 ease-out-quart group-hover:scale-[1.025]"
-      >
-        <div className="absolute inset-0 bg-grid mask-fade-radial opacity-70 [background-size:40px_40px]" />
-        {/* Depth: a soft vignette towards the bottom-right, a light bloom top-left */}
-        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_100%_100%,rgb(10_11_15/0.14),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_10%_0%,rgb(255_255_255/0.5),transparent_70%)]" />
-      </ImageBlock>
+      <div className="absolute inset-0 transition-transform duration-700 ease-out-quart group-hover:scale-[1.025]">
+        <ImageBlock variant="warm" className="size-full">
+          <div className="absolute inset-0 bg-grid mask-fade-radial opacity-70 [background-size:40px_40px]" />
+          {/* Depth: a soft vignette towards the bottom-right, a light bloom top-left */}
+          <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_100%_100%,rgb(10_11_15/0.14),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_10%_0%,rgb(255_255_255/0.5),transparent_70%)]" />
+        </ImageBlock>
+      </div>
       {/* Inner top highlight, like the site's cards */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
 
@@ -59,7 +58,7 @@ function EmptySlot({ className, label }: { className?: string; label: string }) 
       {/* The mark stands in for a face until there is one */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
         <LogoMark className="size-12 drop-shadow-[0_10px_20px_rgb(10_11_15/0.18)] sm:size-14" />
-        <p className="mt-4 text-[0.9375rem] font-semibold tracking-[-0.02em] text-ink-950">{site.name}</p>
+        <p className="mt-4 text-md font-semibold tracking-[-0.02em] text-ink-950">{site.name}</p>
       </div>
 
       {/* Label */}

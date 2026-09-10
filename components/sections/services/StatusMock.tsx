@@ -68,7 +68,7 @@ export function StatusMock() {
           </div>
           {/* Reserved height so the reveal never shifts layout */}
           <div className="relative mt-[1.6cqw] h-[6cqw]">
-            <div className="absolute inset-0 flex items-center gap-[1.6cqw] rounded-[1.4cqw] px-[2cqw] text-[2cqw] opacity-0 transition-[opacity,transform] duration-500 ease-out-expo translate-y-[0.8cqw] group-hover:translate-y-0 group-hover:opacity-100 group-hover:delay-100 bg-ok-soft/60">
+            <div className="absolute inset-0 flex items-center gap-[1.6cqw] rounded-[1.4cqw] px-[2cqw] text-[2cqw] opacity-0 transition-[opacity,translate] duration-500 ease-out-expo translate-y-[0.8cqw] group-hover:translate-y-0 group-hover:opacity-100 group-hover:delay-100 bg-ok-soft/60">
               <span className="size-[1.4cqw] rounded-full bg-ok" />
               <span className="font-medium text-ink-800">Bug fix deployed</span>
               <span className="ml-auto font-mono text-[1.7cqw] text-ink-500">just now</span>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { isLocale, localeMeta, locales } from "@/lib/i18n/config";
+import { baseOpenGraph } from "@/lib/i18n/metadata";
 import { Hero } from "@/components/sections/Hero";
 import { Positioning } from "@/components/sections/Positioning";
 import { Services } from "@/components/sections/Services";
@@ -25,9 +26,18 @@ export function languageAlternates(path = "") {
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
+  const t = await getDictionary(locale);
   return {
     alternates: { canonical: `/${locale}`, languages: languageAlternates() },
-    openGraph: { url: `/${locale}` },
+    /* The homepage carries a longer share description than its meta description. */
+    openGraph: {
+      ...baseOpenGraph(locale),
+      url: `/${locale}`,
+      title: t.meta.title,
+      description: t.meta.ogDescription,
+    },
+    /* Next replaces (not merges) `twitter` per segment, so the card type must be repeated. */
+    twitter: { card: "summary_large_image", description: t.meta.description },
   };
 }
 
@@ -47,7 +57,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <Process locale={locale} t={t.process} />
       <Stack locale={locale} t={t.stack} />
       <About t={t.about} />
-      <Support locale={locale} t={t.support} />
+      <Support t={t.support} />
       <Contact locale={locale} t={t.contact} form={t.form} />
     </>
   );

@@ -2,8 +2,8 @@ import type { Dictionary } from "@/content/i18n/types";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
+import { SectionFooter } from "@/components/ui/SectionFooter";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
   FileTextIcon,
@@ -48,14 +48,11 @@ export function Process({ locale, t }: { locale: Locale; t: Dictionary["process"
           ))}
         </ProcessTrack>
 
-        <Reveal delay={160} className="mt-12 sm:mt-16">
-          <div className="flex flex-col gap-5 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-[46ch] text-muted">{t.closingText}</p>
-            <Button href={localePath(locale, "#contact")} arrow className="shrink-0 self-start sm:self-auto">
-              {t.closingCta}
-            </Button>
-          </div>
-        </Reveal>
+        <SectionFooter text={t.closingText} delay={160}>
+          <Button href={localePath(locale, "#contact")} arrow className="shrink-0 self-start sm:self-auto">
+            {t.closingCta}
+          </Button>
+        </SectionFooter>
       </Container>
     </Section>
   );

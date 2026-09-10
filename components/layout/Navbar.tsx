@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { site } from "@/content/site";
 import type { Dictionary } from "@/content/i18n/types";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/Button";
@@ -15,12 +15,15 @@ type NavbarProps = {
   locale: Locale;
   nav: Dictionary["nav"];
   common: Dictionary["common"];
+  /** One-line summary of the services, shown under the mobile menu's CTA. */
+  tagline: string;
 };
 
-export function Navbar({ locale, nav, common }: NavbarProps) {
+export function Navbar({ locale, nav, common, tagline }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [overDark, setOverDark] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const menuId = useId();
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -40,7 +43,8 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Flip the bar to the dark tone while it overlaps a dark section. */
+  /* Flip the bar to the dark tone while it overlaps a dark section. Re-collect the
+     targets on every route change: this component persists across client navigations. */
   useEffect(() => {
     const targets = Array.from(document.querySelectorAll<HTMLElement>("main .tone-dark, footer.tone-dark"));
     if (targets.length === 0) return;
@@ -68,7 +72,7 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
       io?.disconnect();
       window.removeEventListener("resize", observe);
     };
-  }, []);
+  }, [pathname]);
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -76,15 +80,31 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
     if (!open) return;
     const { overflow } = document.body.style;
     document.body.style.overflow = "hidden";
-    /* Everything behind the menu is inert, so Tab stays inside it. */
-    const main = document.getElementById("main");
-    const footer = document.querySelector("footer");
-    main?.setAttribute("inert", "");
-    footer?.setAttribute("inert", "");
+    /* Everything behind the menu is inert, so Tab stays inside the header. */
+    const outside = Array.from(document.querySelectorAll<HTMLElement>("main, footer"));
+    outside.forEach((el) => el.setAttribute("inert", ""));
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         close();
         toggleRef.current?.focus();
+        return;
+      }
+      /* Wrap Tab / Shift+Tab between the first and last controls left in the header. */
+      if (e.key !== "Tab") return;
+      const header = toggleRef.current?.closest("header");
+      if (!header) return;
+      const focusable = Array.from(header.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")).filter(
+        (el) => el.tabIndex >= 0 && el.getClientRects().length > 0,
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
     };
     const mq = window.matchMedia("(min-width: 768px)");
@@ -94,8 +114,7 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
     firstLinkRef.current?.focus({ preventScroll: true });
     return () => {
       document.body.style.overflow = overflow;
-      main?.removeAttribute("inert");
-      footer?.removeAttribute("inert");
+      outside.forEach((el) => el.removeAttribute("inert"));
       window.removeEventListener("keydown", onKey);
       mq.removeEventListener("change", onResize);
     };
@@ -105,6 +124,8 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
     <header className={cn("fixed inset-x-0 top-0 z-50", overDark && "tone-dark")}>
       <a
         href="#main"
+        /* #main is inert while the menu is open, so the skip link leaves the tab order too */
+        tabIndex={open ? -1 : undefined}
         className="sr-only left-4 top-4 z-[60] rounded-full bg-fg px-4 py-2 text-sm font-medium text-bg focus:not-sr-only focus:absolute"
       >
         {common.skipToContent}
@@ -126,7 +147,7 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-muted transition-colors duration-200 hover:bg-fg/5 hover:text-fg"
+                  className="rounded-full px-3.5 py-2 text-md font-medium text-muted transition-colors duration-200 hover:bg-fg/5 hover:text-fg"
                 >
                   {item.label}
                 </a>
@@ -137,9 +158,11 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
           <div className="flex items-center gap-1 sm:gap-2">
             <LanguageMenu locale={locale} label={common.language} className="hidden md:block" />
             <ThemeToggle labels={common.theme} />
-            <Button href={cta} size="sm" arrow className="ml-1 hidden md:inline-flex">
-              {common.startProject}
-            </Button>
+            <div className="ml-1 hidden md:flex">
+              <Button href={cta} size="sm" arrow>
+                {common.startProject}
+              </Button>
+            </div>
             <button
               ref={toggleRef}
               type="button"
@@ -158,9 +181,6 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
       {/* Mobile menu */}
       <div
         id={menuId}
-        role="dialog"
-        aria-modal={open ? true : undefined}
-        aria-label={common.openMenu}
         className={cn(
           "fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-y-auto bg-bg transition-[opacity,translate] duration-300 ease-out-quart md:hidden",
           open ? "opacity-100" : "pointer-events-none -translate-y-2 opacity-0",
@@ -169,7 +189,7 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
         inert={!open}
       >
         <div className="container-site flex flex-1 flex-col pt-4 pb-8">
-          <nav aria-label="Primary">
+          <nav aria-label="Menu">
             <ul className="flex flex-col">
               {links.map((item, i) => (
                 <li key={item.href} className="border-b border-line">
@@ -200,7 +220,7 @@ export function Navbar({ locale, nav, common }: NavbarProps) {
             <Button href={cta} size="lg" arrow className="w-full" onClick={close}>
               {common.startProject}
             </Button>
-            <p className="mt-4 text-center font-mono text-xs text-muted">{site.tagline}</p>
+            <p className="mt-4 text-center font-mono text-xs text-muted">{tagline}</p>
           </div>
         </div>
       </div>

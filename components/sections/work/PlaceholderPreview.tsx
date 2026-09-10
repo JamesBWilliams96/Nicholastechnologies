@@ -4,6 +4,7 @@ import type { Project } from "@/content/projects";
 import { cn } from "@/lib/utils";
 import { BrowserFrame } from "@/components/mockups/frames";
 import {
+  DarkChip,
   ImageBlock,
   MockAvatar,
   MockButton,
@@ -36,11 +37,11 @@ function WebsiteMock() {
       <div className="flex items-center justify-between px-[4.5cqw] py-[2.4cqw]">
         <div className="flex items-center gap-[1.2cqw]">
           <span className="size-[3.2cqw] rounded-[0.9cqw] bg-ink-950" />
-          <Skeleton width="8cqw" className="h-[1.2cqw] bg-ink-950" />
+          <Skeleton width="8cqw" height="1.2cqw" tone="none" className="bg-ink-950" />
         </div>
         <div className="flex gap-[2.8cqw]">
           {[5, 4, 6, 4].map((w, i) => (
-            <Skeleton key={i} width={`${w}cqw`} className="h-[1.1cqw]" />
+            <Skeleton key={i} width={`${w}cqw`} height="1.1cqw" />
           ))}
         </div>
         <MockButton tone="dark" className="text-[1.6cqw]">
@@ -57,8 +58,8 @@ function WebsiteMock() {
           Good coffee. No fuss.
         </p>
         <div className="mt-[2.4cqw] flex w-full flex-col items-center gap-[1.2cqw]">
-          <Skeleton width="76%" className="h-[1.2cqw]" />
-          <Skeleton width="48%" className="h-[1.2cqw]" />
+          <Skeleton width="76%" height="1.2cqw" />
+          <Skeleton width="48%" height="1.2cqw" />
         </div>
         <div className="mt-[3cqw] flex gap-[1.4cqw] text-[1.8cqw]">
           <MockButton tone="dark">View the menu</MockButton>
@@ -116,7 +117,7 @@ function StoreMock() {
         <span className="text-[2.4cqw] font-semibold tracking-tight">Store</span>
         <div className="flex gap-[2.8cqw]">
           {[6, 5, 4, 5].map((w, i) => (
-            <Skeleton key={i} width={`${w}cqw`} className="h-[1.1cqw]" />
+            <Skeleton key={i} width={`${w}cqw`} height="1.1cqw" />
           ))}
         </div>
         <div className="flex items-center gap-[1.4cqw]">
@@ -140,10 +141,12 @@ function StoreMock() {
           </p>
         </div>
         <div className="flex gap-[0.8cqw] text-[1.4cqw]">
-          <MockChip tone="dark">All</MockChip>
-          <MockChip>Kitchen</MockChip>
-          <MockChip>Textiles</MockChip>
-          <MockChip>Gifts</MockChip>
+          <MockChip tone="dark" className="leading-none">
+            All
+          </MockChip>
+          <MockChip className="leading-none">Kitchen</MockChip>
+          <MockChip className="leading-none">Textiles</MockChip>
+          <MockChip className="leading-none">Gifts</MockChip>
         </div>
       </div>
 
@@ -182,7 +185,7 @@ const invoices = [
   { width: "46%", status: "Paid", tone: "ok", hue: 0 },
   { width: "58%", status: "Due", tone: "warn", hue: 1 },
   { width: "40%", status: "Paid", tone: "ok", hue: 3 },
-  { width: "52%", status: "Draft", tone: "dark", hue: 2 },
+  { width: "52%", status: "Draft", tone: "neutral", hue: 2 },
 ] as const;
 const jobs = [
   { title: "Site survey", when: "Tue 09:30", status: "Booked", tone: "accent", hue: 1 },
@@ -198,7 +201,7 @@ function AppMock() {
       <aside className="flex flex-col border-r border-white/8 bg-ink-950/50 p-[2cqw]">
         <div className="flex items-center gap-[1cqw]">
           <span className="size-[2.6cqw] rounded-[0.7cqw] bg-accent-500" />
-          <Skeleton tone="dark" width="7cqw" className="h-[1.1cqw] bg-white/40" />
+          <Skeleton tone="none" width="7cqw" height="1.1cqw" className="bg-white/40" />
         </div>
         <ul className="mt-[3.2cqw] space-y-[0.6cqw]">
           {navItems.map((label, i) => (
@@ -220,8 +223,8 @@ function AppMock() {
           ))}
         </ul>
         <div className="mt-auto flex items-center gap-[1cqw] pt-[2cqw]">
-          <MockAvatar hue={4} className="size-[2.6cqw]" />
-          <Skeleton tone="dark" width="7cqw" className="h-[1cqw]" />
+          <MockAvatar hue={4} size="2.6cqw" />
+          <Skeleton tone="dark" width="7cqw" height="1cqw" />
         </div>
       </aside>
 
@@ -237,9 +240,7 @@ function AppMock() {
             </p>
           </div>
           <div className="flex items-center gap-[1cqw] text-[1.45cqw]">
-            <span className="inline-flex h-[2.6em] items-center rounded-full bg-white/6 px-[1.2em] font-medium leading-none text-ink-300 ring-1 ring-white/10">
-              Export
-            </span>
+            <MockButton tone="ghost-dark">Export</MockButton>
             <MockButton tone="accent">New job</MockButton>
           </div>
         </div>
@@ -257,9 +258,9 @@ function AppMock() {
                 <span className="text-[3.2cqw] font-semibold leading-none tracking-[-0.02em] tabular-nums">
                   {k.value}
                 </span>
-                <MockChip tone={k.tone} className="text-[1.1cqw]">
+                <DarkChip tone={k.tone} className="text-[1.1cqw]">
                   {k.delta}
-                </MockChip>
+                </DarkChip>
               </div>
             </div>
           ))}
@@ -273,7 +274,7 @@ function AppMock() {
             </div>
             <Sparkline
               values={[0.3, 0.42, 0.38, 0.55, 0.5, 0.64, 0.6, 0.74, 0.7, 0.86, 0.8, 0.95]}
-              stroke="#5b82ff"
+              stroke="var(--color-accent-400)"
               className="mt-[1.6cqw] h-[11cqw]"
             />
           </div>
@@ -282,11 +283,11 @@ function AppMock() {
             <ul className="mt-[1.6cqw] space-y-[1.1cqw]">
               {invoices.map((row, i) => (
                 <li key={i} className="flex items-center gap-[1cqw]">
-                  <MockAvatar hue={row.hue} className="size-[2.2cqw]" />
-                  <Skeleton tone="dark" width={row.width} className="h-[1cqw]" />
-                  <MockChip tone={row.tone} className="ml-auto text-[1.05cqw]">
+                  <MockAvatar hue={row.hue} size="2.2cqw" />
+                  <Skeleton tone="dark" width={row.width} height="1cqw" />
+                  <DarkChip tone={row.tone} className="ml-auto text-[1.05cqw]">
                     {row.status}
-                  </MockChip>
+                  </DarkChip>
                 </li>
               ))}
             </ul>
@@ -307,13 +308,13 @@ function AppMock() {
               >
                 <span className="truncate font-medium">{job.title}</span>
                 <span className="flex items-center gap-[0.8cqw]">
-                  <MockAvatar hue={job.hue} className="size-[1.9cqw]" />
-                  <Skeleton tone="dark" width="55%" className="h-[0.9cqw]" />
+                  <MockAvatar hue={job.hue} size="1.9cqw" />
+                  <Skeleton tone="dark" width="55%" height="0.9cqw" />
                 </span>
                 <span className="font-mono text-[1.15cqw] text-ink-400 tabular-nums">{job.when}</span>
-                <MockChip tone={job.tone} className="text-[1.05cqw]">
+                <DarkChip tone={job.tone} className="text-[1.05cqw]">
                   {job.status}
-                </MockChip>
+                </DarkChip>
               </li>
             ))}
           </ul>
@@ -345,7 +346,7 @@ export function PlaceholderPreview({ variant = "website", className }: Placehold
     <BrowserFrame
       url={urls[variant]}
       chrome={dark ? "dark" : "light"}
-      className={cn(dark && "ring-white/15", className)}
+      className={className}
     >
       <Mock />
     </BrowserFrame>

@@ -11,13 +11,13 @@ import { ChevronDownIcon } from "@/components/ui/icons";
    destructive token and this is the only place one is needed.
    ------------------------------------------------------------------ */
 
-export const errorText = "text-danger-300";
+const errorText = "text-danger-300";
 
 const control = cn(
-  "block w-full rounded-xl bg-surface-2 px-4 text-[0.9375rem] text-fg ring-1 ring-inset ring-line-strong",
+  "block w-full rounded-xl bg-surface-2 px-4 text-md ring-1 ring-inset ring-white/35",
   "placeholder:text-muted",
   "transition-[box-shadow,background-color] duration-200 ease-out-quart",
-  "hover:ring-line-strong",
+  "hover:ring-white/50",
   "focus:outline-none focus:bg-surface-3 focus:ring-2 focus:ring-accent-400 focus:shadow-[0_0_0_4px_rgb(91_130_255/0.16)]",
   "aria-invalid:ring-danger-400/70 aria-invalid:hover:ring-danger-400 aria-invalid:focus:ring-danger-400 aria-invalid:focus:shadow-[0_0_0_4px_rgb(248_113_113/0.16)]",
   "disabled:opacity-60",
@@ -91,7 +91,7 @@ export function TextField({ id, label, optional, optionalLabel, hint, error, cla
     <FieldShell id={id} label={label} optional={optional} optionalLabel={optionalLabel} hint={hint} error={error} className={className}>
       <input
         id={id}
-        className={cn(control, "h-12")}
+        className={cn(control, "h-12 text-fg")}
         aria-describedby={describedBy(id, hint, error)}
         aria-invalid={error ? true : undefined}
         required={!optional}
@@ -122,7 +122,7 @@ export function TextAreaField({
     <FieldShell id={id} label={label} optional={optional} optionalLabel={optionalLabel} hint={hint} error={error} className={className}>
       <textarea
         id={id}
-        className={cn(control, "resize-y py-3 leading-relaxed", minHeightClassName)}
+        className={cn(control, "resize-y py-3 leading-relaxed text-fg", minHeightClassName)}
         aria-describedby={describedBy(id, hint, error)}
         aria-invalid={error ? true : undefined}
         required={!optional}
@@ -157,7 +157,7 @@ export function SelectField({
       <div className="relative">
         <select
           id={id}
-          className={cn(control, "h-12 cursor-pointer appearance-none pr-11", empty && "text-muted")}
+          className={cn(control, "h-12 cursor-pointer appearance-none pr-11", empty ? "text-muted" : "text-fg")}
           aria-describedby={describedBy(id, hint, error)}
           aria-invalid={error ? true : undefined}
           required={!optional}

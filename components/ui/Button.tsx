@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon, ArrowUpRightIcon } from "./icons";
+import { InPageLink } from "./InPageLink";
 
 export type ButtonVariant = "primary" | "accent" | "secondary" | "ghost" | "inverse";
 export type ButtonSize = "sm" | "md" | "lg";
@@ -27,25 +28,28 @@ type NativeProps = Common & { href?: undefined } & Omit<
 export type ButtonProps = AnchorProps | NativeProps;
 
 const base =
-  "group relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium tracking-[-0.01em] transition-[transform,translate,background-color,color,box-shadow,border-color,opacity] duration-200 ease-out-quart focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent-500 active:scale-[0.985] disabled:pointer-events-none disabled:opacity-60";
+  "group relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap font-medium tracking-[-0.01em] transition-[transform,translate,background-color,color,box-shadow,border-color,opacity] duration-200 ease-out-quart focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent-500 active:scale-[0.985] disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<ButtonVariant, string> = {
   /* Tone-aware: dark on light sections, light on dark sections. */
   primary:
-    "bg-fg text-bg shadow-[0_1px_0_0_rgb(255_255_255/0.12)_inset,0_8px_20px_-10px_rgb(10_11_15/0.5)] after:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-current/0 after:transition-colors hover:-translate-y-px hover:after:bg-current/10",
+    "rounded-full bg-fg text-bg shadow-[0_1px_0_0_rgb(255_255_255/0.12)_inset,0_8px_20px_-10px_rgb(10_11_15/0.5)] after:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-current/0 after:transition-colors hover:-translate-y-px hover:after:bg-current/10",
   accent:
-    "bg-accent-500 text-white shadow-[0_1px_0_0_rgb(255_255_255/0.2)_inset,0_10px_28px_-10px_rgb(47_91_255/0.65)] hover:-translate-y-px hover:bg-accent-600",
+    "rounded-full bg-accent-500 text-white shadow-[0_1px_0_0_rgb(255_255_255/0.2)_inset,0_10px_28px_-10px_rgb(47_91_255/0.65)] hover:-translate-y-px hover:bg-accent-600",
   secondary:
-    "bg-surface text-fg ring-1 ring-line-strong shadow-[0_1px_2px_rgb(10_11_15/0.04)] hover:-translate-y-px hover:bg-surface-2 hover:ring-line-strong",
+    "rounded-full bg-surface text-fg ring-1 ring-line-strong shadow-[0_1px_2px_rgb(10_11_15/0.04)] hover:-translate-y-px hover:bg-surface-2 hover:ring-line-strong",
   inverse:
-    "bg-white text-ink-950 shadow-[0_8px_24px_-10px_rgb(0_0_0/0.5)] hover:-translate-y-px hover:bg-paper",
+    "rounded-full bg-white text-ink-950 shadow-[0_8px_24px_-10px_rgb(0_0_0/0.5)] hover:-translate-y-px hover:bg-paper",
   ghost:
     "rounded-md px-0 text-fg underline-offset-4 hover:text-brand hover:underline",
 };
 
+/** Matches an internal href that points at a fragment: `#id`, `/en#id`, `/en/work/x#id`. */
+const isHashHref = (href: string) => /^\/?[^?:]*#/.test(href);
+
 const sizes: Record<ButtonSize, string> = {
   sm: "h-9 px-4 text-sm",
-  md: "h-11 px-5 text-[0.9375rem]",
+  md: "h-11 px-5 text-md",
   lg: "h-12 px-6 text-base",
 };
 
@@ -79,6 +83,14 @@ export function Button(props: ButtonProps) {
         <a href={href} className={classes} rel="noopener noreferrer" {...rest}>
           {content}
         </a>
+      );
+    }
+    /* In-page fragments use a native anchor so the browser hands focus to the target section. */
+    if (isHashHref(href)) {
+      return (
+        <InPageLink href={href} className={classes} {...rest}>
+          {content}
+        </InPageLink>
       );
     }
     return (

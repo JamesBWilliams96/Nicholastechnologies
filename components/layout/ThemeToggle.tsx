@@ -2,13 +2,8 @@
 
 import { useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
+import { applyTheme, readTheme, type Theme } from "@/lib/theme";
 import { MoonIcon, SunIcon } from "@/components/ui/icons";
-
-type Theme = "light" | "dark";
-
-function readTheme(): Theme {
-  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-}
 
 /* The current theme lives on <html data-theme>. Watching the attribute keeps
    every toggle on the page in sync without any shared state. */
@@ -16,17 +11,6 @@ function subscribe(onChange: () => void) {
   const observer = new MutationObserver(onChange);
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   return () => observer.disconnect();
-}
-
-function applyTheme(theme: Theme) {
-  const root = document.documentElement;
-  if (theme === "dark") root.dataset.theme = "dark";
-  else delete root.dataset.theme;
-  try {
-    localStorage.setItem("theme", theme);
-  } catch {
-    /* private mode: the choice lasts for this page view */
-  }
 }
 
 export function ThemeToggle({

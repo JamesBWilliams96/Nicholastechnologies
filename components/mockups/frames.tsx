@@ -13,6 +13,8 @@ type BrowserFrameProps = ComponentPropsWithoutRef<"div"> & {
   chrome?: "light" | "dark";
   /** Accessible description of what the mock shows. Omit if a parent is aria-hidden. */
   label?: string;
+  /** Decorative content at the right of the title bar (an account mark, say). Sized in rem to match the chrome. */
+  trailing?: ReactNode;
   children: ReactNode;
 };
 
@@ -21,6 +23,7 @@ export function BrowserFrame({
   url = "yourbusiness.com",
   chrome = "light",
   label,
+  trailing,
   className,
   children,
   ...rest
@@ -30,7 +33,7 @@ export function BrowserFrame({
     <div
       className={cn(
         "overflow-hidden rounded-xl shadow-float ring-1",
-        dark ? "bg-ink-900 ring-white/10" : "bg-white ring-ink-950/8",
+        dark ? "bg-ink-900 ring-white/15" : "bg-white ring-ink-950/8",
         className,
       )}
       role={label ? "img" : undefined}
@@ -60,7 +63,9 @@ export function BrowserFrame({
           </svg>
           <span className="truncate">{url}</span>
         </div>
-        <div className="w-10" aria-hidden />
+        <div className="flex w-10 justify-end" aria-hidden>
+          {trailing}
+        </div>
       </div>
       <div className="@container relative">{children}</div>
     </div>
@@ -98,16 +103,23 @@ export function PhoneFrame({ label, className, children, ...rest }: PhoneFramePr
 type PanelProps = ComponentPropsWithoutRef<"div"> & {
   /** Glass floats over other UI; solid sits inside a page. */
   variant?: "glass" | "solid";
+  /** Text colour: dark ink for light UI, paper for a dark app window. */
+  tone?: "light" | "dark";
+  /** Resting shadow. Defaults to float for glass, card for solid. */
+  shadow?: "card" | "float";
   label?: string;
 };
 
 /** Small floating UI card (calendar, chart, toast...). */
-export function Panel({ variant = "glass", label, className, ...rest }: PanelProps) {
+export function Panel({ variant = "glass", tone = "light", shadow, label, className, ...rest }: PanelProps) {
+  const lift = shadow ?? (variant === "glass" ? "float" : "card");
   return (
     <div
       className={cn(
-        "rounded-xl text-ink-950",
-        variant === "glass" ? "glass-strong shadow-float" : "bg-white shadow-card ring-1 ring-ink-950/8",
+        "rounded-xl",
+        tone === "dark" ? "text-paper" : "text-ink-950",
+        variant === "glass" ? "glass-strong" : "bg-white ring-1 ring-ink-950/8",
+        lift === "float" ? "shadow-float" : "shadow-card",
         className,
       )}
       role={label ? "img" : undefined}
@@ -130,7 +142,7 @@ export function AppFrame({
     <div
       className={cn(
         "@container overflow-hidden rounded-xl shadow-float ring-1",
-        dark ? "bg-ink-900 text-paper ring-white/10" : "bg-white text-ink-950 ring-ink-950/8",
+        dark ? "bg-ink-900 text-paper ring-white/12" : "bg-white text-ink-950 ring-ink-950/8",
         className,
       )}
       role={label ? "img" : undefined}

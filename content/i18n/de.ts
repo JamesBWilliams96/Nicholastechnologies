@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 /** German. */
 export const de: Dictionary = {
   meta: {
-    title: "Nicholas Technologies — Websites, Shopify-Shops & Web-Apps",
+    title: "Nicholas Technologies — Webdesign, Shopify & Web-Apps",
     description:
       "Ein-Personen-Studio für Websites, Shopify-Shops und individuelle Web-Apps für kleine Unternehmen und Start-ups. Festpreisprojekte, Support nach dem Launch.",
     ogDescription:
@@ -25,7 +25,7 @@ export const de: Dictionary = {
   nav: { work: "Projekte", services: "Leistungen", process: "Ablauf", about: "Über mich", contact: "Kontakt" },
   footer: {
     tagline: "Websites, Web-Apps und technischer Support.",
-    rights: "© {year} {site}. Alle Rechte vorbehalten.",
+    rights: "© {site}. Alle Rechte vorbehalten.",
     builtBy: "Gestaltet und entwickelt von {site}.",
   },
   hero: {
@@ -41,10 +41,10 @@ export const de: Dictionary = {
     titleA: "Klein genug, um sich zu kümmern.",
     titleB: "Technisch stark genug, um es richtig zu bauen.",
     points: [
-      { title: "Direkt", text: "Sie sprechen mit der Person, die es baut. Keine Kundenbetreuer." },
+      { title: "Direkt", text: "Sie sprechen in jeder Phase mit mir, und ich mache die Arbeit. Niemand dazwischen." },
       { title: "Festpreis", text: "Umfang, Leistungen und Kosten stehen fest, bevor die Arbeit beginnt." },
       { title: "Sauber gebaut", text: "React, Next.js, Shopify oder Webflow, je nachdem, was zur Aufgabe passt." },
-      { title: "Weiter da", text: "Hosting, Wartung und Support nach dem Launch." },
+      { title: "Weiter da", text: "Ich hoste die Seite, halte sie aktuell und bleibe erreichbar, sobald sie live ist." },
     ],
   },
   services: {
@@ -52,16 +52,18 @@ export const de: Dictionary = {
     titleA: "Was ich baue,",
     titleB: "und wie ich es am Laufen halte.",
     description:
-      "Websites, Onlineshops, kleine individuelle Apps und der Support, der sie nach dem Launch betreut. Projekte werden vor dem Start abgesteckt und zum Festpreis angeboten.",
+      "Webdesign und Webentwicklung für kleine Unternehmen und Start-ups: Websites, Onlineshops, kleine individuelle Apps und der Support, der sie nach dem Launch betreut. Projekte werden vor dem Start abgesteckt und zum Festpreis angeboten.",
     items: [
       {
         title: "Websites",
-        description: "Individuelle Websites und Landingpages, gestaltet rund um Ihr Unternehmen.",
+        description:
+          "Individuelles Webdesign und Webentwicklung, von der einzelnen Landingpage bis zur kompletten Website, gestaltet rund um Ihr Unternehmen.",
         tags: ["React + Next.js", "Webflow", "Landingpages", "Redesigns"],
       },
       {
         title: "Shopify",
-        description: "Professionelle Onlineshops und individuelle Shopify-Anpassungen.",
+        description:
+          "Shopify-Entwicklung für Shops, die auf dem Smartphone verkaufen: professioneller E-Commerce, individuelle Themes und Verbesserungen an dem, was Sie schon haben.",
         tags: ["Shop-Einrichtung", "Theme-Anpassung", "Integrationen", "Optimierungen"],
       },
       {
@@ -72,7 +74,7 @@ export const de: Dictionary = {
       {
         title: "Laufender Support",
         description:
-          "Hosting, Wartung und technischer Support nach dem Launch, von der Person, die es gebaut hat.",
+          "Hosting, Website-Wartung und technischer Support nach dem Launch.",
         tags: ["Hosting", "Updates", "Wartung", "Technischer Support"],
       },
     ],
@@ -82,7 +84,8 @@ export const de: Dictionary = {
   },
   work: {
     eyebrow: "Ausgewählte Projekte",
-    title: "Was ich gebaut habe.",
+    titleSamples: "Was ich gebaut habe.",
+    titleReal: "Was ich gebaut habe.",
     descriptionSamples:
       "Ein paar Beispiele für die Art von Projekten, die ich übernehme: eine Website, die Buchungen bringt, ein Shop, der auf dem Handy verkauft, ein Tool, das eine Tabelle ersetzt.",
     descriptionReal: "Ein paar aktuelle Projekte. Jedes davon von mir gestaltet, gebaut und gelauncht.",
@@ -180,7 +183,7 @@ export const de: Dictionary = {
       { title: "Umfang", text: "Wir klären, was Sie wirklich brauchen, und vereinbaren Umfang und Preis." },
       { title: "Umsetzung", text: "Ich gestalte und entwickle die Website oder Anwendung." },
       { title: "Launch", text: "Alles wird getestet, veröffentlicht und übergeben." },
-      { title: "Support", text: "Optional Hosting, Wartung und technischer Support nach dem Launch." },
+      { title: "Support", text: "Optional. Wenn Sie möchten, bleibe ich dran und kümmere mich weiter darum." },
     ],
     closingText: "Schritt eins ist ein Gespräch. Erzählen Sie mir, woran Sie arbeiten, den Rest klären wir gemeinsam.",
     closingCta: "Projekt starten",
@@ -231,7 +234,7 @@ export const de: Dictionary = {
     eyebrow: "Über mich",
     titleA: "Ein Ein-Personen-Studio,",
     titleB: "mit Absicht.",
-    lead: "Ich habe {site} bewusst bei einer Person belassen. Sie bekommen für das gesamte Projekt denselben Designer, Entwickler und Ansprechpartner, und danach dieselbe Person, die sich darum kümmert.",
+    lead: "Ich habe {site} bei einer Person belassen, weil ich so am besten arbeite: nah am Kunden, nah am Code und für alles selbst verantwortlich. Alles, was ich baue, führt auf dieselben fünf Dinge zurück.",
     focusLabel: "Worauf ich achte",
     focus: [
       { title: "Gutes Design", text: "Durchdacht, klar und leicht zu bedienen, auf jedem Bildschirm." },
@@ -267,7 +270,7 @@ export const de: Dictionary = {
     lead: "Ob neue Website, Onlineshop, individuelles Tool oder Hilfe bei etwas Bestehendem: Erzählen Sie mir, was Sie vorhaben.",
     expectLabel: "Was Sie erwarten können",
     expectations: [
-      { title: "Eine Antwort von der Person, die es baut", text: "Sie hören von der Person, die die Arbeit macht, nicht von einem Postfach." },
+      { title: "Eine Antwort von der Person, die es baut", text: "Eine kurze Antwort mit ein paar Fragen, damit ich verstehe, was Sie brauchen, bevor ich etwas vorschlage." },
       { title: "Ein klarer Umfang und ein Festpreis", text: "Sie wissen, was gebaut wird und was es kostet, bevor die Arbeit beginnt." },
       { title: "Ehrliche Beratung", text: "Auch wenn die Antwort lautet: „Das brauchen Sie noch nicht.“" },
     ],

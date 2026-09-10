@@ -145,7 +145,7 @@ export function ProcessStep({ step, position, total }: ProcessStepProps) {
           </span>
           <h3 className="text-[1.0625rem] font-semibold leading-6 tracking-[-0.01em]">{step.title}</h3>
         </div>
-        <p className="mt-2 max-w-[40ch] text-sm leading-relaxed text-muted xl:text-[0.9375rem]">{step.text}</p>
+        <p className="mt-2 max-w-[40ch] text-sm leading-relaxed text-muted xl:text-md">{step.text}</p>
       </div>
     </Reveal>
   );

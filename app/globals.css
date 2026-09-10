@@ -41,6 +41,9 @@
   --text-2xs: 0.6875rem;
   --text-2xs--line-height: 1rem;
 
+  /* Body-medium (15px): nav links, card body copy, field text. Font-size only — line-height comes from the element or its `leading-*`. */
+  --text-md: 0.9375rem;
+
   /* Neutrals — a charcoal scale with a faint cool bias */
   --color-ink-950: #0a0b0f;
   --color-ink-900: #101218;
@@ -78,6 +81,12 @@
   --color-ok-soft: #dcfce7;
   --color-warn: #d97706;
   --color-warn-soft: #fef3c7;
+  --color-ok-ink: #15803d; /* ok text on ok-soft */
+  --color-ok-ring: #86efac;
+  --color-ok-bright: #4ade80; /* ok text on dark app windows */
+  --color-warn-ink: #b45309;
+  --color-warn-ring: #fcd34d;
+  --color-warn-bright: #fbbf24;
   --color-danger-300: #fca5a5;
   --color-danger-400: #f87171;
   --color-danger-500: #ef4444;
@@ -209,6 +218,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Keeps focused controls and anchor targets clear of the 4rem fixed header */
+    scroll-padding-top: 4.5rem;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
   }
@@ -310,14 +321,12 @@
 @utility glass {
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
   border: 1px solid var(--line);
 }
 
 @utility glass-strong {
   background: color-mix(in srgb, #ffffff 82%, transparent);
   backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
   border: 1px solid rgb(10 11 15 / 0.08);
 }
 
@@ -346,11 +355,6 @@
   color: transparent;
 }
 
-/* Text balance for short headings */
-@utility text-balance {
-  text-wrap: balance;
-}
-
 /* ------------------------------------------------------------------
    Scroll reveal — driven by components/ui/Reveal.tsx
    Only hides content when JS is running (html.js), so nothing is
@@ -364,7 +368,6 @@
     opacity 0.9s var(--ease-out-quart),
     transform 0.9s var(--ease-out-quart);
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
 }
 
 .js [data-reveal="scale"] {
@@ -391,7 +394,9 @@
   opacity: 1;
   transform: none;
   transition: none;
-  animation: reveal-up 0.9s var(--ease-out-quart) both;
+  /* Translate-only (opacity stays 1) so the hero H1/lead can be recorded as
+     LCP at first paint rather than after the fade completes. */
+  animation: reveal-slide 0.9s var(--ease-out-quart) backwards;
   animation-delay: var(--reveal-delay, 0ms);
 }
 
@@ -405,9 +410,11 @@
   animation-name: reveal-fade;
 }
 
+/* `:root [data-reveal][data-eager]` matches the (0,3,0) specificity of the
+   eager rules above so these overrides win on source order. */
 @media (prefers-reduced-motion: reduce) {
   .js [data-reveal],
-  [data-reveal][data-eager] {
+  :root [data-reveal][data-eager] {
     opacity: 1;
     transform: none;
     transition: none;
@@ -416,6 +423,18 @@
 
   .motion-safe-only {
     animation: none !important;
+  }
+}
+
+/* Printing / saving to PDF has no scrolling, so the IntersectionObserver
+   never fires — force every reveal block visible. */
+@media print {
+  .js [data-reveal],
+  :root [data-reveal][data-eager] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
   }
 }
 
@@ -468,6 +487,15 @@
   }
   to {
     opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-slide {
+  from {
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
     transform: none;
   }
 }

@@ -32,9 +32,10 @@ const siteUrl = resolveSiteUrl();
 export const site = {
   name: "Nicholas Technologies",
   url: siteUrl,
-  tagline: "Websites, web apps & technical support.",
-  /** Used for the <title> of the homepage. */
-  title: "Nicholas Technologies — Websites, Shopify stores & custom web apps",
+  /**
+   * Every visible string — including the homepage <title>, tagline and share
+   * image alt — is translated, so it lives in content/i18n/*.ts (`meta`, `footer`).
+   */
   description:
     "Nicholas Technologies is a one-person software studio building high-quality websites, Shopify stores and small custom web apps for local businesses and early-stage startups. Fixed-price projects, direct communication and support after launch.",
   /** Currency symbol shown inside illustrative interface mockups. */
@@ -59,5 +60,3 @@ export const site = {
     { label: "Contact", href: "/#contact" },
   ],
 } as const;
-
-export type NavLink = (typeof site.nav)[number];

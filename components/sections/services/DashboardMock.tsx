@@ -52,8 +52,8 @@ export function DashboardMock() {
               </MockChip>
             </div>
             <div className="flex items-center gap-[1.6cqw] text-[1.8cqw]">
-              <Skeleton width="10cqw" className="h-[1.2cqw]" />
-              <MockButton tone="dark" className="h-[4.4cqw] px-[2.2cqw]">
+              <Skeleton width="10cqw" height="1.2cqw" />
+              <MockButton tone="dark" style={{ height: "4.4cqw", paddingInline: "2.2cqw" }}>
                 New booking
               </MockButton>
             </div>
@@ -90,15 +90,15 @@ export function DashboardMock() {
                     <span className="font-mono text-ink-500 tabular-nums">{r.time}</span>
                     <span className="truncate font-medium text-ink-800">{r.service}</span>
                     <span className="flex items-center gap-[1.2cqw]">
-                      <MockAvatar initials={r.initial} hue={r.hue} className="size-[3.2cqw] text-[1.4cqw]" />
-                      <Skeleton width="60%" className="h-[1.1cqw]" />
+                      <MockAvatar initials={r.initial} hue={r.hue} size="3.2cqw" />
+                      <Skeleton width="60%" height="1.1cqw" />
                     </span>
                     {r.tone === "warn" ? (
                       <span className="relative w-[10cqw] text-[1.4cqw]">
-                        <MockChip tone="warn" className="w-full justify-center transition-opacity duration-300 group-hover:opacity-0 group-hover:delay-[420ms]">
+                        <MockChip tone="warn" className="w-full justify-center leading-none transition-opacity duration-300 group-hover:opacity-0 group-hover:delay-[420ms]">
                           {r.status}
                         </MockChip>
-                        <MockChip tone="ok" className="absolute inset-0 w-full justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:delay-[420ms]">
+                        <MockChip tone="ok" className="absolute inset-0 w-full justify-center leading-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:delay-[420ms]">
                           Confirmed
                         </MockChip>
                       </span>

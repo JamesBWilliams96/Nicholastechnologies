@@ -8,6 +8,9 @@ import { useInView, usePrefersReducedMotion } from "@/lib/use-in-view";
  * descendants can start a CSS entrance (drawn lines, stamps, bars filling in)
  * using `[.js_[data-inview]_&]:` variants. Under reduced motion the attribute
  * is set straight away, so nothing waits on an animation.
+ *
+ * Keyframe animations that should wait for the group use `playWhenInView`
+ * from ./in-view (a server-safe module, so Server Components can use it).
  */
 export function InViewGroup({
   className,

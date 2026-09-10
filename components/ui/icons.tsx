@@ -59,22 +59,9 @@ export const CloseIcon = (p: IconProps) => (
   </Icon>
 );
 
-export const ChevronRightIcon = (p: IconProps) => (
-  <Icon {...p}>
-    <path d="m9 6 6 6-6 6" />
-  </Icon>
-);
-
 export const ChevronDownIcon = (p: IconProps) => (
   <Icon {...p}>
     <path d="m6 9 6 6 6-6" />
-  </Icon>
-);
-
-export const PlusIcon = (p: IconProps) => (
-  <Icon {...p}>
-    <path d="M12 5v14" />
-    <path d="M5 12h14" />
   </Icon>
 );
 
@@ -278,5 +265,3 @@ export const LanguageIcon = (p: IconProps) => (
     <path d="M14.8 17h5.4" />
   </Icon>
 );
-
-export const ExternalIcon = ArrowUpRightIcon;
