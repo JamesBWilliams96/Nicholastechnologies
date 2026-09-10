@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useId, useRef, useState, type FormEvent } from "react";
+import type { Dictionary } from "@/content/i18n/types";
+import { fmt, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/Button";
 import { CheckIcon } from "@/components/ui/icons";
 import { site } from "@/content/site";
@@ -26,13 +28,12 @@ type Status =
 
 type ServerPayload = { ok?: boolean; message?: string; errors?: Partial<Record<string, string>> };
 
-const GENERIC_ERROR = "Something went wrong and your enquiry wasn't sent.";
-
-const whatHappensNext = [
-  "I read what you've sent and reply with honest next steps.",
-  "If it's a good fit, we agree the scope and a fixed price before anything is built.",
-  "If it isn't, I'll say so and point you somewhere more useful.",
-];
+type ContactFormProps = {
+  locale: Locale;
+  t: Dictionary["form"];
+  /** mailto: link offered when delivery fails, if an email is configured. */
+  mailto: string | null;
+};
 
 /** Keep only messages for fields we actually render. */
 function pickErrors(errors: Partial<Record<string, string>> | undefined): EnquiryErrors {
@@ -46,7 +47,7 @@ function pickErrors(errors: Partial<Record<string, string>> | undefined): Enquir
   return out;
 }
 
-export function ContactForm() {
+export function ContactForm({ locale, t, mailto }: ContactFormProps) {
   const uid = useId().replace(/[^a-zA-Z0-9-]/g, "");
   const fieldId = useCallback((f: EnquiryField | "website") => `enquiry-${f}-${uid}`, [uid]);
 
@@ -84,19 +85,17 @@ export function ContactForm() {
     (next: EnquiryErrors) => {
       setErrors(next);
       const count = Object.keys(next).length;
-      setLiveMessage(
-        count === 1 ? "Please check the highlighted field." : `Please check the ${count} highlighted fields.`,
-      );
+      setLiveMessage(count === 1 ? t.checkOne : fmt(t.checkMany, { count }));
       focusField(firstErrorField(next));
     },
-    [focusField],
+    [focusField, t],
   );
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (submitting) return;
 
-    const result = validateEnquiry(values);
+    const result = validateEnquiry(values, t.validation);
     if (!result.ok) {
       showErrors(result.errors);
       return;
@@ -110,7 +109,7 @@ export function ContactForm() {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, locale }),
       });
       const payload = (await res.json().catch(() => null)) as ServerPayload | null;
 
@@ -128,13 +127,15 @@ export function ContactForm() {
 
       if (res.status === 400 && payload?.errors) {
         setStatus({ kind: "idle" });
-        showErrors(pickErrors(payload.errors));
+        /* Re-run local validation so the messages are in the visitor's language. */
+        const local = validateEnquiry(values, t.validation);
+        showErrors(local.ok ? pickErrors(payload.errors) : local.errors);
         return;
       }
 
-      setStatus({ kind: "error", message: payload?.message || GENERIC_ERROR });
+      setStatus({ kind: "error", message: t.errorGeneric });
     } catch {
-      setStatus({ kind: "error", message: GENERIC_ERROR });
+      setStatus({ kind: "error", message: t.errorGeneric });
     }
   }
 
@@ -157,13 +158,11 @@ export function ContactForm() {
           tabIndex={-1}
           className="mt-6 text-display-sm focus:outline-none"
         >
-          Thanks — your enquiry is on its way.
+          {t.success.title}
         </h3>
-        <p className="mt-3 max-w-[40ch] text-base text-muted">
-          I&rsquo;ll reply personally. In the meantime, here&rsquo;s what happens next.
-        </p>
+        <p className="mt-3 max-w-[40ch] text-base text-muted">{t.success.lead}</p>
         <ol className="mt-7 space-y-3.5 border-t border-line pt-7">
-          {whatHappensNext.map((item, i) => (
+          {t.success.steps.map((item, i) => (
             <li key={item} className="flex gap-3.5 text-sm leading-relaxed">
               <span
                 aria-hidden
@@ -182,7 +181,7 @@ export function ContactForm() {
           onClick={reset}
           className="mt-8 text-sm"
         >
-          Send another enquiry
+          {t.success.again}
         </Button>
       </div>
     );
@@ -199,20 +198,20 @@ export function ContactForm() {
       className="@container"
     >
       {/* About you */}
-      <fieldset className="min-w-0" disabled={submitting}>
+      <fieldset className="min-w-0" aria-busy={submitting}>
         <legend className="font-mono text-2xs font-medium uppercase tracking-[0.14em] text-muted">
           <span className="text-subtle" aria-hidden>01&nbsp;&nbsp;</span>
-          About you
+          {t.aboutYou}
         </legend>
         <div className="mt-5 grid gap-5 @md:grid-cols-2">
           <TextField
             id={fieldId("name")}
             name="name"
-            label="Name"
+            label={t.name}
             type="text"
             autoComplete="name"
             maxLength={LIMITS.name}
-            placeholder="Your name"
+            placeholder={t.namePlaceholder}
             value={values.name}
             onChange={update("name")}
             error={errors.name}
@@ -220,14 +219,14 @@ export function ContactForm() {
           <TextField
             id={fieldId("email")}
             name="email"
-            label="Email"
+            label={t.email}
             type="email"
             inputMode="email"
             autoComplete="email"
             autoCapitalize="off"
             spellCheck={false}
             maxLength={LIMITS.email}
-            placeholder="you@example.com"
+            placeholder={t.emailPlaceholder}
             value={values.email}
             onChange={update("email")}
             error={errors.email}
@@ -235,12 +234,13 @@ export function ContactForm() {
           <TextField
             id={fieldId("company")}
             name="company"
-            label="Business or company"
+            label={t.company}
             optional
+            optionalLabel={t.optional}
             type="text"
             autoComplete="organization"
             maxLength={LIMITS.company}
-            placeholder="Who is this for?"
+            placeholder={t.companyPlaceholder}
             value={values.company}
             onChange={update("company")}
             error={errors.company}
@@ -251,19 +251,19 @@ export function ContactForm() {
 
       {/* The project */}
       <div className="mt-9 border-t border-line pt-8">
-        <fieldset className="min-w-0" disabled={submitting}>
+        <fieldset className="min-w-0" aria-busy={submitting}>
           <legend className="font-mono text-2xs font-medium uppercase tracking-[0.14em] text-muted">
             <span className="text-subtle" aria-hidden>02&nbsp;&nbsp;</span>
-            The project
+            {t.theProject}
           </legend>
           <div className="mt-5 grid gap-5 @md:grid-cols-2">
             <TextAreaField
               id={fieldId("project")}
               name="project"
-              label="What are you looking to build?"
+              label={t.project}
               minHeightClassName="min-h-36"
               maxLength={LIMITS.project}
-              placeholder="A new website for my business, a store, a booking system, a tool for the team… A few sentences in your own words is plenty."
+              placeholder={t.projectPlaceholder}
               value={values.project}
               onChange={update("project")}
               error={errors.project}
@@ -272,13 +272,14 @@ export function ContactForm() {
             <TextField
               id={fieldId("budget")}
               name="budget"
-              label="Approximate budget"
+              label={t.budget}
               optional
+              optionalLabel={t.optional}
               type="text"
               autoComplete="off"
               maxLength={LIMITS.budget}
-              placeholder="A rough range, or 'not sure yet'"
-              hint="A guide, not a commitment."
+              placeholder={t.budgetPlaceholder}
+              hint={t.budgetHint}
               value={values.budget}
               onChange={update("budget")}
               error={errors.budget}
@@ -286,11 +287,12 @@ export function ContactForm() {
             <SelectField
               id={fieldId("timeframe")}
               name="timeframe"
-              label="Desired timeframe"
+              label={t.timeframe}
               optional
+              optionalLabel={t.optional}
               autoComplete="off"
-              options={TIMEFRAMES}
-              placeholder="Choose a timeframe"
+              options={TIMEFRAMES.map((o) => ({ value: o.value, label: t.timeframes[o.value] }))}
+              placeholder={t.timeframePlaceholder}
               value={values.timeframe}
               onChange={update("timeframe")}
               error={errors.timeframe}
@@ -298,11 +300,12 @@ export function ContactForm() {
             <TextAreaField
               id={fieldId("extra")}
               name="extra"
-              label="Anything else?"
+              label={t.extra}
               optional
+              optionalLabel={t.optional}
               minHeightClassName="min-h-24"
               maxLength={LIMITS.extra}
-              placeholder="Links to your current site, examples you like, deadlines, questions…"
+              placeholder={t.extraPlaceholder}
               value={values.extra}
               onChange={update("extra")}
               error={errors.extra}
@@ -332,20 +335,20 @@ export function ContactForm() {
           <div className="rounded-xl bg-danger-400/[0.08] px-4 py-3.5 text-sm leading-relaxed ring-1 ring-inset ring-danger-400/30">
             <p className="font-medium text-fg">{status.message}</p>
             <p className="mt-1 text-muted">
-              Your details are still filled in.{" "}
-              {site.email ? (
+              {t.errorKept}{" "}
+              {mailto && site.email ? (
                 <>
-                  If it keeps happening, email me directly at{" "}
+                  {t.errorEmail.split("{email}")[0]}
                   <a
-                    href={`mailto:${site.email}?subject=${encodeURIComponent("Project enquiry")}`}
+                    href={mailto}
                     className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-fg"
                   >
                     {site.email}
                   </a>
-                  .
+                  {t.errorEmail.split("{email}")[1]}
                 </>
               ) : (
-                "Please try again in a moment."
+                t.errorRetry
               )}
             </p>
           </div>
@@ -359,14 +362,12 @@ export function ContactForm() {
           type="submit"
           size="lg"
           arrow
-          disabled={submitting}
+          aria-disabled={submitting}
           className="w-full @md:w-auto"
         >
-          {submitting ? "Sending…" : "Send enquiry"}
+          {submitting ? t.submitting : t.submit}
         </Button>
-        <p className="max-w-[30ch] text-xs leading-relaxed text-muted @md:text-right">
-          No sales call, no pressure. Just a straight answer.
-        </p>
+        <p className="max-w-[30ch] text-xs leading-relaxed text-muted @md:text-right">{t.reassurance}</p>
       </div>
     </form>
   );

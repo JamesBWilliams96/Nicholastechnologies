@@ -27,14 +27,14 @@ function CornerMark({ className }: { className: string }) {
   return (
     <span
       className={cn(
-        "absolute size-3.5 border-ink-950/25 transition-transform duration-500 ease-spring",
+        "absolute size-3.5 border-ink-950/25 transition-[translate] duration-500 ease-spring",
         className,
       )}
     />
   );
 }
 
-function EmptySlot({ className }: { className?: string }) {
+function EmptySlot({ className, label }: { className?: string; label: string }) {
   return (
     <div aria-hidden="true" className={cn(frame, "tone-light", className)}>
       {/* Warm gradient (the site's image treatment) with an engineering grid on top */}
@@ -65,14 +65,23 @@ function EmptySlot({ className }: { className?: string }) {
       {/* Label */}
       <span className="absolute bottom-5 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-white/75 px-2.5 py-1 font-mono text-2xs font-medium uppercase leading-none tracking-[0.14em] text-ink-700 ring-1 ring-inset ring-ink-950/8 backdrop-blur">
         <span className="size-1.5 rounded-full bg-accent-500" />
-        Photo
+        {label}
       </span>
     </div>
   );
 }
 
-export function PhotoFrame({ photo, className }: { photo: FounderPhoto | null; className?: string }) {
-  if (!photo) return <EmptySlot className={className} />;
+export function PhotoFrame({
+  photo,
+  label,
+  className,
+}: {
+  photo: FounderPhoto | null;
+  /** Caption on the empty slot, e.g. "Photo". */
+  label: string;
+  className?: string;
+}) {
+  if (!photo) return <EmptySlot className={className} label={label} />;
 
   // Tablets show a wide crop; keep the top of a portrait (where a face is) in frame.
   const portrait = photo.height > photo.width;

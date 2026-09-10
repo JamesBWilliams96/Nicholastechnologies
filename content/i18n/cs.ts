@@ -1,0 +1,352 @@
+import type { Dictionary } from "./types";
+
+/** Czech. */
+export const cs: Dictionary = {
+  meta: {
+    title: "Nicholas Technologies — Weby, e-shopy na Shopify a webové aplikace",
+    description:
+      "Studio jednoho člověka. Stavím weby, e-shopy na Shopify a webové aplikace na míru pro malé firmy a startupy. Pevná cena, podpora i po spuštění.",
+    ogDescription:
+      "Nicholas Technologies je softwarové studio jednoho člověka. Stavím kvalitní weby, e-shopy na Shopify a menší webové aplikace na míru pro místní firmy a začínající startupy. Projekty za pevnou cenu, přímá komunikace a podpora i po spuštění.",
+    ogAlt: "Nicholas Technologies — weby, e-shopy na Shopify a webové aplikace na míru",
+    ogSubtitle:
+      "Softwarové studio jednoho člověka pro místní firmy a začínající startupy. Projekty za pevnou cenu, přímá komunikace a podpora i po spuštění.",
+  },
+  common: {
+    skipToContent: "Přeskočit na obsah",
+    startProject: "Začít projekt",
+    home: "domů",
+    openMenu: "Otevřít menu",
+    closeMenu: "Zavřít menu",
+    language: "Jazyk",
+    theme: { label: "Vzhled", light: "Přepnout na světlý režim", dark: "Přepnout na tmavý režim" },
+    opensNewTab: "(otevře se na nové kartě)",
+  },
+  nav: { work: "Portfolio", services: "Služby", process: "Postup", about: "O mně", contact: "Kontakt" },
+  footer: {
+    tagline: "Weby, webové aplikace a technická podpora.",
+    rights: "© {year} {site}. Všechna práva vyhrazena.",
+    builtBy: "Design a vývoj: {site}.",
+  },
+  hero: {
+    eyebrow: "Nezávislé softwarové studio",
+    titleA: "Weby, e-shopy a software",
+    titleB: "na míru vašemu podnikání.",
+    lead: "Navrhuji a stavím weby, e-shopy na Shopify a menší webové aplikace na míru pro místní firmy a začínající startupy. Jednáte přímo se mnou, od prvního rozhovoru až dlouho po spuštění. Žádní account manažeři, žádné předávání.",
+    primary: "Začít projekt",
+    secondary: "Podívejte se, co stavím",
+    proof: ["Projekty za pevnou cenu", "Jeden kontakt na všechno", "Podpora po spuštění"],
+  },
+  positioning: {
+    titleA: "Dost malé na to, aby mu na vás záleželo.",
+    titleB: "Dost technické na to, aby to postavilo pořádně.",
+    points: [
+      { title: "Přímo", text: "Mluvíte s tím, kdo to staví. Žádní account manažeři." },
+      { title: "Pevná cena", text: "Rozsah, výstupy i cena domluvené před začátkem práce." },
+      { title: "Postaveno pořádně", text: "React, Next.js, Shopify nebo Webflow, podle toho, co projekt potřebuje." },
+      { title: "Stále tady", text: "Hosting, údržba a podpora i po spuštění." },
+    ],
+  },
+  services: {
+    eyebrow: "Služby",
+    titleA: "Co stavím,",
+    titleB: "a jak to udržuji v chodu.",
+    description:
+      "Weby, e-shopy, menší aplikace na míru a podpora, která se o ně postará, jakmile jsou spuštěné. Rozsah i cena jsou domluvené, než se začne.",
+    items: [
+      {
+        title: "Weby",
+        description: "Weby a landing pages na míru, navržené kolem vašeho podnikání.",
+        tags: ["React + Next.js", "Webflow", "Landing pages", "Redesigny"],
+      },
+      {
+        title: "Shopify",
+        description: "Profesionální e-shopy a úpravy Shopify na míru.",
+        tags: ["Založení e-shopu", "Úpravy šablony", "Integrace", "Vylepšení"],
+      },
+      {
+        title: "Software na míru",
+        description: "Menší webové aplikace postavené podle toho, jak vaše firma doopravdy funguje.",
+        tags: ["Rezervační systémy", "Klientské portály", "Dashboardy", "Interní nástroje"],
+      },
+      {
+        title: "Dlouhodobá podpora",
+        description:
+          "Hosting, údržba a technická podpora po spuštění, od toho, kdo to postavil.",
+        tags: ["Hosting", "Aktualizace", "Údržba", "Technická podpora"],
+      },
+    ],
+    closingText:
+      "Nevíte, co z toho potřebujete? Napište mi, čeho chcete dosáhnout, a navrhnu nejjednodušší cestu.",
+    closingLink: "Napište mi, co potřebujete",
+  },
+  work: {
+    eyebrow: "Vybrané práce",
+    title: "Co jsem postavil.",
+    descriptionSamples:
+      "Pár ukázek toho, jaké projekty dělám: web, který přináší rezervace, e-shop, který prodává na mobilu, nástroj, který nahradí tabulku.",
+    descriptionReal: "Pár nedávných projektů. Každý z nich jsem navrhl, postavil a spustil já.",
+    liveSite: "Živý web",
+    caseStudy: "Případová studie",
+    categories: {
+      Website: "Web",
+      "Landing page": "Landing page",
+      "Shopify store": "E-shop na Shopify",
+      "Web application": "Webová aplikace",
+      "Client portal": "Klientský portál",
+      "Internal tool": "Interní nástroj",
+      "Booking system": "Rezervační systém",
+    },
+    projects: {
+      "marlow-lane-coffee": {
+        summary:
+          "Nový web pro nezávislou kavárnu: menu, otevírací doba a rezervace stolů na jedné rychlé stránce, snadno upravitelné z telefonu.",
+      },
+      "hollis-and-oak": {
+        summary:
+          "E-shop na Shopify pro malou značku bytových doplňků: šablona na míru, filtrování kolekcí a pokladna vyladěná pro nákup na mobilu.",
+      },
+      fieldbook: {
+        summary:
+          "Interní nástroj pro řemeslnou firmu: zakázky, obhlídky, faktury a týdenní přehled na jednom místě, místo sdílené tabulky.",
+      },
+    },
+  },
+  studio: {
+    eyebrow: "Výhoda jednoho člověka",
+    titleMuted: "Žádní account manažeři. Žádné předávání.",
+    titleBright: "Jen ten, kdo to staví.",
+    body: "{site} držím záměrně malé. Každý rozhovor, rozhodnutí i řádek kódu jde přese mě, takže na otázky dostanete přímou odpověď a projekt se nezasekne.",
+    cta: "Jak projekt probíhá",
+    diagram: {
+      agencyLabel: "Typická agentura",
+      chain: ["Vy", "Account manažer", "Projektový manažer", "Designér", "Vývojář", "Váš web"],
+      you: "Vy",
+      person: "Ten, kdo to navrhuje a staví",
+      stagesLabel: "Fáze projektu",
+      stages: ["Návrh", "Vývoj", "Spuštění", "Podpora"],
+      captionA: "Pět předání, nebo",
+      captionB: "jeden rozhovor",
+    },
+    highlights: [
+      { title: "Přímo", text: "Mluvíte s tím, kdo práci dělá, ne s tím, kdo ji předává dál." },
+      { title: "Propojené", text: "Návrh i vývoj od jednoho člověka, takže se při předávání nic neztratí." },
+      { title: "Srozumitelné", text: "Rozsah a cena domluvené předem, lidskou řečí. Bez překvapení." },
+      { title: "Dlouhodobě", text: "Po spuštění jsem pořád tady: hosting, aktualizace, podpora." },
+    ],
+  },
+  fixedPrice: {
+    eyebrow: "Projekty za pevnou cenu",
+    titleA: "Víte, co dostanete.",
+    titleB: "Víte, kolik to stojí.",
+    description:
+      "Většinu projektů naceňuji pevnou částkou. Výstupy i cenu vidíte dřív, než se pustím do práce.",
+    steps: [
+      { title: "Rozsah", text: "Co vlastně stavíme?" },
+      { title: "Nabídka", text: "Jasná pevná cena projektu." },
+      { title: "Vývoj", text: "Návrh, vývoj a testování." },
+      { title: "Spuštění", text: "Nasazení a předání." },
+    ],
+    proposal: {
+      title: "Nabídka projektu",
+      subtitle: "Redesign webu",
+      subtitleSuffix: "Pevný rozsah",
+      items: [
+        { label: "Rozsah", value: "Web o 6 stránkách" },
+        { label: "Výstupy", value: "Návrh, vývoj, spuštění, předání" },
+        { label: "Termín", value: "Domluvený předem" },
+        { label: "Podpora", value: "Volitelná po spuštění" },
+      ],
+      total: "Celkem",
+      totalValue: "Pevná cena",
+      totalNote: "domluvená před začátkem práce",
+      acceptedBy: "Odsouhlasil",
+      approved: "Schváleno",
+    },
+    scopeCall: {
+      title: "Úvodní hovor",
+      notes: "Poznámky",
+      items: ["Cíle a cílová skupina", "Stránky a obsah", "Rezervace a poptávky", "Termín spuštění"],
+      next: "Dále · Pevná nabídka",
+    },
+  },
+  process: {
+    eyebrow: "Postup",
+    title: "Jak to probíhá.",
+    description: "Pět kroků. Žádná záhada. V každé fázi víte, kde věci jsou.",
+    ariaLabel: "Pět kroků projektu",
+    steps: [
+      { title: "Rozhovor", text: "Řekněte mi, co chcete postavit, vylepšit nebo opravit." },
+      { title: "Rozsah", text: "Ujasníme si, co skutečně potřebujete, a domluvíme rozsah a cenu." },
+      { title: "Vývoj", text: "Navrhnu a vyvinu web nebo aplikaci." },
+      { title: "Spuštění", text: "Všechno otestuji, nasadím a předám." },
+      { title: "Podpora", text: "Volitelný hosting, údržba a technická podpora po spuštění." },
+    ],
+    closingText: "První krok je rozhovor. Napište mi, na čem pracujete, a vezmeme to odtud.",
+    closingCta: "Začít projekt",
+  },
+  stack: {
+    eyebrow: "Technologie",
+    titleA: "Správný nástroj",
+    titleB: "pro danou práci.",
+    description:
+      "Netlačím každý projekt do jedné technologie. Technologie má sloužit podnikání, ne naopak.",
+    tools: [
+      { text: "Skvělá volba pro přehledné prezentační weby, které si chtějí klienti upravovat sami." },
+      {
+        text: "Skvělá volba pro weby na míru, pokročilé interakce a webové aplikace.",
+        note: "U webových aplikací je součástí stacku i TypeScript a databáze.",
+      },
+      { text: "Skvělá volba pro firmy, které potřebují spolehlivou e-commerce platformu." },
+    ],
+    builder: {
+      label: "Sestavte si stack",
+      question: "Co stavíte?",
+      options: [
+        {
+          label: "Prezentační web, který si upravíte sami",
+          why: "Webflow vám dá rychlý, dobře navržený web s vizuálním editorem, takže texty a obrázky měníte sami a nečekáte na mě.",
+        },
+        {
+          label: "Web na míru s pokročilými interakcemi",
+          why: "Vlastní kód odstraní limity šablony: layouty na míru, pokročilé interakce a výkon vyladěný přesně na to, co má web dělat.",
+        },
+        {
+          label: "E-shop",
+          why: "Shopify spolehlivě řeší platby, sklad i pokladnu, takže energie jde do designu e-shopu a do toho, co je ve vašem podnikání jedinečné.",
+        },
+        {
+          label: "Webová aplikace, portál nebo interní nástroj",
+          why: "Software potřebuje logiku, účty a data. Next.js s TypeScriptem a databází mu dává pevný základ, který poroste s firmou.",
+          extra: "+ TypeScript a databáze",
+        },
+      ],
+      recommended: "Doporučeno",
+      yourProject: "Váš projekt",
+      footnote: "Ne každý projekt zapadne přesně do jedné škatulky. Výběr správného stacku je součást práce.",
+      link: "Napište mi o svém projektu",
+    },
+  },
+  about: {
+    eyebrow: "O mně",
+    titleA: "Studio jednoho člověka,",
+    titleB: "záměrně.",
+    lead: "{site} jsem záměrně nechal jako studio jednoho člověka. Po celý projekt máte stejného designéra, vývojáře i kontaktní osobu, a stejný člověk se o web stará i potom.",
+    focusLabel: "Na co se soustředím",
+    focus: [
+      { title: "Dobrý design", text: "Promyšlený, čistý a snadno použitelný, na každé obrazovce." },
+      { title: "Dobrá technologie", text: "Správné nástroje pro danou práci, postavené pořádně, aby dál fungovaly." },
+      { title: "Jasná komunikace", text: "Přímé odpovědi, žádný žargon, žádná překvapení." },
+      { title: "Praktická řešení", text: "To nejjednodušší, co problém opravdu vyřeší." },
+      { title: "Dlouhodobé vztahy", text: "Raději se o váš web starám roky, než abych ho postavil a zmizel." },
+    ],
+    photo: "Fotografie",
+  },
+  support: {
+    eyebrow: "Potřebujete pomoc i po spuštění?",
+    title: "Spuštění není cílová rovinka.",
+    description:
+      "Jakmile je váš web živý, nemusíte řešit, co dál. Můžu se postarat o hosting, údržbu i podporu.",
+    included: ["Hosting", "Aktualizace", "Údržba", "Opravy chyb", "Technická podpora", "Drobná vylepšení"],
+    codaA: "Ten, kdo to postavil,",
+    codaB: "je pořád tady.",
+    cta: "Ozvěte se mi",
+    ticket: {
+      label: "Požadavek na podporu",
+      ago: "před 2 h",
+      title: "Pokladna na mobilu nefunguje",
+      open: "Otevřeno",
+      resolved: "Vyřešeno",
+      reply: "Opraveno a nasazeno. Kdyby se objevilo cokoli dalšího, dejte mi vědět.",
+    },
+  },
+  contact: {
+    eyebrow: "Začít projekt",
+    titleA: "Máte něco v hlavě?",
+    titleB: "Pojďme to postavit.",
+    lead: "Ať potřebujete nový web, e-shop, nástroj na míru nebo pomoc s něčím, co už existuje, napište mi, co máte na mysli.",
+    expectLabel: "Co můžete čekat",
+    expectations: [
+      { title: "Odpověď od toho, kdo to bude stavět", text: "Ozve se vám člověk, který bude práci dělat, ne anonymní schránka." },
+      { title: "Jasný rozsah a pevná cena", text: "Před začátkem práce víte, co se staví a kolik to stojí." },
+      { title: "Upřímná rada", text: "I kdyby zněla „tohle zatím nepotřebujete“." },
+    ],
+    preferEmail: "Raději e-mailem?",
+    emailSubject: "Poptávka projektu",
+  },
+  form: {
+    aboutYou: "O vás",
+    theProject: "Projekt",
+    optional: "Nepovinné",
+    name: "Jméno",
+    namePlaceholder: "Vaše jméno",
+    email: "E-mail",
+    emailPlaceholder: "jmeno@firma.cz",
+    company: "Firma nebo podnikání",
+    companyPlaceholder: "Pro koho to je?",
+    project: "Co chcete postavit?",
+    projectPlaceholder:
+      "Nový web pro moji firmu, e-shop, rezervační systém, nástroj pro tým… Pár vět vlastními slovy bohatě stačí.",
+    budget: "Přibližný rozpočet",
+    budgetPlaceholder: "Hrubé rozmezí, nebo „zatím nevím“",
+    budgetHint: "Orientačně, k ničemu vás to nezavazuje.",
+    timeframe: "Požadovaný termín",
+    timeframePlaceholder: "Vyberte termín",
+    timeframes: {
+      asap: "Co nejdřív",
+      "1-3-months": "V příštích 1–3 měsících",
+      "later-this-year": "Později v tomto roce",
+      "not-sure": "Zatím nevím",
+    },
+    extra: "Ještě něco?",
+    extraPlaceholder: "Odkazy na váš současný web, ukázky, které se vám líbí, termíny, otázky…",
+    submit: "Odeslat poptávku",
+    submitting: "Odesílám…",
+    reassurance: "Žádný obchodní hovor, žádný tlak. Jen přímá odpověď.",
+    success: {
+      title: "Díky — vaše poptávka je na cestě.",
+      lead: "Odpovím vám osobně. Zatím tu máte, co bude následovat.",
+      steps: [
+        "Přečtu si, co jste poslali, a odpovím s upřímným návrhem dalších kroků.",
+        "Pokud si budeme sedět, domluvíme rozsah a pevnou cenu, než se cokoli začne stavět.",
+        "Pokud ne, řeknu to na rovinu a nasměruji vás někam, kde vám pomůžou líp.",
+      ],
+      again: "Odeslat další poptávku",
+    },
+    errorGeneric: "Něco se pokazilo a poptávka se neodeslala.",
+    errorKept: "Vaše údaje zůstaly vyplněné.",
+    errorRetry: "Zkuste to prosím za chvíli znovu.",
+    errorEmail: "Pokud se to opakuje, napište mi přímo na {email}.",
+    checkOne: "Zkontrolujte prosím zvýrazněné pole.",
+    checkMany: "Zkontrolujte prosím zvýrazněná pole ({count}).",
+    validation: {
+      name: "Napište mi prosím své jméno.",
+      nameLong: "Jméno prosím zkraťte pod {n} znaků.",
+      email: "Přidejte prosím e-mail, abych vám mohl odpovědět.",
+      emailInvalid: "Tahle e-mailová adresa nevypadá správně. Zkontrolujte ji prosím.",
+      tooLong: "Zkraťte to prosím pod {n} znaků.",
+      project: "Napište mi něco málo o tom, co chcete postavit.",
+      timeframe: "Vyberte prosím jednu z možností.",
+    },
+  },
+  notFound: {
+    metaTitle: "Stránka nenalezena",
+    eyebrow: "404",
+    title: "Tahle stránka neexistuje.",
+    lead: "Odkaz může být zastaralý nebo se stránka přesunula. Vraťte se na úvodní stránku, nebo mi napište, co jste hledali.",
+    home: "Zpět na úvodní stránku",
+    cta: "Začít projekt",
+  },
+  caseStudy: {
+    back: "Vybrané práce",
+    label: "Případová studie",
+    challenge: "Zadání",
+    solution: "Řešení",
+    result: "Co se změnilo",
+    nextEyebrow: "Další",
+    nextTitle: "Máte v hlavě něco podobného?",
+    nextLead: "Řekněte mi, co je potřeba postavit. Já vymyslím nejjednodušší způsob, jak to udělat.",
+    cta: "Začít projekt",
+    allWork: "Další práce",
+  },
+};

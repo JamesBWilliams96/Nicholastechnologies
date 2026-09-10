@@ -19,7 +19,15 @@ export function LogoMark({ className, animate = false }: { className?: string; a
   );
 }
 
-export function Logo({ className, href = "/" }: { className?: string; href?: string }) {
+export function Logo({
+  className,
+  href = "/",
+  homeLabel = "home",
+}: {
+  className?: string;
+  href?: string;
+  homeLabel?: string;
+}) {
   return (
     <Link
       href={href}
@@ -27,7 +35,7 @@ export function Logo({ className, href = "/" }: { className?: string; href?: str
         "group inline-flex items-center gap-2.5 rounded-md text-[0.9375rem] font-semibold tracking-[-0.02em] text-fg",
         className,
       )}
-      aria-label={`${site.name} — home`}
+      aria-label={`${site.name} — ${homeLabel}`}
     >
       <LogoMark animate />
       <span>{site.name}</span>

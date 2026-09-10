@@ -25,10 +25,35 @@ Copy `.env.example` to `.env.local` and fill in what you need:
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Optional. Shown in the footer and offered as a fallback if the enquiry form can't send. |
 | `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Enquiry form delivery through [Resend](https://resend.com). Until these are set, the form still completes normally for the visitor and each submission is written to the server logs (visible in the hosting dashboard) instead of being emailed. |
 
+## Languages
+
+The site is available in Slovak, Czech, German, Polish, Hungarian and English, each under its
+own prefix (`/sk`, `/cs`, `/de`, `/pl`, `/hu`, `/en`). A request without a prefix is sent to the
+visitor's language: an explicit choice remembered in a cookie first, then the browser's
+`Accept-Language`, then English (`proxy.ts`). Every page declares `hreflang` alternates and the
+sitemap lists all languages.
+
+Copy lives in `content/i18n/<locale>.ts`, one file per language with the same shape
+(`content/i18n/types.ts`). English (`en.ts`) is the reference: change the copy there first, then
+mirror the change in the other files. Interface mockups keep their English sample text; the few
+diagrams that carry a section's message are translated. To add a language, add it to
+`lib/i18n/config.ts`, create its dictionary and register it in `lib/i18n/dictionaries.ts`.
+
+## Light and dark mode
+
+The theme toggle in the navbar switches between light and dark. The choice is stored in
+`localStorage` and applied before first paint by a small inline script; with no choice saved the
+site follows the system preference. The dark palette lives next to the light one in
+`app/globals.css` (`:root[data-theme="dark"]`).
+
 ## Where things live
 
 ```
-app/                  routes, metadata, sitemap, robots, OG image, API route for enquiries
+app/[locale]/         the pages, layout, localised 404 and share image (one copy per language)
+app/                  sitemap, robots, icons, API route for enquiries
+proxy.ts              language detection and locale-prefix redirects
+content/i18n/         copy for every language
+lib/i18n/             locale config and dictionary loader
 components/ui/        design-system primitives (Button, Section, SectionHeading, Reveal, Chip, Logo, icons)
 components/mockups/   browser / phone / app frames and mock UI building blocks
 components/layout/    Navbar, Footer

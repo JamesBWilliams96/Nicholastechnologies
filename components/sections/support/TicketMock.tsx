@@ -1,3 +1,4 @@
+import type { Dictionary } from "@/content/i18n/types";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon, CheckIcon } from "@/components/ui/icons";
 import { DarkChip } from "./DarkChip";
@@ -11,18 +12,18 @@ import { DarkChip } from "./DarkChip";
 const playWhenInView =
   "motion-safe-only [.js_&]:[animation-play-state:paused] [.js_[data-inview]_&]:[animation-play-state:running]";
 
-export function TicketMock() {
+export function TicketMock({ t }: { t: Dictionary["support"]["ticket"] }) {
   return (
     <div className="p-3.5 sm:p-4">
       <div className="flex items-center justify-between gap-3">
         <span className="font-mono text-[0.625rem] font-medium uppercase tracking-[0.12em] text-ink-300">
-          Support request
+          {t.label}
         </span>
-        <span className="font-mono text-[0.625rem] text-ink-300 tabular-nums">2h ago</span>
+        <span className="font-mono text-[0.625rem] text-ink-300 tabular-nums">{t.ago}</span>
       </div>
 
       <p className="mt-2 text-[0.8125rem] font-semibold leading-snug tracking-[-0.01em] text-paper sm:text-sm">
-        Checkout not working on mobile
+        {t.title}
       </p>
 
       {/* Open → Resolved */}
@@ -34,7 +35,7 @@ export function TicketMock() {
             "[.js_[data-inview]_&]:opacity-50 [.js_[data-inview]_&]:delay-[1100ms]",
           )}
         >
-          Open
+          {t.open}
         </DarkChip>
         <ArrowRightIcon className="size-3 shrink-0 text-ink-300" />
         <span
@@ -43,7 +44,7 @@ export function TicketMock() {
         >
           <DarkChip tone="ok">
             <CheckIcon className="-ml-0.5 size-[1.1em]" />
-            Resolved
+            {t.resolved}
           </DarkChip>
         </span>
       </div>
@@ -59,7 +60,7 @@ export function TicketMock() {
           N
         </span>
         <p className="text-xs leading-relaxed text-ink-100">
-          Fixed and deployed. Let me know if anything else comes up.
+          {t.reply}
         </p>
       </div>
     </div>

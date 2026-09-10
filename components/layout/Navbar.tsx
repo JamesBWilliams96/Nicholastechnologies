@@ -1,20 +1,37 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { site } from "@/content/site";
+import type { Dictionary } from "@/content/i18n/types";
+import { localePath, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
 import { CloseIcon, MenuIcon } from "@/components/ui/icons";
+import { LanguageList, LanguageMenu } from "./LanguageSwitcher";
+import { ThemeToggle } from "./ThemeToggle";
 
-export function Navbar() {
+type NavbarProps = {
+  locale: Locale;
+  nav: Dictionary["nav"];
+  common: Dictionary["common"];
+};
+
+export function Navbar({ locale, nav, common }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [overDark, setOverDark] = useState(false);
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+
+  const links = [
+    { label: nav.work, href: localePath(locale, "#work") },
+    { label: nav.services, href: localePath(locale, "#services") },
+    { label: nav.process, href: localePath(locale, "#process") },
+    { label: nav.about, href: localePath(locale, "#about") },
+  ];
+  const cta = localePath(locale, "#contact");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -32,7 +49,7 @@ export function Navbar() {
     const observe = () => {
       io?.disconnect();
       active.clear();
-      const band = 40; // px below the top edge that decides the tone
+      const band = 40;
       io = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
@@ -59,6 +76,11 @@ export function Navbar() {
     if (!open) return;
     const { overflow } = document.body.style;
     document.body.style.overflow = "hidden";
+    /* Everything behind the menu is inert, so Tab stays inside it. */
+    const main = document.getElementById("main");
+    const footer = document.querySelector("footer");
+    main?.setAttribute("inert", "");
+    footer?.setAttribute("inert", "");
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         close();
@@ -72,6 +94,8 @@ export function Navbar() {
     firstLinkRef.current?.focus({ preventScroll: true });
     return () => {
       document.body.style.overflow = overflow;
+      main?.removeAttribute("inert");
+      footer?.removeAttribute("inert");
       window.removeEventListener("keydown", onKey);
       mq.removeEventListener("change", onResize);
     };
@@ -83,7 +107,7 @@ export function Navbar() {
         href="#main"
         className="sr-only left-4 top-4 z-[60] rounded-full bg-fg px-4 py-2 text-sm font-medium text-bg focus:not-sr-only focus:absolute"
       >
-        Skip to content
+        {common.skipToContent}
       </a>
 
       <div
@@ -95,24 +119,26 @@ export function Navbar() {
         )}
       >
         <nav className="container-site flex h-16 items-center justify-between" aria-label="Primary">
-          <Logo />
+          <Logo href={localePath(locale)} homeLabel={common.home} />
 
           <ul className="hidden items-center gap-1 md:flex">
-            {site.nav.map((item) => (
+            {links.map((item) => (
               <li key={item.href}>
-                <Link
+                <a
                   href={item.href}
                   className="rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-muted transition-colors duration-200 hover:bg-fg/5 hover:text-fg"
                 >
                   {item.label}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
 
-          <div className="flex items-center gap-2">
-            <Button href={site.cta.href} size="sm" arrow className="hidden md:inline-flex">
-              {site.cta.label}
+          <div className="flex items-center gap-1 sm:gap-2">
+            <LanguageMenu locale={locale} label={common.language} className="hidden md:block" />
+            <ThemeToggle labels={common.theme} />
+            <Button href={cta} size="sm" arrow className="ml-1 hidden md:inline-flex">
+              {common.startProject}
             </Button>
             <button
               ref={toggleRef}
@@ -120,7 +146,7 @@ export function Navbar() {
               className="inline-flex size-10 items-center justify-center rounded-full text-fg transition-colors hover:bg-fg/5 md:hidden"
               aria-expanded={open}
               aria-controls={menuId}
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? common.closeMenu : common.openMenu}
               onClick={() => setOpen((v) => !v)}
             >
               {open ? <CloseIcon className="size-5" /> : <MenuIcon className="size-5" />}
@@ -132,34 +158,49 @@ export function Navbar() {
       {/* Mobile menu */}
       <div
         id={menuId}
+        role="dialog"
+        aria-modal={open ? true : undefined}
+        aria-label={common.openMenu}
         className={cn(
-          "fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col bg-bg transition-[opacity,transform] duration-300 ease-out-quart md:hidden",
+          "fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-y-auto bg-bg transition-[opacity,translate] duration-300 ease-out-quart md:hidden",
           open ? "opacity-100" : "pointer-events-none -translate-y-2 opacity-0",
         )}
-        aria-hidden={!open}
+        /* inert keeps every link inside out of the tab order and the accessibility tree while closed */
+        inert={!open}
       >
         <div className="container-site flex flex-1 flex-col pt-4 pb-8">
-          <ul className="flex flex-col">
-            {site.nav.map((item, i) => (
-              <li key={item.href} className="border-b border-line">
-                <Link
-                  ref={i === 0 ? firstLinkRef : undefined}
-                  href={item.href}
-                  onClick={close}
-                  tabIndex={open ? 0 : -1}
-                  className="flex items-center justify-between py-5 text-2xl font-semibold tracking-[-0.02em] text-fg"
-                >
-                  {item.label}
-                  <span className="font-mono text-xs text-subtle">0{i + 1}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <nav aria-label="Primary">
+            <ul className="flex flex-col">
+              {links.map((item, i) => (
+                <li key={item.href} className="border-b border-line">
+                  <a
+                    ref={i === 0 ? firstLinkRef : undefined}
+                    href={item.href}
+                    onClick={close}
+                    className="flex items-center justify-between py-5 text-2xl font-semibold tracking-[-0.02em] text-fg"
+                  >
+                    {item.label}
+                    <span aria-hidden className="font-mono text-xs text-muted">
+                      0{i + 1}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="mt-8">
+            <p className="font-mono text-2xs font-medium uppercase tracking-[0.14em] text-muted">
+              {common.language}
+            </p>
+            <LanguageList locale={locale} label={common.language} className="mt-3" />
+          </div>
+
           <div className="mt-auto pt-8">
-            <Button href={site.cta.href} size="lg" arrow className="w-full" onClick={close} tabIndex={open ? 0 : -1}>
-              {site.cta.label}
+            <Button href={cta} size="lg" arrow className="w-full" onClick={close}>
+              {common.startProject}
             </Button>
-            <p className="mt-4 text-center font-mono text-xs text-subtle">{site.tagline}</p>
+            <p className="mt-4 text-center font-mono text-xs text-muted">{site.tagline}</p>
           </div>
         </div>
       </div>

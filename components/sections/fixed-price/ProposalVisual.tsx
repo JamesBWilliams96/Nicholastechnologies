@@ -1,3 +1,4 @@
+import type { Dictionary } from "@/content/i18n/types";
 import { Panel } from "@/components/mockups/frames";
 import { ParallaxLayer, ParallaxStage } from "@/components/ui/ParallaxStage";
 import { Reveal } from "@/components/ui/Reveal";
@@ -13,7 +14,12 @@ import { ScopeCallMock } from "./ScopeCallMock";
    meaning, so the whole thing is hidden from assistive tech.
    ------------------------------------------------------------------ */
 
-export function ProposalVisual() {
+type ProposalVisualProps = {
+  proposal: Dictionary["fixedPrice"]["proposal"];
+  scopeCall: Dictionary["fixedPrice"]["scopeCall"];
+};
+
+export function ProposalVisual({ proposal, scopeCall }: ProposalVisualProps) {
   return (
     <ParallaxStage className="relative mx-auto w-full max-w-[600px] lg:max-w-none">
       {/* Backdrop: a soft field of dots so the paper reads as floating.
@@ -27,7 +33,7 @@ export function ProposalVisual() {
         <Reveal variant="scale" delay={120} className="relative z-10 w-full sm:ml-auto sm:w-[88%]">
           <ParallaxLayer depth={6}>
             <InViewGroup>
-              <ProposalMock />
+              <ProposalMock t={proposal} />
             </InViewGroup>
           </ParallaxLayer>
         </Reveal>
@@ -39,7 +45,7 @@ export function ProposalVisual() {
           <ParallaxLayer depth={16}>
             <div className="animate-float motion-safe-only">
               <Panel>
-                <ScopeCallMock />
+                <ScopeCallMock t={scopeCall} />
               </Panel>
             </div>
           </ParallaxLayer>

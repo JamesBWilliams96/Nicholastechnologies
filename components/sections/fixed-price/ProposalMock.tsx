@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import type { Dictionary } from "@/content/i18n/types";
 import { cn } from "@/lib/utils";
 import { Panel } from "@/components/mockups/frames";
 import { CheckIcon } from "@/components/ui/icons";
@@ -13,12 +14,7 @@ import { LogoMark } from "@/components/ui/Logo";
    column is narrow.
    ------------------------------------------------------------------ */
 
-const lineItems = [
-  { label: "Scope", value: "6-page website" },
-  { label: "Deliverables", value: "Design, build, launch, handover" },
-  { label: "Timeline", value: "Agreed up front" },
-  { label: "Support", value: "Optional after launch" },
-];
+type ProposalCopy = Dictionary["fixedPrice"]["proposal"];
 
 /* Stroke length of the signature path (measured), for the draw-on animation. */
 const SIGNATURE_LENGTH = 172;
@@ -53,7 +49,7 @@ function Signature() {
 }
 
 /* Presses in after the signature has been drawn. */
-function ApprovedStamp() {
+function ApprovedStamp({ label }: { label: string }) {
   return (
     <span
       className={cn(
@@ -67,16 +63,16 @@ function ApprovedStamp() {
       )}
     >
       <CheckIcon className="size-[max(0.75rem,2.8cqw)]" strokeWidth={2.5} />
-      Approved
+      {label}
     </span>
   );
 }
 
-export function ProposalMock() {
+export function ProposalMock({ t }: { t: ProposalCopy }) {
   return (
     <div className="@container">
       <Panel variant="solid" className="relative shadow-float">
-        <ApprovedStamp />
+        <ApprovedStamp label={t.approved} />
 
         <div className="p-[6cqw]">
           {/* Header */}
@@ -84,20 +80,20 @@ export function ProposalMock() {
             <LogoMark className="size-[max(1.5rem,6.2cqw)] shrink-0" />
             <div className="min-w-0">
               <p className="text-[max(0.9375rem,3.7cqw)] font-semibold leading-none tracking-[-0.02em]">
-                Project proposal
+                {t.title}
               </p>
               <p className="mt-[1.4cqw] truncate font-mono text-[max(0.625rem,1.95cqw)] text-ink-500">
-                Website redesign
+                {t.subtitle}
                 {/* the stamp keeps its rem floor in a narrow document, so
                     the suffix only appears once the document is wide enough */}
-                <span className="hidden @sm:inline"> · Fixed scope</span>
+                <span className="hidden @sm:inline"> · {t.subtitleSuffix}</span>
               </p>
             </div>
           </div>
 
           {/* Line items */}
           <ul className="mt-[5.5cqw] border-t border-ink-950/8">
-            {lineItems.map((item) => (
+            {t.items.map((item) => (
               <li
                 key={item.label}
                 className="flex items-center gap-[2.6cqw] border-b border-ink-950/6 py-[3cqw]"
@@ -118,10 +114,10 @@ export function ProposalMock() {
 
           {/* Total — the whole point: no number, an agreement */}
           <div className="mt-[3.5cqw] flex items-center justify-between gap-[3cqw] rounded-[2cqw] bg-ink-50 px-[3.5cqw] py-[3cqw]">
-            <span className="text-[max(0.8125rem,2.7cqw)] font-semibold">Total</span>
+            <span className="text-[max(0.8125rem,2.7cqw)] font-semibold">{t.total}</span>
             <span className="text-right text-[max(0.75rem,2.45cqw)] leading-snug">
-              <span className="font-semibold text-ink-950">Fixed price</span>
-              <span className="text-ink-500"> · agreed before work starts</span>
+              <span className="font-semibold text-ink-950">{t.totalValue}</span>
+              <span className="text-ink-500"> · {t.totalNote}</span>
             </span>
           </div>
 
@@ -131,7 +127,7 @@ export function ProposalMock() {
             <div className="w-[34%]">
               <Signature />
               <p className="mt-[0.8cqw] border-t border-ink-950/15 pt-[1.2cqw] font-mono text-[max(0.5625rem,1.7cqw)] uppercase tracking-[0.14em] text-ink-500">
-                Accepted by
+                {t.acceptedBy}
               </p>
             </div>
           </div>

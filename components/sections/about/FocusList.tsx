@@ -31,7 +31,7 @@ export function FocusList({ items, label, baseDelay = 200, className }: FocusLis
       <Reveal delay={baseDelay - 60}>
         <p
           id={labelId}
-          className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-muted"
+          className="font-mono text-2xs font-medium uppercase tracking-[0.14em] text-muted"
         >
           {label}
         </p>

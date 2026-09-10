@@ -1,3 +1,4 @@
+import type { Dictionary } from "@/content/i18n/types";
 import { cn } from "@/lib/utils";
 import { Panel } from "@/components/mockups/frames";
 import { ParallaxLayer, ParallaxStage } from "@/components/ui/ParallaxStage";
@@ -14,7 +15,7 @@ import { TicketMock } from "./TicketMock";
    bottom padding, never a row of text. Decorative: all aria-hidden.
    ------------------------------------------------------------------ */
 
-export function SupportVisual() {
+export function SupportVisual({ ticket }: { ticket: Dictionary["support"]["ticket"] }) {
   return (
     <ParallaxStage className="relative mx-auto w-full max-w-[600px] lg:max-w-none">
       {/* One observer drives the whole story: the window, its bars and activity, then the request. */}
@@ -29,14 +30,14 @@ export function SupportVisual() {
           <div
             className={cn(
               "absolute -left-[2%] bottom-0 z-20 w-[72%] xs:w-[62%] sm:w-[48%] lg:-left-[9%] lg:w-[52%] xl:w-[46%]",
-              "transition-[opacity,transform] duration-[900ms] ease-out-quart will-change-[opacity,transform]",
+              "transition-[opacity,translate] duration-[900ms] ease-out-quart will-change-[opacity,translate]",
               "[.js_&]:translate-y-4 [.js_&]:opacity-0 [.js_[data-inview]_&]:translate-y-0 [.js_[data-inview]_&]:opacity-100 [.js_[data-inview]_&]:delay-[520ms]",
             )}
           >
             <ParallaxLayer depth={16}>
               <div className="animate-float motion-safe-only">
                 <Panel className="text-paper">
-                  <TicketMock />
+                  <TicketMock t={ticket} />
                 </Panel>
               </div>
             </ParallaxLayer>

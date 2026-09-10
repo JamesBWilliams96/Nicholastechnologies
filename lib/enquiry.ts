@@ -54,6 +54,29 @@ export type EnquiryValidation =
   | { ok: true; data: Enquiry; spam: boolean }
   | { ok: false; errors: EnquiryErrors };
 
+/** Validation copy. "{n}" is replaced with the relevant character limit. */
+export type EnquiryMessages = {
+  name: string;
+  nameLong: string;
+  email: string;
+  emailInvalid: string;
+  tooLong: string;
+  project: string;
+  timeframe: string;
+};
+
+export const ENQUIRY_MESSAGES_EN: EnquiryMessages = {
+  name: "Please tell me your name.",
+  nameLong: "Please keep your name under {n} characters.",
+  email: "Please add an email address so I can reply.",
+  emailInvalid: "That email address doesn’t look right. Please check it.",
+  tooLong: "Please keep this under {n} characters.",
+  project: "Tell me a little about what you’re looking to build.",
+  timeframe: "Please choose one of the options.",
+};
+
+const withLimit = (template: string, n: number) => template.replace("{n}", n.toLocaleString("en-GB"));
+
 export const EMPTY_ENQUIRY: EnquiryInput = {
   name: "",
   email: "",
@@ -116,38 +139,36 @@ export function toEnquiryInput(value: unknown): EnquiryInput {
  * Validates an enquiry. Returns either the cleaned data (plus a `spam` flag
  * when the honeypot was filled) or a map of field → message.
  */
-export function validateEnquiry(value: unknown): EnquiryValidation {
+export function validateEnquiry(
+  value: unknown,
+  messages: EnquiryMessages = ENQUIRY_MESSAGES_EN,
+): EnquiryValidation {
   const input = toEnquiryInput(value);
   const errors: EnquiryErrors = {};
 
   const name = clean(input.name).replace(/\s*\n\s*/g, " ");
-  if (!name) errors.name = "Please tell me your name.";
-  else if (name.length > LIMITS.name) errors.name = `Please keep your name under ${LIMITS.name} characters.`;
+  if (!name) errors.name = messages.name;
+  else if (name.length > LIMITS.name) errors.name = withLimit(messages.nameLong, LIMITS.name);
 
   const email = clean(input.email).replace(/\s+/g, "");
-  if (!email) errors.email = "Please add an email address so I can reply.";
-  else if (email.length > LIMITS.email || !EMAIL_RE.test(email))
-    errors.email = "That email address doesn't look right. Please check it.";
+  if (!email) errors.email = messages.email;
+  else if (email.length > LIMITS.email || !EMAIL_RE.test(email)) errors.email = messages.emailInvalid;
 
   const company = clean(input.company).replace(/\s*\n\s*/g, " ");
-  if (company.length > LIMITS.company)
-    errors.company = `Please keep this under ${LIMITS.company} characters.`;
+  if (company.length > LIMITS.company) errors.company = withLimit(messages.tooLong, LIMITS.company);
 
   const project = clean(input.project);
-  if (!project) errors.project = "Tell me a little about what you're looking to build.";
-  else if (project.length > LIMITS.project)
-    errors.project = `Please keep this under ${LIMITS.project.toLocaleString("en-GB")} characters.`;
+  if (!project) errors.project = messages.project;
+  else if (project.length > LIMITS.project) errors.project = withLimit(messages.tooLong, LIMITS.project);
 
   const budget = clean(input.budget).replace(/\s*\n\s*/g, " ");
-  if (budget.length > LIMITS.budget) errors.budget = `Please keep this under ${LIMITS.budget} characters.`;
+  if (budget.length > LIMITS.budget) errors.budget = withLimit(messages.tooLong, LIMITS.budget);
 
   const timeframe = clean(input.timeframe);
-  if (timeframe && !TIMEFRAME_VALUES.has(timeframe))
-    errors.timeframe = "Please choose one of the options.";
+  if (timeframe && !TIMEFRAME_VALUES.has(timeframe)) errors.timeframe = messages.timeframe;
 
   const extra = clean(input.extra);
-  if (extra.length > LIMITS.extra)
-    errors.extra = `Please keep this under ${LIMITS.extra.toLocaleString("en-GB")} characters.`;
+  if (extra.length > LIMITS.extra) errors.extra = withLimit(messages.tooLong, LIMITS.extra);
 
   if (Object.keys(errors).length > 0) return { ok: false, errors };
 

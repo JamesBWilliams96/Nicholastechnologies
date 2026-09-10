@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Project } from "@/content/projects";
+import type { Dictionary } from "@/content/i18n/types";
+import { localePath, type Locale } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
 import { Chip } from "@/components/ui/Chip";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@/components/ui/icons";
@@ -8,9 +10,9 @@ import { StackTags } from "./StackTags";
 import type { PreviewVariant } from "./PlaceholderPreview";
 
 /** Where a card should link, if anywhere. Placeholders never link. */
-function projectLink(project: Project): { href: string; external: boolean } | null {
+function projectLink(project: Project, locale: Locale): { href: string; external: boolean } | null {
   if (project.placeholder) return null;
-  if (project.caseStudy) return { href: `/work/${project.slug}`, external: false };
+  if (project.caseStudy) return { href: localePath(locale, `/work/${project.slug}`), external: false };
   if (project.href) return { href: project.href, external: true };
   return null;
 }
@@ -30,15 +32,19 @@ type ProjectCardProps = {
   index: number;
   /** Full-width layout: preview beside the text on large screens. */
   featured?: boolean;
+  locale: Locale;
+  t: Dictionary["work"];
+  common: Dictionary["common"];
 };
 
-export function ProjectCard({ project, index, featured = false }: ProjectCardProps) {
-  const link = projectLink(project);
+export function ProjectCard({ project, index, featured = false, locale, t, common }: ProjectCardProps) {
+  const link = projectLink(project, locale);
+  const summary = t.projects[project.slug]?.summary ?? project.summary;
   const kind: PreviewVariant | "image" = project.image ? "image" : (project.preview ?? "website");
   const dark = kind === "app";
 
   const statusChip = link ? (
-    <Chip tone="accent">{link.external ? "Live site" : "Case study"}</Chip>
+    <Chip tone="accent">{link.external ? t.liveSite : t.caseStudy}</Chip>
   ) : null;
 
   return (
@@ -92,7 +98,7 @@ export function ProjectCard({ project, index, featured = false }: ProjectCardPro
       <div className={cn("flex flex-1 flex-col p-6 sm:p-8", featured && "lg:p-10")}>
         <div className="flex items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
-            <Chip>{project.category}</Chip>
+            <Chip>{t.categories[project.category]}</Chip>
             {statusChip}
           </div>
           <span aria-hidden className="font-mono text-xs text-muted tabular-nums">
@@ -111,7 +117,7 @@ export function ProjectCard({ project, index, featured = false }: ProjectCardPro
                   className="after:absolute after:inset-0 after:z-10 after:content-[''] focus-visible:outline-none"
                 >
                   {project.name}
-                  <span className="sr-only"> (opens in a new tab)</span>
+                  <span className="sr-only"> {common.opensNewTab}</span>
                 </a>
               ) : (
                 <Link
@@ -125,7 +131,7 @@ export function ProjectCard({ project, index, featured = false }: ProjectCardPro
               project.name
             )}
           </h3>
-          <p className="mt-3 max-w-[42ch] text-muted">{project.summary}</p>
+          <p className="mt-3 max-w-[42ch] text-muted">{summary}</p>
         </div>
 
         <div

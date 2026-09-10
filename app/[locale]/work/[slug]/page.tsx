@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
-import { site } from "@/content/site";
 import { notFound } from "next/navigation";
+import { site } from "@/content/site";
 import { realProjects } from "@/content/projects";
 import { CaseStudy, type CaseStudyProject } from "@/components/sections/work/CaseStudy";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { isLocale, localeMeta, locales } from "@/lib/i18n/config";
+import { languageAlternates } from "../../page";
 
 /* ------------------------------------------------------------------
-   Case study page: /work/[slug]
-   Only real projects with a `caseStudy` get a page. Placeholders and
-   unknown slugs 404.
+   Case study page: /[locale]/work/[slug]
+   Only real projects with a `caseStudy` get a page. Samples and unknown
+   slugs 404.
    ------------------------------------------------------------------ */
 
-type Params = { slug: string };
+type Params = { locale: string; slug: string };
 
 const caseStudies = realProjects.filter((p): p is CaseStudyProject => Boolean(p.caseStudy));
 
@@ -19,22 +22,23 @@ function getCaseStudy(slug: string) {
 }
 
 export function generateStaticParams(): Params[] {
-  return caseStudies.map((p) => ({ slug: p.slug }));
+  return locales.flatMap((locale) => caseStudies.map((p) => ({ locale, slug: p.slug })));
 }
 
-export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: PageProps<"/[locale]/work/[slug]">): Promise<Metadata> {
+  const { locale, slug } = await params;
   const project = getCaseStudy(slug);
-  if (!project) notFound();
+  if (!project || !isLocale(locale)) notFound();
+  const path = `/work/${project.slug}`;
   return {
     title: project.name,
     description: project.summary,
-    alternates: { canonical: `/work/${project.slug}` },
+    alternates: { canonical: `/${locale}${path}`, languages: languageAlternates(path) },
     openGraph: {
       type: "article",
       siteName: site.name,
-      locale: "en_GB",
-      url: `/work/${project.slug}`,
+      locale: localeMeta[locale].og,
+      url: `/${locale}${path}`,
       title: project.name,
       description: project.summary,
       ...(project.image
@@ -53,9 +57,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function CaseStudyPage({ params }: { params: Promise<Params> }) {
-  const { slug } = await params;
+export default async function CaseStudyPage({ params }: PageProps<"/[locale]/work/[slug]">) {
+  const { locale, slug } = await params;
   const project = getCaseStudy(slug);
-  if (!project) notFound();
-  return <CaseStudy project={project} />;
+  if (!project || !isLocale(locale)) notFound();
+  const t = await getDictionary(locale);
+  return <CaseStudy project={project} locale={locale} t={t.caseStudy} work={t.work} />;
 }

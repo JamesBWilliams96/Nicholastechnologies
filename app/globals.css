@@ -7,6 +7,8 @@
 
 @custom-variant hocus (&:hover, &:focus-visible);
 @custom-variant motion-ok (@media (prefers-reduced-motion: no-preference));
+/* Anything on a dark ground: inside a dark section, or anywhere in dark mode. */
+@custom-variant dark (&:where(.tone-dark, .tone-dark *, [data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
   /* Typography */
@@ -137,6 +139,7 @@
   --color-brand: var(--brand);
   --color-brand-soft: var(--brand-soft);
   --color-on-brand: var(--on-brand);
+  --color-band: var(--band);
 }
 
 :root,
@@ -153,7 +156,33 @@
   --brand: var(--color-accent-500);
   --brand-soft: var(--color-accent-50);
   --on-brand: #ffffff;
+  /* alternate band behind "paper" sections */
+  --band: var(--color-paper-2);
   color-scheme: light;
+}
+
+/* Dark mode: the whole page takes the dark tokens; dark sections shift a
+   step lighter so the band rhythm survives. */
+:root[data-theme="dark"] {
+  --bg: var(--color-ink-950);
+  --fg: var(--color-paper);
+  --fg-muted: var(--color-ink-300);
+  --fg-subtle: var(--color-ink-400);
+  --surface: rgb(255 255 255 / 0.04);
+  --surface-2: rgb(255 255 255 / 0.07);
+  --surface-3: rgb(255 255 255 / 0.11);
+  --line: rgb(255 255 255 / 0.1);
+  --line-strong: rgb(255 255 255 / 0.18);
+  --brand: var(--color-accent-400);
+  --brand-soft: rgb(91 130 255 / 0.14);
+  --on-brand: #ffffff;
+  --band: #0e1015;
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] .tone-dark {
+  --bg: #111318;
+  --band: #111318;
 }
 
 .tone-dark {
@@ -169,6 +198,7 @@
   --brand: var(--color-accent-400);
   --brand-soft: rgb(91 130 255 / 0.14);
   --on-brand: #ffffff;
+  --band: var(--color-ink-900);
   color-scheme: dark;
 }
 
@@ -199,7 +229,8 @@
     color: var(--color-ink-950);
   }
 
-  .tone-dark ::selection {
+  .tone-dark ::selection,
+  [data-theme="dark"] ::selection {
     background: var(--color-accent-700);
     color: #fff;
   }

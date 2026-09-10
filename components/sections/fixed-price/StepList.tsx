@@ -33,7 +33,7 @@ export function StepList({ steps, className }: { steps: readonly Step[]; classNa
               className={cn(
                 "relative z-10 flex size-8 items-center justify-center rounded-full font-mono text-2xs font-medium tabular-nums ring-1",
                 step.highlight
-                  ? "bg-accent-500 text-white ring-accent-500 shadow-[0_0_0_4px_var(--color-accent-100)]"
+                  ? "bg-accent-500 text-white ring-accent-500 shadow-[0_0_0_4px_var(--brand-soft)]"
                   : "bg-surface text-muted ring-line",
               )}
             >

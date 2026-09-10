@@ -1,19 +1,27 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
 import { projects } from "@/content/projects";
+import { localeMeta, locales } from "@/lib/i18n/config";
+
+function alternates(path: string) {
+  const languages: Record<string, string> = {};
+  for (const l of locales) languages[localeMeta[l].tag] = `${site.url}/${l}${path}`;
+  languages["x-default"] = `${site.url}/en${path}`;
+  return { languages };
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const entries: MetadataRoute.Sitemap = [
-    { url: `${site.url}/`, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
-  ];
-  for (const project of projects) {
-    if (project.placeholder || !project.caseStudy) continue;
-    entries.push({
-      url: `${site.url}/work/${project.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.7,
-    });
+  const entries: MetadataRoute.Sitemap = [];
+  const paths = ["", ...projects.filter((p) => !p.placeholder && p.caseStudy).map((p) => `/work/${p.slug}`)];
+  for (const path of paths) {
+    for (const locale of locales) {
+      entries.push({
+        url: `${site.url}/${locale}${path}`,
+        changeFrequency: path ? "yearly" : "monthly",
+        priority: path ? 0.7 : 1,
+        alternates: alternates(path),
+      });
+    }
   }
   return entries;
 }

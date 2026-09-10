@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/content/site";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { defaultLocale, isLocale } from "@/lib/i18n/config";
 
 export const alt = `${site.name} — websites, Shopify stores and custom web apps`;
 export const size = { width: 1200, height: 630 };
@@ -11,7 +13,10 @@ async function loadFont(file: string) {
   return readFile(join(process.cwd(), "node_modules/geist/dist/fonts/geist-sans", file));
 }
 
-export default async function OpenGraphImage() {
+export default async function OpenGraphImage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: requested } = await params;
+  const locale = isLocale(requested) ? requested : defaultLocale;
+  const t = await getDictionary(locale);
   const [semibold, regular] = await Promise.all([
     loadFont("Geist-SemiBold.ttf"),
     loadFont("Geist-Regular.ttf"),
@@ -34,15 +39,15 @@ export default async function OpenGraphImage() {
         }}
       >
         {/* Soft cobalt glow: layered circles, because Satori can't rasterise radial gradients cleanly. */}
-        {Array.from({ length: 16 }, (_, i) => 720 - i * 40).map((size) => (
+        {Array.from({ length: 16 }, (_, i) => 720 - i * 40).map((s) => (
           <div
-            key={size}
+            key={s}
             style={{
               position: "absolute",
-              right: 120 - size / 2,
-              top: 40 - size / 2,
-              width: size,
-              height: size,
+              right: 120 - s / 2,
+              top: 40 - s / 2,
+              width: s,
+              height: s,
               borderRadius: 9999,
               background: "rgba(47, 91, 255, 0.04)",
               display: "flex",
@@ -61,11 +66,10 @@ export default async function OpenGraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
           <div style={{ fontSize: 60, fontWeight: 600, lineHeight: 1.04, letterSpacing: -2.2, maxWidth: 1000 }}>
-            Websites, stores and software, built around your business.
+            {`${t.hero.titleA} ${t.hero.titleB}`}
           </div>
           <div style={{ fontSize: 26, color: "#a3a9b6", maxWidth: 960, lineHeight: 1.4, fontWeight: 400 }}>
-            A one-person software studio for local businesses and early-stage startups.
-            Fixed-price projects, direct communication and support after launch.
+            {t.meta.ogSubtitle}
           </div>
         </div>
       </div>

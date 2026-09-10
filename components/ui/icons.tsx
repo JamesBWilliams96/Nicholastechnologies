@@ -248,4 +248,35 @@ export const SparkIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const SunIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 3v2" />
+    <path d="M12 19v2" />
+    <path d="M3 12h2" />
+    <path d="M19 12h2" />
+    <path d="m5.6 5.6 1.5 1.5" />
+    <path d="m16.9 16.9 1.5 1.5" />
+    <path d="m18.4 5.6-1.5 1.5" />
+    <path d="m7.1 16.9-1.5 1.5" />
+  </Icon>
+);
+
+export const MoonIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" />
+  </Icon>
+);
+
+export const LanguageIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M4 5h9" />
+    <path d="M8.5 3v2" />
+    <path d="M11 5c-.6 4.2-2.9 7.6-6.5 9.5" />
+    <path d="M5.5 8c1 2.9 3.2 5.2 6 6.5" />
+    <path d="m13 21 4.5-10 4.5 10" />
+    <path d="M14.8 17h5.4" />
+  </Icon>
+);
+
 export const ExternalIcon = ArrowUpRightIcon;

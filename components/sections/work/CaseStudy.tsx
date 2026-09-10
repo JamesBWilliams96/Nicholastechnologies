@@ -1,5 +1,6 @@
-import Link from "next/link";
 import type { Project } from "@/content/projects";
+import type { Dictionary } from "@/content/i18n/types";
+import { localePath, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -17,11 +18,19 @@ export type CaseStudyProject = Project & { caseStudy: NonNullable<Project["caseS
  * blocks on a paper band, and a dark closing CTA. Pure presentation —
  * the route decides which project to render (and 404s otherwise).
  */
-export function CaseStudy({ project }: { project: CaseStudyProject }) {
+type CaseStudyProps = {
+  project: CaseStudyProject;
+  locale: Locale;
+  t: Dictionary["caseStudy"];
+  work: Dictionary["work"];
+};
+
+export function CaseStudy({ project, locale, t, work }: CaseStudyProps) {
+  const summary = work.projects[project.slug]?.summary ?? project.summary;
   const story = [
-    { n: "01", title: "The challenge", body: project.caseStudy.challenge },
-    { n: "02", title: "The solution", body: project.caseStudy.solution },
-    { n: "03", title: "The result", body: project.caseStudy.result },
+    { n: "01", title: t.challenge, body: project.caseStudy.challenge },
+    { n: "02", title: t.solution, body: project.caseStudy.solution },
+    { n: "03", title: t.result, body: project.caseStudy.result },
   ];
 
   return (
@@ -33,21 +42,21 @@ export function CaseStudy({ project }: { project: CaseStudyProject }) {
         </div>
         <Container>
           <Reveal>
-            <Link
-              href="/#work"
+            <a
+              href={localePath(locale, "#work")}
               className="group inline-flex items-center gap-2 rounded-md font-mono text-xs font-medium uppercase tracking-[0.14em] text-muted transition-colors duration-200 hover:text-fg"
             >
               <ArrowRightIcon className="size-3.5 rotate-180 transition-transform duration-200 ease-out-quart group-hover:-translate-x-0.5" />
-              All work
-            </Link>
+              {t.back}
+            </a>
           </Reveal>
 
           <SectionHeading
             as="h1"
             className="mt-8 sm:mt-10"
-            eyebrow={project.category}
+            eyebrow={work.categories[project.category]}
             title={project.name}
-            description={project.summary}
+            description={summary}
           >
             <StackTags stack={project.stack} />
           </SectionHeading>
@@ -70,7 +79,7 @@ export function CaseStudy({ project }: { project: CaseStudyProject }) {
       </Section>
 
       {/* Story */}
-      <Section tone="paper" aria-label="Case study">
+      <Section tone="paper" aria-label={t.label}>
         <Container>
           <div className="divide-y divide-line">
             {story.map((block, i) => (
@@ -99,16 +108,16 @@ export function CaseStudy({ project }: { project: CaseStudyProject }) {
           <SectionHeading
             align="center"
             size="md"
-            eyebrow="Next"
-            title="Have something similar in mind?"
-            description="Tell me what needs building. I'll work out the simplest way to build it."
+            eyebrow={t.nextEyebrow}
+            title={t.nextTitle}
+            description={t.nextLead}
           >
             <div className="flex flex-wrap justify-center gap-3">
-              <Button href="/#contact" size="lg" arrow>
-                Start a project
+              <Button href={localePath(locale, "#contact")} size="lg" arrow>
+                {t.cta}
               </Button>
-              <Button href="/#work" variant="secondary" size="lg">
-                All work
+              <Button href={localePath(locale, "#work")} variant="secondary" size="lg">
+                {t.allWork}
               </Button>
             </div>
           </SectionHeading>

@@ -15,7 +15,7 @@ export function Chip({ tone = "neutral", mono = true, className, ...rest }: Chip
         "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 leading-none ring-1 ring-inset",
         mono ? "font-mono text-2xs font-medium uppercase tracking-[0.08em]" : "text-xs font-medium",
         tone === "neutral" && "bg-surface-2 text-muted ring-line",
-        tone === "accent" && "bg-brand-soft text-accent-700 ring-accent-200 [.tone-dark_&]:text-accent-300 [.tone-dark_&]:ring-accent-400/30",
+        tone === "accent" && "bg-brand-soft text-accent-700 ring-accent-200 dark:text-accent-300 dark:ring-accent-400/30",
         tone === "ok" && "bg-ok-soft text-[#15803d] ring-[#86efac]/60",
         tone === "warn" && "bg-warn-soft text-[#b45309] ring-[#fcd34d]/60",
         className,

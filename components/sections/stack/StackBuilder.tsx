@@ -9,6 +9,8 @@ import {
   type KeyboardEvent,
   type PointerEvent,
 } from "react";
+import type { Dictionary } from "@/content/i18n/types";
+import { localePath, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/Button";
 import { AppWindowIcon, ArrowRightIcon, BagIcon, CodeIcon, GlobeIcon } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
@@ -44,45 +46,19 @@ const tools: readonly { id: ToolId; name: string; x: number; y: number }[] = [
 
 const toolName = (id: ToolId) => tools.find((t) => t.id === id)?.name ?? id;
 
+/* Which tools each project type calls for. Labels and reasons come from the dictionary, in this order. */
 const projects: readonly {
   id: ProjectId;
-  label: string;
   icon: typeof GlobeIcon;
   tools: readonly ToolId[];
-  /** Short mono line after the badges, for anything beyond the four tools. */
-  extra?: string;
-  why: string;
 }[] = [
-  {
-    id: "marketing",
-    label: "A marketing site you can edit yourself",
-    icon: GlobeIcon,
-    tools: ["webflow"],
-    why: "Webflow gives you a fast, well-designed site with a visual editor, so you can change words and images yourself without waiting on me.",
-  },
-  {
-    id: "custom",
-    label: "A custom website with advanced interactions",
-    icon: CodeIcon,
-    tools: ["react", "next"],
-    why: "Custom code removes the limits of a template: bespoke layouts, advanced interactions and performance tuned to exactly what the site needs to do.",
-  },
-  {
-    id: "store",
-    label: "An online store",
-    icon: BagIcon,
-    tools: ["shopify"],
-    why: "Shopify already handles payments, stock and checkout reliably, so the effort goes into your store's design and the parts unique to your business.",
-  },
-  {
-    id: "app",
-    label: "A web app, portal or internal tool",
-    icon: AppWindowIcon,
-    tools: ["react", "next"],
-    extra: "+ TypeScript and a database",
-    why: "Software needs logic, accounts and data, and Next.js with TypeScript and a database gives it a solid foundation that can grow with the business.",
-  },
+  { id: "marketing", icon: GlobeIcon, tools: ["webflow"] },
+  { id: "custom", icon: CodeIcon, tools: ["react", "next"] },
+  { id: "store", icon: BagIcon, tools: ["shopify"] },
+  { id: "app", icon: AppWindowIcon, tools: ["react", "next"] },
 ];
+
+type BuilderCopy = Dictionary["stack"]["builder"];
 
 const DEFAULT_PROJECT: ProjectId = "custom";
 
@@ -92,7 +68,7 @@ const HOVER_INTENT_MS = 120;
 
 /* ---------------------------------- diagram ---------------------------------- */
 
-function Diagram({ selected }: { selected: ProjectId }) {
+function Diagram({ selected, yourProject }: { selected: ProjectId; yourProject: string }) {
   const project = projects.find((p) => p.id === selected) ?? projects[1];
   const active = new Set<ToolId>(project.tools);
 
@@ -189,10 +165,8 @@ function Diagram({ selected }: { selected: ProjectId }) {
       {/* centre: your project */}
       <div className="absolute left-1/2 top-1/2 size-[max(6.25rem,27cqw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-fg/[0.045]" />
       <div className="absolute left-1/2 top-1/2 flex size-[max(4.75rem,20cqw)] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-fg text-center text-bg shadow-float">
-        <span className="text-[max(0.6875rem,2.9cqw)] font-semibold leading-[1.15] tracking-[-0.01em]">
-          Your
-          <br />
-          project
+        <span className="max-w-[80%] text-[max(0.6875rem,2.9cqw)] font-semibold leading-[1.15] tracking-[-0.01em]">
+          {yourProject}
         </span>
       </div>
 
@@ -221,7 +195,15 @@ function Diagram({ selected }: { selected: ProjectId }) {
 
 /* ---------------------------------- builder ---------------------------------- */
 
-export function StackBuilder({ className }: { className?: string }) {
+export function StackBuilder({
+  locale,
+  t,
+  className,
+}: {
+  locale: Locale;
+  t: BuilderCopy;
+  className?: string;
+}) {
   const [selected, setSelected] = useState<ProjectId>(DEFAULT_PROJECT);
   const promptId = useId();
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
@@ -265,9 +247,9 @@ export function StackBuilder({ className }: { className?: string }) {
     >
       {/* selector */}
       <div className="p-5 sm:p-8 lg:pb-0 xl:p-10 xl:pb-0">
-        <p className="font-mono text-2xs font-medium uppercase tracking-[0.14em] text-muted">Build your stack</p>
+        <p className="font-mono text-2xs font-medium uppercase tracking-[0.14em] text-muted">{t.label}</p>
         <h3 id={promptId} className="mt-2 text-lg font-semibold tracking-[-0.015em]">
-          What are you building?
+          {t.question}
         </h3>
 
         <div role="group" aria-labelledby={promptId} className="mt-5 flex flex-col gap-1.5" onKeyDown={onKeyDown}>
@@ -294,17 +276,17 @@ export function StackBuilder({ className }: { className?: string }) {
                   className={cn(
                     "inline-flex size-9 shrink-0 items-center justify-center rounded-lg ring-1 ring-inset transition-[background-color,color,box-shadow] duration-300 ease-out-quart",
                     on
-                      ? "bg-accent-500 text-white ring-accent-500 shadow-[0_0_0_3px_var(--color-accent-100)]"
+                      ? "bg-accent-500 text-white ring-accent-500 shadow-[0_0_0_3px_var(--brand-soft)]"
                       : "bg-surface text-muted ring-line group-hover:text-fg",
                   )}
                 >
                   <p.icon className="size-[1.1rem]" />
                 </span>
-                <span className="flex-1 text-[0.9375rem] font-medium leading-snug">{p.label}</span>
+                <span className="flex-1 text-[0.9375rem] font-medium leading-snug">{t.options[i].label}</span>
                 <ArrowRightIcon
                   aria-hidden
                   className={cn(
-                    "size-4 shrink-0 text-accent-600 transition-[opacity,transform] duration-300 ease-out-quart",
+                    "size-4 shrink-0 text-accent-600 transition-[opacity,translate] duration-300 ease-out-quart dark:text-accent-300",
                     on ? "translate-x-0 opacity-100" : "-translate-x-1 opacity-0",
                   )}
                 />
@@ -316,11 +298,13 @@ export function StackBuilder({ className }: { className?: string }) {
 
       {/* diagram + why */}
       <div className="flex flex-col border-t border-line lg:row-span-2 lg:border-l lg:border-t-0">
-        <Diagram selected={selected} />
+        <Diagram selected={selected} yourProject={t.yourProject} />
 
         <div aria-live="polite" className="grid border-t border-line px-5 py-5 sm:px-8 sm:py-7 xl:px-10">
-          {projects.map((p) => {
+          {projects.map((p, i) => {
             const on = p.id === selected;
+            const copy = t.options[i];
+            const extra = "extra" in copy ? copy.extra : undefined;
             return (
               <div
                 key={p.id}
@@ -331,16 +315,16 @@ export function StackBuilder({ className }: { className?: string }) {
               >
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
                   <span className="mr-1 font-mono text-2xs font-medium uppercase tracking-[0.14em] text-muted">
-                    Recommended
+                    {t.recommended}
                   </span>
                   {p.tools.map((id) => (
                     <Wordmark key={id} active className="text-xs">
                       {toolName(id)}
                     </Wordmark>
                   ))}
-                  {p.extra ? <span className="font-mono text-xs text-muted">{p.extra}</span> : null}
+                  {extra ? <span className="font-mono text-xs text-muted">{extra}</span> : null}
                 </div>
-                <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-muted">{p.why}</p>
+                <p className="mt-3 max-w-[50ch] text-sm leading-relaxed text-muted">{copy.why}</p>
               </div>
             );
           })}
@@ -350,11 +334,9 @@ export function StackBuilder({ className }: { className?: string }) {
       {/* footer: last on phones (after the answer), under the selector on desktop */}
       <div className="border-t border-line px-5 py-5 sm:px-8 sm:py-7 lg:border-t-0 lg:pb-8 lg:pt-8 xl:px-10 xl:pb-10">
         <div className="lg:border-t lg:border-line lg:pt-6">
-          <p className="max-w-[40ch] text-sm leading-relaxed text-muted">
-            Not every project fits neatly in one box. Choosing the right stack is part of the job.
-          </p>
-          <Button href="/#contact" variant="ghost" arrow className="mt-3 text-sm">
-            Tell me about your project
+          <p className="max-w-[40ch] text-sm leading-relaxed text-muted">{t.footnote}</p>
+          <Button href={localePath(locale, "#contact")} variant="ghost" arrow className="mt-3 text-sm">
+            {t.link}
           </Button>
         </div>
       </div>

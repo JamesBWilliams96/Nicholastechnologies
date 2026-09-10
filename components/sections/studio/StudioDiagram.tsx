@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useRef, type CSSProperties, type ReactNode } from "react";
+import type { Dictionary } from "@/content/i18n/types";
 import { LogoMark } from "@/components/ui/Logo";
 import { site } from "@/content/site";
 import { useInView, usePrefersReducedMotion } from "@/lib/use-in-view";
@@ -13,23 +14,9 @@ import { cn } from "@/lib/utils";
    two side-by-side vertical columns below that.
    ------------------------------------------------------------------ */
 
-const agencyChain = [
-  "You",
-  "Account manager",
-  "Project manager",
-  "Designer",
-  "Developer",
-  "Your website",
-] as const;
-
 /* Milestones sit at 12.5 / 37.5 / 62.5 / 87.5% of the line. Delays match
    the moment the drawn line (1.6s, in-out easing) reaches each one. */
-const milestones = [
-  { label: "Design", delay: 480 },
-  { label: "Build", delay: 700 },
-  { label: "Launch", delay: 900 },
-  { label: "Support", delay: 1120 },
-] as const;
+const milestoneDelays = [480, 700, 900, 1120] as const;
 
 function RowLabel({
   id,
@@ -77,7 +64,9 @@ function AgencyStep({ children }: { children: ReactNode }) {
   );
 }
 
-export function StudioDiagram() {
+export function StudioDiagram({ t }: { t: Dictionary["studio"]["diagram"] }) {
+  const agencyChain = t.chain;
+  const milestones = t.stages.map((label, i) => ({ label, delay: milestoneDelays[i] }));
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { threshold: 0.25 });
   const reduced = usePrefersReducedMotion();
@@ -94,7 +83,7 @@ export function StudioDiagram() {
         {/* A typical agency — faded, secondary */}
         <div className="flex flex-col border-r border-line pr-4 sm:pr-8 lg:border-r-0 lg:pr-0">
           <RowLabel id={agencyId} tone="muted">
-            A typical agency
+            {t.agencyLabel}
           </RowLabel>
           <ol
             aria-labelledby={agencyId}
@@ -131,7 +120,7 @@ export function StudioDiagram() {
             className="mt-5 flex flex-1 flex-col items-center lg:mt-6 lg:flex-row lg:items-center"
           >
             <span className="inline-flex items-center whitespace-nowrap rounded-full bg-fg px-3.5 py-1.5 text-xs font-semibold text-bg sm:text-[0.8125rem] lg:px-4 lg:py-2 lg:text-sm">
-              You
+              {t.you}
             </span>
 
             {/* The line */}
@@ -155,7 +144,7 @@ export function StudioDiagram() {
 
               {/* milestones along the line */}
               <ul
-                aria-label="Project stages"
+                aria-label={t.stagesLabel}
                 className="absolute inset-y-0 left-1/2 flex flex-col justify-around lg:inset-x-0 lg:bottom-auto lg:left-0 lg:top-1/2 lg:flex-row lg:justify-around"
               >
                 {milestones.map((m) => (
@@ -188,14 +177,14 @@ export function StudioDiagram() {
 
             <span className="flex max-w-[10rem] flex-col items-center gap-2 rounded-2xl bg-surface-2 px-3 py-3 text-center text-xs font-medium text-fg ring-1 ring-inset ring-accent-400/40 sm:text-[0.8125rem] lg:max-w-none lg:flex-row lg:gap-2.5 lg:whitespace-nowrap lg:rounded-full lg:py-1.5 lg:pl-1.5 lg:pr-4 lg:text-left lg:text-sm">
               <LogoMark className="size-6 shrink-0" />
-              The person designing and building it
+              {t.person}
             </span>
           </div>
         </div>
       </div>
 
       <figcaption className="mt-8 border-t border-line pt-5 text-sm text-muted">
-        Five handovers, or <span className="text-fg">one conversation</span>.
+        {t.captionA} <span className="text-fg">{t.captionB}</span>.
       </figcaption>
     </figure>
   );

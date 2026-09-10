@@ -19,7 +19,7 @@ export function Section({ tone = "light", flush = false, className, ...rest }: S
       className={cn(
         "relative scroll-mt-16",
         tone === "dark" && "tone-dark bg-bg text-fg",
-        tone === "paper" && "bg-paper-2",
+        tone === "paper" && "bg-band",
         !flush && "py-20 sm:py-24 lg:py-32",
         className,
       )}

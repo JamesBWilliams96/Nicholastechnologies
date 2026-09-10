@@ -14,8 +14,8 @@ import { ChevronDownIcon } from "@/components/ui/icons";
 export const errorText = "text-danger-300";
 
 const control = cn(
-  "block w-full rounded-xl bg-surface-2 px-4 text-[0.9375rem] text-fg ring-1 ring-inset ring-line",
-  "placeholder:text-subtle",
+  "block w-full rounded-xl bg-surface-2 px-4 text-[0.9375rem] text-fg ring-1 ring-inset ring-line-strong",
+  "placeholder:text-muted",
   "transition-[box-shadow,background-color] duration-200 ease-out-quart",
   "hover:ring-line-strong",
   "focus:outline-none focus:bg-surface-3 focus:ring-2 focus:ring-accent-400 focus:shadow-[0_0_0_4px_rgb(91_130_255/0.16)]",
@@ -27,6 +27,8 @@ type ShellProps = {
   id: string;
   label: ReactNode;
   optional?: boolean;
+  /** Text of the "Optional" tag. */
+  optionalLabel?: string;
   hint?: ReactNode;
   error?: string;
   className?: string;
@@ -34,7 +36,16 @@ type ShellProps = {
 };
 
 /** Label + control + hint + error. Children receive the ids through `describedBy()`. */
-export function FieldShell({ id, label, optional, hint, error, className, children }: ShellProps) {
+export function FieldShell({
+  id,
+  label,
+  optional,
+  optionalLabel = "Optional",
+  hint,
+  error,
+  className,
+  children,
+}: ShellProps) {
   return (
     <div className={cn("min-w-0", className)}>
       <label
@@ -43,8 +54,8 @@ export function FieldShell({ id, label, optional, hint, error, className, childr
       >
         <span>{label}</span>
         {optional ? (
-          <span className="font-mono text-2xs font-normal uppercase tracking-[0.1em] text-muted">
-            Optional
+          <span className="font-mono text-2xs font-normal uppercase tracking-[0.14em] text-muted">
+            {optionalLabel}
           </span>
         ) : null}
       </label>
@@ -75,9 +86,9 @@ type BaseFieldProps = Omit<ShellProps, "children"> & { error?: string };
 type TextFieldProps = BaseFieldProps &
   Omit<ComponentPropsWithoutRef<"input">, "id" | "className" | "aria-describedby" | "aria-invalid">;
 
-export function TextField({ id, label, optional, hint, error, className, ...input }: TextFieldProps) {
+export function TextField({ id, label, optional, optionalLabel, hint, error, className, ...input }: TextFieldProps) {
   return (
-    <FieldShell id={id} label={label} optional={optional} hint={hint} error={error} className={className}>
+    <FieldShell id={id} label={label} optional={optional} optionalLabel={optionalLabel} hint={hint} error={error} className={className}>
       <input
         id={id}
         className={cn(control, "h-12")}
@@ -100,6 +111,7 @@ export function TextAreaField({
   id,
   label,
   optional,
+  optionalLabel,
   hint,
   error,
   className,
@@ -107,7 +119,7 @@ export function TextAreaField({
   ...textarea
 }: TextAreaFieldProps) {
   return (
-    <FieldShell id={id} label={label} optional={optional} hint={hint} error={error} className={className}>
+    <FieldShell id={id} label={label} optional={optional} optionalLabel={optionalLabel} hint={hint} error={error} className={className}>
       <textarea
         id={id}
         className={cn(control, "resize-y py-3 leading-relaxed", minHeightClassName)}
@@ -130,6 +142,7 @@ export function SelectField({
   id,
   label,
   optional,
+  optionalLabel,
   hint,
   error,
   className,
@@ -140,11 +153,11 @@ export function SelectField({
 }: SelectFieldProps) {
   const empty = value === "" || value === undefined;
   return (
-    <FieldShell id={id} label={label} optional={optional} hint={hint} error={error} className={className}>
+    <FieldShell id={id} label={label} optional={optional} optionalLabel={optionalLabel} hint={hint} error={error} className={className}>
       <div className="relative">
         <select
           id={id}
-          className={cn(control, "h-12 cursor-pointer appearance-none pr-11", empty && "text-subtle")}
+          className={cn(control, "h-12 cursor-pointer appearance-none pr-11", empty && "text-muted")}
           aria-describedby={describedBy(id, hint, error)}
           aria-invalid={error ? true : undefined}
           required={!optional}

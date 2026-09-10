@@ -1,0 +1,352 @@
+import type { Dictionary } from "./types";
+
+/** English — the reference copy. Other languages mirror this shape exactly. */
+export const en: Dictionary = {
+  meta: {
+    title: "Nicholas Technologies — Websites, Shopify stores & custom web apps",
+    description:
+      "A one-person studio building websites, Shopify stores and custom web apps for small businesses and startups. Fixed-price projects, support after launch.",
+    ogDescription:
+      "Nicholas Technologies is a one-person software studio building high-quality websites, Shopify stores and small custom web apps for local businesses and early-stage startups. Fixed-price projects, direct communication and support after launch.",
+    ogAlt: "Nicholas Technologies — websites, Shopify stores and custom web apps",
+    ogSubtitle:
+      "A one-person software studio for local businesses and early-stage startups. Fixed-price projects, direct communication and support after launch.",
+  },
+  common: {
+    skipToContent: "Skip to content",
+    startProject: "Start a project",
+    home: "home",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    language: "Language",
+    theme: { label: "Theme", light: "Switch to light mode", dark: "Switch to dark mode" },
+    opensNewTab: "(opens in a new tab)",
+  },
+  nav: { work: "Work", services: "Services", process: "Process", about: "About", contact: "Contact" },
+  footer: {
+    tagline: "Websites, web apps and technical support.",
+    rights: "© {year} {site}. All rights reserved.",
+    builtBy: "Designed and built by {site}.",
+  },
+  hero: {
+    eyebrow: "Independent software studio",
+    titleA: "Websites, stores and software,",
+    titleB: "built around your business.",
+    lead: "I design and build websites, Shopify stores and small custom web apps for local businesses and early-stage startups. You deal with me directly, from the first conversation to long after launch. No account managers, no handovers.",
+    primary: "Start a project",
+    secondary: "See what I build",
+    proof: ["Fixed-price projects", "One point of contact", "Support after launch"],
+  },
+  positioning: {
+    titleA: "Small enough to care.",
+    titleB: "Technical enough to build it properly.",
+    points: [
+      { title: "Direct", text: "You talk to the person building it. No account managers." },
+      { title: "Fixed-price", text: "Scope, deliverables and cost agreed before work starts." },
+      { title: "Built properly", text: "React, Next.js, Shopify or Webflow, chosen to fit the job." },
+      { title: "Still here", text: "Hosting, maintenance and support after launch." },
+    ],
+  },
+  services: {
+    eyebrow: "Services",
+    titleA: "What I build,",
+    titleB: "and how I keep it running.",
+    description:
+      "Websites, online stores, small custom apps and the support to look after them once they’re live. Projects are scoped and priced before they start.",
+    items: [
+      {
+        title: "Websites",
+        description: "Custom websites and landing pages designed around your business.",
+        tags: ["React + Next.js", "Webflow", "Landing pages", "Redesigns"],
+      },
+      {
+        title: "Shopify",
+        description: "Professional ecommerce stores and custom Shopify improvements.",
+        tags: ["Store setup", "Theme customisation", "Integrations", "Improvements"],
+      },
+      {
+        title: "Custom software",
+        description: "Small web applications shaped around the way your business actually works.",
+        tags: ["Booking systems", "Client portals", "Dashboards", "Internal tools"],
+      },
+      {
+        title: "Ongoing support",
+        description:
+          "Hosting, maintenance and technical support after launch, from the person who built it.",
+        tags: ["Hosting", "Updates", "Maintenance", "Technical support"],
+      },
+    ],
+    closingText:
+      "Not sure which one you need? Tell me what you’re trying to do and I’ll suggest the simplest route.",
+    closingLink: "Tell me what you need",
+  },
+  work: {
+    eyebrow: "Selected work",
+    title: "Things I’ve built.",
+    descriptionSamples:
+      "A few of the kinds of projects I take on: a website that brings in bookings, a store that sells on mobile, a tool that replaces a spreadsheet.",
+    descriptionReal: "A few recent projects. Every one of them designed, built and launched by me.",
+    liveSite: "Live site",
+    caseStudy: "Case study",
+    categories: {
+      Website: "Website",
+      "Landing page": "Landing page",
+      "Shopify store": "Shopify store",
+      "Web application": "Web application",
+      "Client portal": "Client portal",
+      "Internal tool": "Internal tool",
+      "Booking system": "Booking system",
+    },
+    projects: {
+      "marlow-lane-coffee": {
+        summary:
+          "A new website for an independent coffee shop: the menu, opening hours and table bookings on one fast page, easy to update from a phone.",
+      },
+      "hollis-and-oak": {
+        summary:
+          "A Shopify store for a small homeware brand: a custom theme, collection filtering and a checkout tuned for buying on mobile.",
+      },
+      fieldbook: {
+        summary:
+          "An internal tool for a trades business: jobs, site surveys, invoices and a weekly overview in one place, replacing a shared spreadsheet.",
+      },
+    },
+  },
+  studio: {
+    eyebrow: "The one-person advantage",
+    titleMuted: "No account managers. No handovers.",
+    titleBright: "Just the person building it.",
+    body: "I keep {site} deliberately small. Every conversation, decision and line of code goes through me, so questions get straight answers and the project keeps moving.",
+    cta: "See how a project runs",
+    diagram: {
+      agencyLabel: "A typical agency",
+      chain: ["You", "Account manager", "Project manager", "Designer", "Developer", "Your website"],
+      you: "You",
+      person: "The person designing and building it",
+      stagesLabel: "Project stages",
+      stages: ["Design", "Build", "Launch", "Support"],
+      captionA: "Five handovers, or",
+      captionB: "one conversation",
+    },
+    highlights: [
+      { title: "Direct", text: "You talk to the person doing the work, not someone relaying it." },
+      { title: "Joined-up", text: "Designed and built by the same person, so nothing is lost in a handover." },
+      { title: "Straightforward", text: "Scope and price agreed up front, in plain English. No surprises." },
+      { title: "Long-term", text: "After launch I’m still here for hosting, updates and support." },
+    ],
+  },
+  fixedPrice: {
+    eyebrow: "Fixed-price projects",
+    titleA: "Know what you’re getting.",
+    titleB: "Know what it costs.",
+    description:
+      "Most projects are scoped and quoted at a fixed price. You see the deliverables and the cost before any work starts.",
+    steps: [
+      { title: "Scope", text: "What are we actually building?" },
+      { title: "Quote", text: "A clear fixed project price." },
+      { title: "Build", text: "Design, development and testing." },
+      { title: "Launch", text: "Deploy and hand over." },
+    ],
+    proposal: {
+      title: "Project proposal",
+      subtitle: "Website redesign",
+      subtitleSuffix: "Fixed scope",
+      items: [
+        { label: "Scope", value: "6-page website" },
+        { label: "Deliverables", value: "Design, build, launch, handover" },
+        { label: "Timeline", value: "Agreed up front" },
+        { label: "Support", value: "Optional after launch" },
+      ],
+      total: "Total",
+      totalValue: "Fixed price",
+      totalNote: "agreed before work starts",
+      acceptedBy: "Accepted by",
+      approved: "Approved",
+    },
+    scopeCall: {
+      title: "Scope call",
+      notes: "Notes",
+      items: ["Goals and audience", "Pages and content", "Bookings and enquiries", "Launch timing"],
+      next: "Next · Fixed quote",
+    },
+  },
+  process: {
+    eyebrow: "Process",
+    title: "How it works.",
+    description: "Five steps. No mystery. You see where things are at every stage.",
+    ariaLabel: "The five steps of a project",
+    steps: [
+      { title: "Talk", text: "Tell me what you’re trying to build, improve or fix." },
+      { title: "Scope", text: "We work out what you actually need and agree on the scope and price." },
+      { title: "Build", text: "I design and develop the website or application." },
+      { title: "Launch", text: "Everything gets tested, deployed and handed over." },
+      { title: "Support", text: "Optional hosting, maintenance and technical support after launch." },
+    ],
+    closingText: "Step one is a conversation. Tell me what you’re working on and we’ll take it from there.",
+    closingCta: "Start a project",
+  },
+  stack: {
+    eyebrow: "Technology",
+    titleA: "The right tool",
+    titleB: "for the job.",
+    description:
+      "I don’t force every project into one technology. Technology should serve the business, not the other way around.",
+    tools: [
+      { text: "Great for straightforward marketing sites that clients want to edit themselves." },
+      {
+        text: "Great for custom websites, advanced interactions and web applications.",
+        note: "For web apps the stack also includes TypeScript and a database.",
+      },
+      { text: "Great for businesses that need a reliable ecommerce platform." },
+    ],
+    builder: {
+      label: "Build your stack",
+      question: "What are you building?",
+      options: [
+        {
+          label: "A marketing site you can edit yourself",
+          why: "Webflow gives you a fast, well-designed site with a visual editor, so you can change words and images yourself without waiting on me.",
+        },
+        {
+          label: "A custom website with advanced interactions",
+          why: "Custom code removes the limits of a template: bespoke layouts, advanced interactions and performance tuned to exactly what the site needs to do.",
+        },
+        {
+          label: "An online store",
+          why: "Shopify already handles payments, stock and checkout reliably, so the effort goes into your store’s design and the parts unique to your business.",
+        },
+        {
+          label: "A web app, portal or internal tool",
+          why: "Software needs logic, accounts and data, and Next.js with TypeScript and a database gives it a solid foundation that can grow with the business.",
+          extra: "+ TypeScript and a database",
+        },
+      ],
+      recommended: "Recommended",
+      yourProject: "Your project",
+      footnote: "Not every project fits neatly in one box. Choosing the right stack is part of the job.",
+      link: "Tell me about your project",
+    },
+  },
+  about: {
+    eyebrow: "About",
+    titleA: "A one-person studio,",
+    titleB: "on purpose.",
+    lead: "I kept {site} to one person on purpose. You get the same designer, developer and point of contact for the whole project, and the same person looking after it afterwards.",
+    focusLabel: "What I focus on",
+    focus: [
+      { title: "Good design", text: "Considered, clean and easy to use, on every screen." },
+      { title: "Good technology", text: "The right tools for the job, built properly so they keep working." },
+      { title: "Clear communication", text: "Straight answers, no jargon, no surprises." },
+      { title: "Practical solutions", text: "The simplest thing that properly solves the problem." },
+      { title: "Long-term relationships", text: "I’d rather look after your site for years than build it and disappear." },
+    ],
+    photo: "Photo",
+  },
+  support: {
+    eyebrow: "Still need help after launch?",
+    title: "Launch isn’t the finish line.",
+    description:
+      "Once your website is live, you don’t have to work out what happens next. I can keep it hosted, maintained and supported.",
+    included: ["Hosting", "Updates", "Maintenance", "Bug fixes", "Technical support", "Small improvements"],
+    codaA: "The person who built it",
+    codaB: "is still here.",
+    cta: "Get in touch",
+    ticket: {
+      label: "Support request",
+      ago: "2h ago",
+      title: "Checkout not working on mobile",
+      open: "Open",
+      resolved: "Resolved",
+      reply: "Fixed and deployed. Let me know if anything else comes up.",
+    },
+  },
+  contact: {
+    eyebrow: "Start a project",
+    titleA: "Got something in mind?",
+    titleB: "Let’s build it.",
+    lead: "Whether you need a new website, an online store, a custom tool or help with something that already exists, tell me what you have in mind.",
+    expectLabel: "What to expect",
+    expectations: [
+      { title: "A reply from the person who’ll build it", text: "You hear back from the person who will do the work, not an inbox." },
+      { title: "A clear scope and a fixed price", text: "You’ll know what’s being built and what it costs before work starts." },
+      { title: "Honest advice", text: "Even if the answer is “you don’t need this yet”." },
+    ],
+    preferEmail: "Prefer email?",
+    emailSubject: "Project enquiry",
+  },
+  form: {
+    aboutYou: "About you",
+    theProject: "The project",
+    optional: "Optional",
+    name: "Name",
+    namePlaceholder: "Your name",
+    email: "Email",
+    emailPlaceholder: "you@example.com",
+    company: "Business or company",
+    companyPlaceholder: "Who is this for?",
+    project: "What are you looking to build?",
+    projectPlaceholder:
+      "A new website for my business, a store, a booking system, a tool for the team… A few sentences in your own words is plenty.",
+    budget: "Approximate budget",
+    budgetPlaceholder: "A rough range, or ‘not sure yet’",
+    budgetHint: "A guide, not a commitment.",
+    timeframe: "Desired timeframe",
+    timeframePlaceholder: "Choose a timeframe",
+    timeframes: {
+      asap: "As soon as possible",
+      "1-3-months": "In the next 1–3 months",
+      "later-this-year": "Later this year",
+      "not-sure": "Not sure yet",
+    },
+    extra: "Anything else?",
+    extraPlaceholder: "Links to your current site, examples you like, deadlines, questions…",
+    submit: "Send enquiry",
+    submitting: "Sending…",
+    reassurance: "No sales call, no pressure. Just a straight answer.",
+    success: {
+      title: "Thanks — your enquiry is on its way.",
+      lead: "I’ll reply personally. In the meantime, here’s what happens next.",
+      steps: [
+        "I read what you’ve sent and reply with honest next steps.",
+        "If it’s a good fit, we agree the scope and a fixed price before anything is built.",
+        "If it isn’t, I’ll say so and point you somewhere more useful.",
+      ],
+      again: "Send another enquiry",
+    },
+    errorGeneric: "Something went wrong and your enquiry wasn’t sent.",
+    errorKept: "Your details are still filled in.",
+    errorRetry: "Please try again in a moment.",
+    errorEmail: "If it keeps happening, email me directly at {email}.",
+    checkOne: "Please check the highlighted field.",
+    checkMany: "Please check the {count} highlighted fields.",
+    validation: {
+      name: "Please tell me your name.",
+      nameLong: "Please keep your name under {n} characters.",
+      email: "Please add an email address so I can reply.",
+      emailInvalid: "That email address doesn’t look right. Please check it.",
+      tooLong: "Please keep this under {n} characters.",
+      project: "Tell me a little about what you’re looking to build.",
+      timeframe: "Please choose one of the options.",
+    },
+  },
+  notFound: {
+    metaTitle: "Page not found",
+    eyebrow: "404",
+    title: "That page doesn’t exist.",
+    lead: "The link may be out of date, or the page may have moved. Head back to the homepage, or tell me what you were looking for.",
+    home: "Back to the homepage",
+    cta: "Start a project",
+  },
+  caseStudy: {
+    back: "Selected work",
+    label: "Case study",
+    challenge: "The challenge",
+    solution: "The solution",
+    result: "What changed",
+    nextEyebrow: "Next",
+    nextTitle: "Have something similar in mind?",
+    nextLead: "Tell me what needs building. I’ll work out the simplest way to build it.",
+    cta: "Start a project",
+    allWork: "See more work",
+  },
+};

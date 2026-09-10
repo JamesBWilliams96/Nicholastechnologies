@@ -1,0 +1,352 @@
+import type { Dictionary } from "./types";
+
+/** Hungarian. */
+export const hu: Dictionary = {
+  meta: {
+    title: "Nicholas Technologies — Weboldal, Shopify áruház, webalkalmazás",
+    description:
+      "Egyszemélyes stúdió: weboldalakat, Shopify áruházakat és webalkalmazásokat építek kisvállalkozásoknak és startupoknak. Fix ár, támogatás indulás után.",
+    ogDescription:
+      "A Nicholas Technologies egyszemélyes szoftverstúdió: igényes weboldalakat, Shopify webáruházakat és kisebb egyedi webalkalmazásokat építek helyi vállalkozásoknak és induló startupoknak. Fix áras projektek, közvetlen kapcsolat és támogatás az indulás után.",
+    ogAlt: "Nicholas Technologies — weboldalak, Shopify webáruházak és egyedi webalkalmazások",
+    ogSubtitle:
+      "Egyszemélyes szoftverstúdió helyi vállalkozásoknak és induló startupoknak. Fix áras projektek, közvetlen kapcsolat és támogatás az indulás után.",
+  },
+  common: {
+    skipToContent: "Ugrás a tartalomra",
+    startProject: "Projekt indítása",
+    home: "kezdőlap",
+    openMenu: "Menü megnyitása",
+    closeMenu: "Menü bezárása",
+    language: "Nyelv",
+    theme: { label: "Téma", light: "Váltás világos módra", dark: "Váltás sötét módra" },
+    opensNewTab: "(új lapon nyílik meg)",
+  },
+  nav: { work: "Munkák", services: "Szolgáltatások", process: "Folyamat", about: "Rólam", contact: "Kapcsolat" },
+  footer: {
+    tagline: "Weboldalak, webalkalmazások és technikai támogatás.",
+    rights: "© {year} {site}. Minden jog fenntartva.",
+    builtBy: "Tervezte és építette: {site}.",
+  },
+  hero: {
+    eyebrow: "Független szoftverstúdió",
+    titleA: "Weboldalak, webáruházak és szoftverek,",
+    titleB: "az Ön vállalkozására szabva.",
+    lead: "Weboldalakat, Shopify webáruházakat és kisebb egyedi webalkalmazásokat tervezek és építek helyi vállalkozásoknak és induló startupoknak. Végig velem tárgyal, az első beszélgetéstől jóval az indulás utánig. Nincs ügyfélmenedzser, nincs átadogatás.",
+    primary: "Projekt indítása",
+    secondary: "Nézze meg, mit építek",
+    proof: ["Fix áras projektek", "Egyetlen kapcsolattartó", "Támogatás az indulás után"],
+  },
+  positioning: {
+    titleA: "Elég kicsi ahhoz, hogy odafigyeljek.",
+    titleB: "Elég hozzáértő ahhoz, hogy rendesen megépítsem.",
+    points: [
+      { title: "Közvetlen", text: "Azzal beszél, aki építi. Ügyfélmenedzser nélkül." },
+      { title: "Fix áras", text: "Terjedelem, eredmények és ár rögzítve, még a munka kezdete előtt." },
+      { title: "Rendesen megépítve", text: "React, Next.js, Shopify vagy Webflow – mindig a feladathoz illő." },
+      { title: "Itt maradok", text: "Tárhely, karbantartás és támogatás az indulás után." },
+    ],
+  },
+  services: {
+    eyebrow: "Szolgáltatások",
+    titleA: "Amit építek,",
+    titleB: "és ahogy működésben tartom.",
+    description:
+      "Weboldalak, webáruházak, kisebb egyedi alkalmazások, és a támogatás, amely élesben is gondjukat viseli. A projektek terjedelme és ára a kezdés előtt rögzül.",
+    items: [
+      {
+        title: "Weboldalak",
+        description: "Egyedi weboldalak és landing page-ek, az Ön vállalkozására tervezve.",
+        tags: ["React + Next.js", "Webflow", "Landing page-ek", "Újratervezés"],
+      },
+      {
+        title: "Shopify",
+        description: "Professzionális webáruházak és egyedi Shopify-fejlesztések.",
+        tags: ["Áruház beállítása", "Téma testreszabása", "Integrációk", "Fejlesztések"],
+      },
+      {
+        title: "Egyedi szoftver",
+        description: "Kisebb webalkalmazások, úgy megformálva, ahogy a vállalkozása valójában működik.",
+        tags: ["Foglalási rendszerek", "Ügyfélportálok", "Irányítópultok", "Belső eszközök"],
+      },
+      {
+        title: "Folyamatos támogatás",
+        description:
+          "Tárhely, karbantartás és technikai támogatás az indulás után – attól, aki építette.",
+        tags: ["Tárhely", "Frissítések", "Karbantartás", "Technikai támogatás"],
+      },
+    ],
+    closingText:
+      "Nem biztos benne, melyikre van szüksége? Mondja el, mit szeretne elérni, és javaslom a legegyszerűbb utat.",
+    closingLink: "Mondja el, mire van szüksége",
+  },
+  work: {
+    eyebrow: "Válogatott munkák",
+    title: "Amiket építettem.",
+    descriptionSamples:
+      "Néhány példa arra, milyen projekteket vállalok: egy weboldal, amely foglalásokat hoz, egy áruház, amely mobilon is elad, egy eszköz, amely kivált egy táblázatot.",
+    descriptionReal: "Néhány friss projekt. Mindegyiket én terveztem, építettem és indítottam el.",
+    liveSite: "Élő oldal",
+    caseStudy: "Esettanulmány",
+    categories: {
+      Website: "Weboldal",
+      "Landing page": "Landing page",
+      "Shopify store": "Shopify webáruház",
+      "Web application": "Webalkalmazás",
+      "Client portal": "Ügyfélportál",
+      "Internal tool": "Belső eszköz",
+      "Booking system": "Foglalási rendszer",
+    },
+    projects: {
+      "marlow-lane-coffee": {
+        summary:
+          "Új weboldal egy független kávézónak: étlap, nyitvatartás és asztalfoglalás egyetlen gyors oldalon, telefonról is könnyen frissíthetően.",
+      },
+      "hollis-and-oak": {
+        summary:
+          "Shopify webáruház egy kis lakberendezési márkának: egyedi téma, szűrhető kollekciók és mobilos vásárlásra hangolt pénztár.",
+      },
+      fieldbook: {
+        summary:
+          "Belső eszköz egy szakipari vállalkozásnak: munkák, helyszíni felmérések, számlák és heti áttekintés egy helyen – egy megosztott táblázat helyett.",
+      },
+    },
+  },
+  studio: {
+    eyebrow: "Az egyszemélyes stúdió előnye",
+    titleMuted: "Nincs ügyfélmenedzser. Nincs átadogatás.",
+    titleBright: "Csak az, aki építi.",
+    body: "A {site} szándékosan kicsi. Minden beszélgetés, döntés és kódsor rajtam megy keresztül, így a kérdésekre egyenes választ kap, és a projekt nem akad el.",
+    cta: "Nézze meg, hogyan zajlik egy projekt",
+    diagram: {
+      agencyLabel: "Egy tipikus ügynökség",
+      chain: ["Ön", "Ügyfélmenedzser", "Projektmenedzser", "Tervező", "Fejlesztő", "Az Ön weboldala"],
+      you: "Ön",
+      person: "Aki tervezi és építi",
+      stagesLabel: "Projektszakaszok",
+      stages: ["Tervezés", "Építés", "Indulás", "Támogatás"],
+      captionA: "Öt átadás, vagy",
+      captionB: "egy beszélgetés",
+    },
+    highlights: [
+      { title: "Közvetlen", text: "Azzal beszél, aki a munkát végzi, nem azzal, aki továbbadja." },
+      { title: "Egy kézben", text: "Ugyanaz a személy tervezi és építi, így semmi nem vész el az átadásnál." },
+      { title: "Egyértelmű", text: "Terjedelem és ár előre rögzítve, érthetően. Nincs meglepetés." },
+      { title: "Hosszú távon", text: "Az indulás után is itt vagyok: tárhely, frissítések, támogatás." },
+    ],
+  },
+  fixedPrice: {
+    eyebrow: "Fix áras projektek",
+    titleA: "Tudja, mit kap.",
+    titleB: "Tudja, mennyibe kerül.",
+    description:
+      "A legtöbb projektet előre felmérem és fix áron ajánlom. Az eredményeket és az árat még a munka kezdete előtt látja.",
+    steps: [
+      { title: "Felmérés", text: "Mit építünk valójában?" },
+      { title: "Ajánlat", text: "Egyértelmű, fix projektár." },
+      { title: "Építés", text: "Tervezés, fejlesztés és tesztelés." },
+      { title: "Indulás", text: "Élesítés és átadás." },
+    ],
+    proposal: {
+      title: "Projektajánlat",
+      subtitle: "Weboldal újratervezése",
+      subtitleSuffix: "Rögzített terjedelem",
+      items: [
+        { label: "Terjedelem", value: "6 oldalas weboldal" },
+        { label: "Eredmények", value: "Tervezés, építés, indulás, átadás" },
+        { label: "Ütemezés", value: "Előre egyeztetve" },
+        { label: "Támogatás", value: "Opcionális az indulás után" },
+      ],
+      total: "Összesen",
+      totalValue: "Fix ár",
+      totalNote: "a munka kezdete előtt rögzítve",
+      acceptedBy: "Elfogadta",
+      approved: "Jóváhagyva",
+    },
+    scopeCall: {
+      title: "Felmérő hívás",
+      notes: "Jegyzetek",
+      items: ["Célok és célközönség", "Oldalak és tartalom", "Foglalások és megkeresések", "Indulás időzítése"],
+      next: "Következő · Fix ajánlat",
+    },
+  },
+  process: {
+    eyebrow: "Folyamat",
+    title: "Így működik.",
+    description: "Öt lépés. Semmi rejtély. Minden szakaszban látja, hol tart a munka.",
+    ariaLabel: "Egy projekt öt lépése",
+    steps: [
+      { title: "Beszélgetés", text: "Mondja el, mit szeretne építeni, javítani vagy fejleszteni." },
+      { title: "Felmérés", text: "Kitaláljuk, mire van valóban szüksége, és megegyezünk a terjedelemben és az árban." },
+      { title: "Építés", text: "Megtervezem és lefejlesztem a weboldalt vagy az alkalmazást." },
+      { title: "Indulás", text: "Minden tesztelve, élesítve és átadva." },
+      { title: "Támogatás", text: "Opcionális tárhely, karbantartás és technikai támogatás az indulás után." },
+    ],
+    closingText: "Az első lépés egy beszélgetés. Mondja el, min dolgozik, és onnan együtt folytatjuk.",
+    closingCta: "Projekt indítása",
+  },
+  stack: {
+    eyebrow: "Technológia",
+    titleA: "A megfelelő eszköz",
+    titleB: "a feladathoz.",
+    description:
+      "Nem erőltetek minden projektet egyetlen technológiába. A technológia szolgálja a vállalkozást, nem fordítva.",
+    tools: [
+      { text: "Ideális egyszerűbb marketingoldalakhoz, amelyeket az ügyfél maga szeretne szerkeszteni." },
+      {
+        text: "Ideális egyedi weboldalakhoz, összetett interakciókhoz és webalkalmazásokhoz.",
+        note: "Webalkalmazásoknál a stack TypeScriptet és adatbázist is tartalmaz.",
+      },
+      { text: "Ideális olyan vállalkozásoknak, amelyeknek megbízható e-kereskedelmi platformra van szükségük." },
+    ],
+    builder: {
+      label: "Állítsa össze a stacket",
+      question: "Mit épít?",
+      options: [
+        {
+          label: "Marketingoldal, amelyet maga szerkeszthet",
+          why: "A Webflow gyors, igényesen tervezett oldalt ad vizuális szerkesztővel, így a szövegeket és képeket maga cserélheti, nem kell rám várnia.",
+        },
+        {
+          label: "Egyedi weboldal összetett interakciókkal",
+          why: "Az egyedi kód megszünteti a sablonok korlátait: egyedi elrendezés, összetett interakciók és pontosan az oldal feladatára hangolt teljesítmény.",
+        },
+        {
+          label: "Webáruház",
+          why: "A Shopify megbízhatóan kezeli a fizetést, a készletet és a pénztárat, így az energia az áruház dizájnjára és a vállalkozására jellemző részekre megy.",
+        },
+        {
+          label: "Webalkalmazás, portál vagy belső eszköz",
+          why: "A szoftverhez logika, fiókok és adatok kellenek; a Next.js TypeScripttel és adatbázissal olyan stabil alapot ad, amely a vállalkozással együtt nő.",
+          extra: "+ TypeScript és adatbázis",
+        },
+      ],
+      recommended: "Ajánlott",
+      yourProject: "Az Ön projektje",
+      footnote: "Nem minden projekt fér el egyetlen dobozban. A megfelelő stack kiválasztása is a munka része.",
+      link: "Meséljen a projektjéről",
+    },
+  },
+  about: {
+    eyebrow: "Rólam",
+    titleA: "Egyszemélyes stúdió,",
+    titleB: "szándékosan.",
+    lead: "A {site} szándékosan egyszemélyes. A teljes projekt alatt ugyanaz a tervező, fejlesztő és kapcsolattartó áll Ön mellett, és utána is ugyanő gondoskodik az oldalról.",
+    focusLabel: "Amire figyelek",
+    focus: [
+      { title: "Jó dizájn", text: "Átgondolt, letisztult és könnyen használható, minden képernyőn." },
+      { title: "Jó technológia", text: "A feladathoz illő eszközök, rendesen megépítve, hogy tartósan működjenek." },
+      { title: "Világos kommunikáció", text: "Egyenes válaszok, szakzsargon és meglepetések nélkül." },
+      { title: "Gyakorlatias megoldások", text: "A legegyszerűbb, ami valóban megoldja a problémát." },
+      { title: "Hosszú távú kapcsolat", text: "Inkább évekig gondozom az oldalát, mint hogy megépítsem és eltűnjek." },
+    ],
+    photo: "Fotó",
+  },
+  support: {
+    eyebrow: "Az indulás után is kell segítség?",
+    title: "Az indulás nem a célvonal.",
+    description:
+      "Ha a weboldala élesben van, nem kell azon gondolkodnia, mi jön ezután. A tárhelyet, a karbantartást és a támogatást is vállalom.",
+    included: ["Tárhely", "Frissítések", "Karbantartás", "Hibajavítás", "Technikai támogatás", "Kisebb fejlesztések"],
+    codaA: "Aki építette,",
+    codaB: "az továbbra is itt van.",
+    cta: "Vegye fel a kapcsolatot",
+    ticket: {
+      label: "Támogatási kérés",
+      ago: "2 órája",
+      title: "A pénztár nem működik mobilon",
+      open: "Nyitott",
+      resolved: "Megoldva",
+      reply: "Javítva és élesítve. Szóljon, ha bármi más felmerül.",
+    },
+  },
+  contact: {
+    eyebrow: "Projekt indítása",
+    titleA: "Van egy ötlete?",
+    titleB: "Építsük meg.",
+    lead: "Akár új weboldalra, webáruházra vagy egyedi eszközre van szüksége, akár egy meglévő rendszerhez kell segítség, mondja el, mire gondol.",
+    expectLabel: "Mire számíthat",
+    expectations: [
+      { title: "Válasz attól, aki építeni fogja", text: "Attól kap választ, aki a munkát végzi majd, nem egy postafióktól." },
+      { title: "Világos terjedelem és fix ár", text: "Még a munka kezdete előtt tudni fogja, mi készül és mennyibe kerül." },
+      { title: "Őszinte tanács", text: "Akkor is, ha a válasz az, hogy „erre még nincs szüksége”." },
+    ],
+    preferEmail: "Inkább e-mailt írna?",
+    emailSubject: "Projektmegkeresés",
+  },
+  form: {
+    aboutYou: "Önről",
+    theProject: "A projekt",
+    optional: "Nem kötelező",
+    name: "Név",
+    namePlaceholder: "Az Ön neve",
+    email: "E-mail",
+    emailPlaceholder: "nev@example.com",
+    company: "Vállalkozás vagy cég",
+    companyPlaceholder: "Kinek készül?",
+    project: "Mit szeretne építtetni?",
+    projectPlaceholder:
+      "Új weboldal a vállalkozásomnak, webáruház, foglalási rendszer, eszköz a csapatnak… Néhány mondat a saját szavaival bőven elég.",
+    budget: "Hozzávetőleges költségkeret",
+    budgetPlaceholder: "Egy nagyságrend, vagy „még nem tudom”",
+    budgetHint: "Tájékoztató jellegű, nem kötelezettség.",
+    timeframe: "Kívánt időkeret",
+    timeframePlaceholder: "Válasszon időkeretet",
+    timeframes: {
+      asap: "Minél hamarabb",
+      "1-3-months": "A következő 1–3 hónapban",
+      "later-this-year": "Még idén",
+      "not-sure": "Még nem tudom",
+    },
+    extra: "Bármi más?",
+    extraPlaceholder: "Link a jelenlegi oldalára, példák, amelyek tetszenek, határidők, kérdések…",
+    submit: "Megkeresés küldése",
+    submitting: "Küldés…",
+    reassurance: "Nincs értékesítési hívás, nincs nyomás. Csak egy egyenes válasz.",
+    success: {
+      title: "Köszönöm — a megkeresése úton van.",
+      lead: "Személyesen válaszolok. Addig is, ez történik ezután.",
+      steps: [
+        "Elolvasom, amit küldött, és őszinte következő lépésekkel válaszolok.",
+        "Ha jól illik a profilomba, a terjedelemben és a fix árban még az építés előtt megegyezünk.",
+        "Ha nem, megmondom, és olyan irányba terelem, amely hasznosabb Önnek.",
+      ],
+      again: "Újabb megkeresés küldése",
+    },
+    errorGeneric: "Hiba történt, a megkeresése nem ment el.",
+    errorKept: "Az adatai továbbra is kitöltve maradtak.",
+    errorRetry: "Kérem, próbálja újra egy pillanat múlva.",
+    errorEmail: "Ha továbbra sem sikerül, írjon közvetlenül ide: {email}.",
+    checkOne: "Kérem, ellenőrizze a kiemelt mezőt.",
+    checkMany: "Kérem, ellenőrizze a(z) {count} kiemelt mezőt.",
+    validation: {
+      name: "Kérem, adja meg a nevét.",
+      nameLong: "A név legfeljebb {n} karakter lehet.",
+      email: "Kérem, adjon meg egy e-mail-címet, hogy válaszolhassak.",
+      emailInvalid: "Ez az e-mail-cím nem tűnik helyesnek. Kérem, ellenőrizze.",
+      tooLong: "Ez a mező legfeljebb {n} karakter lehet.",
+      project: "Írjon pár szót arról, mit szeretne építtetni.",
+      timeframe: "Kérem, válasszon a lehetőségek közül.",
+    },
+  },
+  notFound: {
+    metaTitle: "Az oldal nem található",
+    eyebrow: "404",
+    title: "Ez az oldal nem létezik.",
+    lead: "A link elavult lehet, vagy az oldal máshová került. Térjen vissza a kezdőlapra, vagy írja meg, mit keresett.",
+    home: "Vissza a kezdőlapra",
+    cta: "Projekt indítása",
+  },
+  caseStudy: {
+    back: "Válogatott munkák",
+    label: "Esettanulmány",
+    challenge: "A kihívás",
+    solution: "A megoldás",
+    result: "Mi változott",
+    nextEyebrow: "Következő",
+    nextTitle: "Valami hasonló jár a fejében?",
+    nextLead: "Mondja el, mit kell megépíteni. Én kitalálom a legegyszerűbb módját.",
+    cta: "Projekt indítása",
+    allWork: "További munkák",
+  },
+};
