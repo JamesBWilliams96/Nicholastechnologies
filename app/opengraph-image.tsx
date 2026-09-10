@@ -35,21 +35,13 @@ export default function OpenGraphImage() {
           }}
         />
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div
-            style={{
-              width: 52,
-              height: 52,
-              borderRadius: 15,
-              background: "#f7f7f5",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
-              <path d="M10.5 22V10l11 12V10" stroke="#0a0b0f" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
+          <svg width="56" height="56" viewBox="0 0 32 32" fill="none">
+            <rect x="2" y="3" width="28" height="26" rx="8" fill="#f7f7f5" />
+            <path d="M2 11.25h28" stroke="#0a0b0f" strokeWidth="2" />
+            <circle cx="8" cy="7.1" r="1.7" fill="#0a0b0f" />
+            <rect x="8" y="16" width="10" height="3.6" rx="1.8" fill="#2f5bff" />
+            <rect x="8" y="22.2" width="16" height="3" rx="1.5" fill="#0a0b0f" opacity="0.35" />
+          </svg>
           <div style={{ fontSize: 30, fontWeight: 600, letterSpacing: -0.5 }}>{site.name}</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>

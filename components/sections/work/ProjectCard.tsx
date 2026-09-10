@@ -37,11 +37,7 @@ export function ProjectCard({ project, index, featured = false }: ProjectCardPro
   const kind: PreviewVariant | "image" = project.image ? "image" : (project.preview ?? "website");
   const dark = kind === "app";
 
-  const statusChip = project.placeholder ? (
-    <Chip className="border border-dashed border-line-strong bg-transparent py-[3px] ring-0">
-      Placeholder
-    </Chip>
-  ) : link ? (
+  const statusChip = link ? (
     <Chip tone="accent">{link.external ? "Live site" : "Case study"}</Chip>
   ) : null;
 

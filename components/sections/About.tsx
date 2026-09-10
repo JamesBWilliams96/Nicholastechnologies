@@ -84,8 +84,9 @@ export function About() {
           </div>
           <Reveal delay={120}>
             <p className="max-w-[46ch] text-lead text-muted lg:pb-1.5">
-              {site.name} is a one-person software studio focused on building useful,
-              well-designed websites and small web applications.
+              I kept {site.name} to one person on purpose. You get the same designer,
+              developer and point of contact for the whole project, and the same person looking
+              after it afterwards.
             </p>
           </Reveal>
         </div>

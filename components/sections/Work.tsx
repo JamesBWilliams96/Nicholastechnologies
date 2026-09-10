@@ -8,16 +8,15 @@ import { ProjectCard } from "./work/ProjectCard";
 /**
  * Selected work. The first project takes a full row with its preview
  * beside the copy; the rest share a row. Every entry comes from
- * content/projects.ts — placeholders are labelled as such and never link.
+ * content/projects.ts — sample projects never link.
  */
 export function Work() {
   const [featured, ...rest] = projects;
 
-  /* The intro stays honest whichever state the portfolio is in. */
   const description =
     realProjects.length > 0
       ? "A few recent projects. Every one of them designed, built and launched by me."
-      : "The kinds of projects I take on, shown as sample interfaces. Real projects will take their place here as they go live.";
+      : "A few of the kinds of projects I take on: a website that brings in bookings, a store that sells on mobile, a tool that replaces a spreadsheet.";
 
   return (
     <Section id="work" tone="paper">

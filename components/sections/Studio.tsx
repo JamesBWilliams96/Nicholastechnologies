@@ -60,9 +60,9 @@ export function Studio() {
           <Reveal delay={120} className="lg:justify-self-end">
             <div className="max-w-[46ch] lg:pb-1.5">
               <p className="text-lead text-muted">
-                {site.name} is intentionally small. Every conversation, decision and line of code
-                goes through the same person, so questions get straight answers and the project
-                keeps moving.
+                I keep {site.name} deliberately small. Every conversation, decision and line of
+                code goes through me, so questions get straight answers and the project keeps
+                moving.
               </p>
               <Button href="/#process" variant="secondary" arrow className="mt-7">
                 See how a project runs

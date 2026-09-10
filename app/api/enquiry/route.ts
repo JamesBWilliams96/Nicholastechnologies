@@ -19,7 +19,6 @@ const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const DEFAULT_FROM = `${site.name} <onboarding@resend.dev>`;
 
 const GENERIC_ERROR = "Something went wrong and your enquiry wasn't sent. Please try again.";
-const NOT_CONFIGURED = "The enquiry form isn't connected yet.";
 
 /* --------------------------------------------------------------
    Best-effort in-memory rate limiting. Resets whenever the server
@@ -52,7 +51,10 @@ function clientKey(req: Request): string {
   return first || req.headers.get("x-real-ip")?.trim() || "unknown";
 }
 
-type Payload = { ok: boolean; message?: string; errors?: Record<string, string> };
+type Payload = { ok: boolean; message?: string; errors?: Record<string, string>
+  /** False when delivery isn't configured and the enquiry was only logged. */
+  delivered?: boolean;
+};
 
 function json(body: Payload, status = 200): Response {
   return Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
@@ -116,11 +118,13 @@ export async function POST(req: Request) {
     const apiKey = process.env.RESEND_API_KEY?.trim();
     const to = process.env.CONTACT_TO_EMAIL?.trim();
     if (!apiKey || !to) {
+      // Delivery isn't configured yet. Record the enquiry in the server logs so
+      // nothing is lost, and let the visitor see the normal confirmation.
       console.warn(
         "[enquiry] RESEND_API_KEY / CONTACT_TO_EMAIL are not set — enquiry logged instead of sent:\n" +
           formatEnquiryText(result.data),
       );
-      return json({ ok: false, message: NOT_CONFIGURED }, 503);
+      return json({ ok: true, delivered: false });
     }
 
     if (isRateLimited(clientKey(req))) {

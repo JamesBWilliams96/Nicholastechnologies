@@ -2,18 +2,19 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { site } from "@/content/site";
 
-export function LogoMark({ className }: { className?: string }) {
+/**
+ * The mark: a small browser window with a cobalt cursor line inside it —
+ * the same object the site's interface mockups are built from. Fills follow
+ * the tone tokens, so it flips correctly on dark sections.
+ */
+export function LogoMark({ className, animate = false }: { className?: string; animate?: boolean }) {
   return (
     <svg viewBox="0 0 32 32" className={cn("size-7", className)} aria-hidden="true" focusable="false">
-      <rect width="32" height="32" rx="9" className="fill-fg" />
-      <path
-        d="M10.5 22V10l11 12V10"
-        className="stroke-bg"
-        strokeWidth="2.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
+      <rect x="2" y="3" width="28" height="26" rx="8" className="fill-fg" />
+      <path d="M2 11.25h28" className="stroke-bg" strokeWidth="2" />
+      <circle cx="8" cy="7.1" r="1.7" className="fill-bg" />
+      <rect x="8" y="16" width="10" height="3.6" rx="1.8" className={cn("fill-accent-500", animate && "logo-cursor")} />
+      <rect x="8" y="22.2" width="16" height="3" rx="1.5" className="fill-bg opacity-35" />
     </svg>
   );
 }
@@ -23,12 +24,12 @@ export function Logo({ className, href = "/" }: { className?: string; href?: str
     <Link
       href={href}
       className={cn(
-        "inline-flex items-center gap-2.5 rounded-md text-[0.9375rem] font-semibold tracking-[-0.02em] text-fg",
+        "group inline-flex items-center gap-2.5 rounded-md text-[0.9375rem] font-semibold tracking-[-0.02em] text-fg",
         className,
       )}
       aria-label={`${site.name} — home`}
     >
-      <LogoMark />
+      <LogoMark animate />
       <span>{site.name}</span>
     </Link>
   );

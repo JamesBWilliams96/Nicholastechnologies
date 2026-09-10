@@ -481,6 +481,24 @@
   }
 }
 
+@keyframes cursor-blink {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* The cobalt cursor in the logo mark blinks slowly, only when motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .logo-cursor {
+    animation: cursor-blink 1.6s steps(1) infinite;
+  }
+}
+
 @keyframes orbit {
   from {
     transform: rotate(0deg);

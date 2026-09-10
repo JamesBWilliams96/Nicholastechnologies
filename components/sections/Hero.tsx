@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/SectionHeading";
 import { CheckIcon } from "@/components/ui/icons";
-import { site } from "@/content/site";
 import { HeroVisual } from "./hero/HeroVisual";
 
 const proofPoints = ["Fixed-price projects", "One point of contact", "Support after launch"];
@@ -30,10 +29,9 @@ export function Hero() {
           </Reveal>
           <Reveal eager delay={140}>
             <p className="mt-6 max-w-[46ch] text-lead text-muted">
-              {site.name} is a one-person studio building high-quality websites, Shopify stores
-              and small custom web apps for local businesses and early-stage startups. You work
-              directly with the person building it, from the first conversation to long after
-              launch.
+              I design and build websites, Shopify stores and small custom web apps for local
+              businesses and early-stage startups. You deal with me directly, from the first
+              conversation to long after launch. No account managers, no handovers.
             </p>
           </Reveal>
           <Reveal eager delay={210}>
