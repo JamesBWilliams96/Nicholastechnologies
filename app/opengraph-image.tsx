@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/content/site";
 
@@ -5,7 +7,16 @@ export const alt = `${site.name} — websites, Shopify stores and custom web app
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+async function loadFont(file: string) {
+  return readFile(join(process.cwd(), "node_modules/geist/dist/fonts/geist-sans", file));
+}
+
+export default async function OpenGraphImage() {
+  const [semibold, regular] = await Promise.all([
+    loadFont("Geist-SemiBold.ttf"),
+    loadFont("Geist-Regular.ttf"),
+  ]);
+
   return new ImageResponse(
     (
       <div
@@ -18,22 +29,26 @@ export default function OpenGraphImage() {
           padding: 72,
           background: "#0a0b0f",
           color: "#f7f7f5",
-          fontFamily: "sans-serif",
+          fontFamily: "Geist",
           position: "relative",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            right: -120,
-            top: -160,
-            width: 620,
-            height: 620,
-            borderRadius: 9999,
-            background: "radial-gradient(closest-side, rgba(47,91,255,0.55), rgba(124,92,255,0.18) 60%, transparent)",
-            display: "flex",
-          }}
-        />
+        {/* Soft cobalt glow: layered circles, because Satori can't rasterise radial gradients cleanly. */}
+        {Array.from({ length: 16 }, (_, i) => 720 - i * 40).map((size) => (
+          <div
+            key={size}
+            style={{
+              position: "absolute",
+              right: 120 - size / 2,
+              top: 40 - size / 2,
+              width: size,
+              height: size,
+              borderRadius: 9999,
+              background: "rgba(47, 91, 255, 0.04)",
+              display: "flex",
+            }}
+          />
+        ))}
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <svg width="56" height="56" viewBox="0 0 32 32" fill="none">
             <rect x="2" y="3" width="28" height="26" rx="8" fill="#f7f7f5" />
@@ -45,16 +60,22 @@ export default function OpenGraphImage() {
           <div style={{ fontSize: 30, fontWeight: 600, letterSpacing: -0.5 }}>{site.name}</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
-          <div style={{ fontSize: 66, fontWeight: 600, lineHeight: 1.02, letterSpacing: -2.5, maxWidth: 900 }}>
+          <div style={{ fontSize: 60, fontWeight: 600, lineHeight: 1.04, letterSpacing: -2.2, maxWidth: 1000 }}>
             Websites, stores and software, built around your business.
           </div>
-          <div style={{ fontSize: 26, color: "#a3a9b6", maxWidth: 860, lineHeight: 1.4 }}>
+          <div style={{ fontSize: 26, color: "#a3a9b6", maxWidth: 960, lineHeight: 1.4, fontWeight: 400 }}>
             A one-person software studio for local businesses and early-stage startups.
-            Fixed-price projects. Direct communication. Support after launch.
+            Fixed-price projects, direct communication and support after launch.
           </div>
         </div>
       </div>
     ),
-    { ...size },
+    {
+      ...size,
+      fonts: [
+        { name: "Geist", data: semibold, weight: 600, style: "normal" },
+        { name: "Geist", data: regular, weight: 400, style: "normal" },
+      ],
+    },
   );
 }
