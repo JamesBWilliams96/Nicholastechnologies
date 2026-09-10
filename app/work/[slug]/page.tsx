@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { site } from "@/content/site";
 import { notFound } from "next/navigation";
 import { realProjects } from "@/content/projects";
 import { CaseStudy, type CaseStudyProject } from "@/components/sections/work/CaseStudy";
@@ -31,7 +32,11 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     alternates: { canonical: `/work/${project.slug}` },
     openGraph: {
       type: "article",
+      siteName: site.name,
+      locale: "en_GB",
       url: `/work/${project.slug}`,
+      title: project.name,
+      description: project.summary,
       ...(project.image
         ? {
             images: [
