@@ -3,7 +3,31 @@
  * (name, URL, navigation, contact details) lives here.
  */
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+/** The canonical production origin. Override with NEXT_PUBLIC_SITE_URL if the domain changes. */
+export const PRODUCTION_URL = "https://nicholastechnology.dev";
+
+/**
+ * Resolves the absolute origin used for canonical URLs, Open Graph, JSON-LD,
+ * the sitemap and robots.txt. Tolerates the ways hosting dashboards commonly
+ * mangle the variable — unset, empty, missing scheme, trailing slash — and
+ * never produces a value that `new URL()` would reject.
+ */
+function resolveSiteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (raw) {
+    const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+    try {
+      return new URL(withScheme).origin;
+    } catch {
+      console.warn(
+        `[site] Ignoring invalid NEXT_PUBLIC_SITE_URL "${raw}"; falling back to ${PRODUCTION_URL}.`,
+      );
+    }
+  }
+  return process.env.NODE_ENV === "development" ? "http://localhost:3000" : PRODUCTION_URL;
+}
+
+const siteUrl = resolveSiteUrl();
 
 export const site = {
   name: "Nicholas Technologies",

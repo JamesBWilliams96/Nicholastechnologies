@@ -27,18 +27,13 @@ export const metadata: Metadata = {
     "Next.js developer",
     "Webflow",
   ],
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: site.title,
-    description: site.description,
-    url: "/",
+    locale: "en_GB",
   },
   twitter: {
     card: "summary_large_image",
-    title: site.title,
-    description: site.description,
   },
   robots: {
     index: true,
@@ -96,7 +91,12 @@ const structuredData = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en-GB"
+      data-scroll-behavior="smooth"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Marks JS as available so scroll-reveal can hide content safely. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

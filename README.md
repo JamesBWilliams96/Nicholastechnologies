@@ -21,7 +21,7 @@ Copy `.env.example` to `.env.local` and fill in what you need:
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Public URL of the deployed site. Drives canonical URLs, Open Graph, the sitemap and robots.txt. |
+| `NEXT_PUBLIC_SITE_URL` | Optional. Public origin of the deployed site (with `https://`). Defaults to `https://nicholastechnology.dev` in production builds and `http://localhost:3000` in development; only set it if the domain changes. Drives canonical URLs, Open Graph, JSON-LD, the sitemap and robots.txt. |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Optional. Shown in the footer and offered as a fallback if the enquiry form can't send. |
 | `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Enquiry form delivery through [Resend](https://resend.com). Until these are set, submissions are logged on the server and the visitor is told the form isn't connected yet. |
 
