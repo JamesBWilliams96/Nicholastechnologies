@@ -13,8 +13,9 @@ export const contentType = "image/png";
  * than a static `alt` export) lets the alt text come from the same dictionary
  * as the page title, so the two can't drift apart or fall out of language.
  */
-export async function generateImageMetadata({ params }: { params: { locale: string } }) {
-  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+export async function generateImageMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: requested } = await params;
+  const locale = isLocale(requested) ? requested : defaultLocale;
   const t = await getDictionary(locale);
   return [{ id: "share", alt: t.meta.ogAlt, size, contentType }];
 }
